@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@material-ui/core": "^3.5.1",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
     "react-scripts": "2.1.1"
@@ -28,6 +29,7 @@
   ],
   "devDependencies": {
     "eslint-config-prettier": "^3.3.0",
+    "faker": "^4.1.0",
     "flow-bin": "^0.86.0",
     "husky": "^1.2.0",
     "nodemon": "^1.18.6",
