@@ -27,16 +27,13 @@ export default class Post extends React.Component {
   render() {
     const { post } = this.props;
     const { shownComments, hiddenComments } = this.state;
+    const tags = post.tags.map(tag => `@${tag}`).join(', ');
 
     return (
       <div className="post">
         <h1>{post.content.description}</h1>
         <img src={post.content.mediaUrl} alt={post.content.description} />
-        <ul>
-          {post.tags.map(tag => (
-            <li key={tag}>@{tag}</li>
-          ))}
-        </ul>
+        {tags}
         <div className="comments">
           {hiddenComments.length > 0 ? (
             <a href="#" onClick={this.showComments}>

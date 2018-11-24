@@ -1,6 +1,7 @@
 import React from 'react';
-import data from '../data/oma.json';
 import Posts from './posts';
+
+import data from '../data/oma.json';
 
 class Feed extends React.Component {
   state = {
