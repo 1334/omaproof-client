@@ -1,6 +1,9 @@
 import React from 'react';
+import { PoseGroup } from 'react-pose';
+
 import Login from './login';
 import Password from './password';
+import StepsFlow from './animations/stepsFlow';
 import '../styles/auth.scss';
 
 const questions = [
@@ -14,8 +17,13 @@ export default class Auth extends React.Component {
     username: '',
     password: '',
     step: 0,
-    component: Login
+    component: Login,
+    isVisible: false
   };
+
+  componentDidMount() {
+    this.setState({ isVisible: true });
+  }
 
   handleSubmit = data => {
     if (this.state.step === 0) {
@@ -48,14 +56,21 @@ export default class Auth extends React.Component {
     const ComponentType = this.state.component;
     const props = {
       handleSubmit: this.handleSubmit,
-      key: this.state.step
+      key: this.state.step,
+      style: `background-color: blue`
     };
     if (ComponentType === Password) {
       props.question = questions[this.state.step - 1];
     }
     return (
       <div className="auth">
-        <ComponentType {...props} />
+        <PoseGroup preEnterPose="pre-enter">
+          {this.state.isVisible && (
+            <StepsFlow key={this.state.step}>
+              <ComponentType {...props} />
+            </StepsFlow>
+          )}
+        </PoseGroup>
       </div>
     );
   }
