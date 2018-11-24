@@ -1,6 +1,7 @@
 import React from 'react';
 import Login from './login';
 import Password from './password';
+import '../styles/auth.scss';
 
 const questions = [
   "What's Jovan favourite food",
@@ -45,13 +46,16 @@ export default class Auth extends React.Component {
 
   render() {
     const ComponentType = this.state.component;
+    const props = {
+      handleSubmit: this.handleSubmit,
+      key: this.state.step
+    };
+    if (ComponentType === Password) {
+      props.question = questions[this.state.step - 1];
+    }
     return (
       <div className="auth">
-        <ComponentType
-          handleSubmit={this.handleSubmit}
-          question={questions[this.state.step - 1]}
-          key={this.state.step}
-        />
+        <ComponentType {...props} />
       </div>
     );
   }
