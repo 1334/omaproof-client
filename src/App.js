@@ -1,23 +1,32 @@
 import React, { Component } from 'react';
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+
 import './App.css';
+
 import Feed from './components/feed';
-
-const theme = createMuiTheme({
-  typography: {
-    useNextVariants: true
-  }
-});
-
-console.log(theme);
+import Auth from './components/auth';
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <MuiThemeProvider theme={theme}>
-          <Feed />
-        </MuiThemeProvider>
+        <Router>
+          <div>
+            <nav>
+              <ul>
+                <li>
+                  <Link to="/">Home</Link>
+                </li>
+                <li>
+                  <Link to="/login">Login</Link>
+                </li>
+              </ul>
+            </nav>
+
+            <Route path="/" exact component={Feed} />
+            <Route path="/login" exact component={Auth} />
+          </div>
+        </Router>
       </div>
     );
   }
