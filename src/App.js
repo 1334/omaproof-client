@@ -22,9 +22,8 @@ class App extends Component {
                 </li>
               </ul>
             </nav>
-
-            <Route path="/" exact component={Feed} />
-            <Route path="/login" exact component={Auth} />
+            <Route path="/" exact component={Feed} key="home" />
+            <Route path="/login" exact component={Auth} key="login" />
           </div>
         </Router>
       </div>
