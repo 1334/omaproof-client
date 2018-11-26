@@ -15,7 +15,8 @@
     }
   },
   "rules": {
-    "no-console": 1
+    "no-console": 1,
+    "react/prop-types": 0
   },
   "env": {
     "es6": true,
