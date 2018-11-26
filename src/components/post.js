@@ -27,7 +27,7 @@ export default class Post extends React.Component {
   render() {
     const { post } = this.props;
     const { shownComments, hiddenComments } = this.state;
-    const tags = post.tags.map(tag => `@${tag}`).join(', ');
+    const tags = post.tags.map(tag => `#${tag}`).join(', ');
 
     return (
       <div className="post">

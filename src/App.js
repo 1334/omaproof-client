@@ -5,6 +5,7 @@ import './App.css';
 
 import Feed from './components/feed';
 import Auth from './components/auth';
+import NewPost from './components/newPost';
 
 class App extends Component {
   render() {
@@ -20,10 +21,14 @@ class App extends Component {
                 <li>
                   <Link to="/login">Login</Link>
                 </li>
+                <li>
+                  <Link to="/new-post">New Post</Link>
+                </li>
               </ul>
             </nav>
             <Route path="/" exact component={Feed} key="home" />
             <Route path="/login" exact component={Auth} key="login" />
+            <Route path="/new-post" exact component={NewPost} key="new-post" />
           </div>
         </Router>
       </div>
