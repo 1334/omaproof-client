@@ -31,7 +31,6 @@
   ],
   "devDependencies": {
     "eslint-config-prettier": "^3.3.0",
-    "faker": "^4.1.0",
     "flow-bin": "^0.86.0",
     "husky": "^1.2.0",
     "nodemon": "^1.18.6",
