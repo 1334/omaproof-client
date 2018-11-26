@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { createGlobalStyle, ThemeProvider } from 'styled-components';
+import ApolloClient from 'apollo-boost';
+import { ApolloProvider } from 'react-apollo';
+
+import './App.css';
 
 import Feed from './components/feed';
 import Auth from './components/auth';
@@ -47,6 +51,10 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
+const client = new ApolloClient({
+  uri: 'https://w5xlvm3vzz.lp.gql.zone/graphql'
+});
+
 class App extends Component {
   state = {
     theme: 'default'
@@ -54,12 +62,32 @@ class App extends Component {
 
   render() {
     return (
+<<<<<<< HEAD
       <ThemeProvider theme={theme}>
         <React.Fragment>
           <GlobalStyle />
           <Router>
             <div>
               <NavBar />
+=======
+      <ApolloProvider client={client}>
+        <div className="App">
+          <Router>
+            <div>
+              <nav>
+                <ul>
+                  <li>
+                    <Link to="/">Home</Link>
+                  </li>
+                  <li>
+                    <Link to="/login">Login</Link>
+                  </li>
+                  <li>
+                    <Link to="/new-post">New Post</Link>
+                  </li>
+                </ul>
+              </nav>
+>>>>>>> add apollo client to the stack
               <Route path="/" exact component={Feed} key="home" />
               <Route path="/login" exact component={Auth} key="login" />
               <Route
@@ -70,8 +98,13 @@ class App extends Component {
               />
             </div>
           </Router>
+<<<<<<< HEAD
         </React.Fragment>
       </ThemeProvider>
+=======
+        </div>
+      </ApolloProvider>
+>>>>>>> add apollo client to the stack
     );
   }
 }
