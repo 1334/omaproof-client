@@ -18,12 +18,6 @@ class Questions extends Component {
     return (
       <div>
         <h2>Question</h2>
-        <input
-          type="text"
-          name="question"
-          placeholder="GROUP question"
-          onChange={this.handleChange}
-        />
         <br />
         <h2>Answer</h2>
         <input

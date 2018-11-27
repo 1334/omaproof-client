@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import Questions from './group-questions';
+import AddMemberManually from './group-addMember';
+
 class GroupCreation extends Component {
   constructor(props) {
     super(props);
@@ -7,6 +9,7 @@ class GroupCreation extends Component {
       groupName: '',
       groupDescription: '',
       step: 0,
+      show: false,
       groupInformations: [],
       members: []
     };
@@ -18,6 +21,10 @@ class GroupCreation extends Component {
     console.log('this state on submit', this.state);
   };
 
+  toggleModal = () => {
+    this.setState({ show: !this.state.show });
+  };
+
   addMember = () => {
     fetch('https://randomuser.me/api/')
       .then(res => res.json())
@@ -26,6 +33,7 @@ class GroupCreation extends Component {
           members: [
             ...this.state.members,
             {
+              id: Math.floor(1000 + Math.random() * 9000),
               firstName: data.results[0].name.first,
               lastName: data.results[0].name.last,
               phoneNumber: data.results[0].phone,
@@ -48,6 +56,23 @@ class GroupCreation extends Component {
       ]
     });
   };
+  addMemberId = () => {
+    this.setState({
+      members: [
+        ...this.state.members,
+        {
+          id: Math.floor(1000 + Math.random() * 9000)
+        }
+      ]
+    });
+    this.toggleModal();
+  };
+
+  updateState = member => {
+    this.setState({
+      members: [...this.state.members, member]
+    });
+  };
 
   gropuQuestionsOnChange = newQa => {
     const qas = this.state.groupInformations.map(qa => {
@@ -58,6 +83,17 @@ class GroupCreation extends Component {
       }
     });
     this.setState({ groupInformations: qas });
+  };
+
+  memberOnChnge = newMember => {
+    const moo = this.state.members.map(member => {
+      if (member.id === newMember.id) {
+        return newMember;
+      } else {
+        return member;
+      }
+    });
+    this.setState({ groupInformations: moo });
   };
 
   removeMember = memberone => {
@@ -96,7 +132,6 @@ class GroupCreation extends Component {
         <hr />
         <div className="page2">
           <h2>Add members</h2> <br />
-          <button onClick={this.addMember}>Add Member</button> <br />
           <table className="table">
             <thead className="thead-dark">
               <tr>
@@ -111,12 +146,12 @@ class GroupCreation extends Component {
             <tbody>
               {members.map(member => {
                 return (
-                  <tr key={member.phoneNumber}>
-                    <th scope="row">1</th>
+                  <tr key={member.id}>
+                    <th scope="row" />
                     <td>
                       <img src={member.avatar} alt="portrait of member" />
                     </td>
-                    i<td>{member.firstName}</td>
+                    <td>{member.firstName}</td>
                     <td>{member.lastName}</td>
                     <td>{member.phoneNumber}</td>
                     <td>
@@ -133,6 +168,19 @@ class GroupCreation extends Component {
               })}
             </tbody>
           </table>
+          <button onClick={this.addMember}>Add Member</button>
+          <button type="button" onClick={this.addMemberId}>
+            {/* can i use more functions in onClick statement */}
+            Add member manualy
+          </button>
+          {this.state.show ? (
+            <AddMemberManually
+              text="Close Me"
+              closePopup={this.toggleModal}
+              memberUpdate={this.memberOnChnge}
+            />
+          ) : null}
+          <br />
           <button>submit</button>
         </div>
 
