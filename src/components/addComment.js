@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import Textarea from '../styledComponents/textarea';
 
 import Button from '../styledComponents/button';
 
@@ -14,16 +15,8 @@ const StyledAddComment = styled.div`
     top: -0.85em;
   }
 
-  input {
-    border: none;
-    background-color: none;
+  textarea {
     width: 100%;
-    height: 80%;
-    font-size: 1rem;
-    color: ${props => props.theme.colors.blue};
-    border-bottom: 1px solid ${props => props.theme.colors.blue};
-    padding-left: 3em;
-    margin-bottom: 0.4em;
   }
 
   .buttons {
@@ -42,7 +35,7 @@ export default class AddComment extends React.Component {
     return (
       <StyledAddComment>
         <img src="http://placehold.it/32x32" alt="me" />
-        <input
+        <Textarea
           id={`comment-${postId}`}
           type="text"
           placeholder="Add your comment"
