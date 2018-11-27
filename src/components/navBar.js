@@ -12,6 +12,7 @@ const StyledNavBar = styled.nav`
 
   a {
     margin-right: 0.7em;
+    color: white;
   }
 `;
 

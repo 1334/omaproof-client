@@ -28,12 +28,11 @@ const GlobalStyle = createGlobalStyle`
   body {
     padding: 0;
     margin: 0;
-    line-height: 2;
+    line-height: 1.5;
     font-family: 'Titillium Web', sans-serif;
   }
   a {
     text-decoration: none;
-    color: white;
   }
 `;
 
