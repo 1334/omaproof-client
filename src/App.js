@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import { createGlobalStyle, ThemeProvider } from 'styled-components';
 
-import './App.css';
-
 import Feed from './components/feed';
 import Auth from './components/auth';
 import NewPost from './components/newPost';
