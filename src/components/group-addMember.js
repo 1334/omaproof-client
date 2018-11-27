@@ -10,14 +10,15 @@ class AddMemberManually extends Component {
   };
   handleChangee = event => {
     const target = event.target;
-    this.setState({ [target.name]: target.value }, () => {
-      const newMember = { id: this.props.id, ...this.state };
-      this.props.memberUpdate(newMember);
-    });
+    this.setState({ [target.name]: target.value });
   };
   consoleLogThis = () => {
     console.log(this.state);
   };
+  createMember = () => {
+    this.props.submitMember(this.state);
+  };
+
   render() {
     return (
       <React.Fragment>
@@ -28,7 +29,7 @@ class AddMemberManually extends Component {
           <input
             type="text"
             name="avatar"
-            defaultValue="picture"
+            defaultValue="avatar"
             onChange={this.handleChangee}
             //   placeholder="add profile picture"
           />
@@ -54,8 +55,8 @@ class AddMemberManually extends Component {
             onChange={this.handleChangee}
           />
           <br />
-          {/* <button onClick={this.props.closePopup} >submit</button> */}
-          <button onClick={this.consoleLogThis}>submit</button>
+          <button onClick={this.createMember}>submit</button>
+          {/* <button onClick={this.consoleLogThis}>submit</button> */}
         </div>
       </React.Fragment>
     );

@@ -68,10 +68,15 @@ class GroupCreation extends Component {
     this.toggleModal();
   };
 
-  updateState = member => {
+  createMember = member1 => {
+    const newMemeber = {
+      ...member1,
+      id: Math.floor(1000 + Math.random() * 9000)
+    };
     this.setState({
-      members: [...this.state.members, member]
+      members: [...this.state.members, newMemeber]
     });
+    this.toggleModal();
   };
 
   gropuQuestionsOnChange = newQa => {
@@ -85,7 +90,7 @@ class GroupCreation extends Component {
     this.setState({ groupInformations: qas });
   };
 
-  memberOnChnge = newMember => {
+  memberOnChange = newMember => {
     const moo = this.state.members.map(member => {
       if (member.id === newMember.id) {
         return newMember;
@@ -93,7 +98,7 @@ class GroupCreation extends Component {
         return member;
       }
     });
-    this.setState({ groupInformations: moo });
+    this.setState({ members: moo });
   };
 
   removeMember = memberone => {
@@ -169,7 +174,7 @@ class GroupCreation extends Component {
             </tbody>
           </table>
           <button onClick={this.addMember}>Add Member</button>
-          <button type="button" onClick={this.addMemberId}>
+          <button type="button" onClick={this.toggleModal}>
             {/* can i use more functions in onClick statement */}
             Add member manualy
           </button>
@@ -177,7 +182,8 @@ class GroupCreation extends Component {
             <AddMemberManually
               text="Close Me"
               closePopup={this.toggleModal}
-              memberUpdate={this.memberOnChnge}
+              submitMember={this.createMember}
+              memberUpdate={this.memberOnChange}
             />
           ) : null}
           <br />
