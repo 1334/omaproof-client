@@ -30,6 +30,7 @@ export const Modal = styled(ModalPose)`
   width: 100vw;
   margin: 0 auto;
   background: white;
+  z-index: 10;
 `;
 
 export const ModalBackground = styled(ModalBackgroundPose)`
@@ -39,4 +40,5 @@ export const ModalBackground = styled(ModalBackgroundPose)`
   left: 0;
   right: 0;
   bottom: 0;
+  z-index: 5;
 `;
