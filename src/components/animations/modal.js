@@ -34,7 +34,7 @@ export const Modal = styled(ModalPose)`
 
 export const ModalBackground = styled(ModalBackgroundPose)`
   position: fixed;
-  background: ${props => props.theme.black};
+  background: rgba(0, 0, 0, 0.8);
   top: 0;
   left: 0;
   right: 0;

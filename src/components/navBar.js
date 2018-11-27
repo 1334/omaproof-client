@@ -5,7 +5,7 @@ import styled from 'styled-components';
 const StyledNavBar = styled.nav`
   display: flex;
   justify-content: flex-end;
-  background-color: ${props => props.theme.navBarBgColor};
+  background-color: ${props => props.theme.colors.blue};
   color: white;
   height: 50px;
   padding: 0.5em 0;

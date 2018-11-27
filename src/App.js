@@ -8,10 +8,12 @@ import NewPost from './components/newPost';
 import NavBar from './components/navBar';
 
 const theme = {
-  black: 'rgb(30,34,38)',
-  grey: 'rgb(119,119,119)',
-  navBarBgColor: 'rgb(14,52,82)',
-  creme: 'rgb(246,244,234)'
+  colors: {
+    black: 'rgb(30,34,38)',
+    grey: 'rgb(119,119,119)',
+    blue: 'rgb(14,52,82)',
+    creme: 'rgb(246,244,234)'
+  }
 };
 
 const GlobalStyle = createGlobalStyle`
