@@ -14,6 +14,13 @@ const StyledFeed = styled.div`
   & > * {
     padding: 0 18px;
   }
+
+  .new-post {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    opacity: 0.8;
+  }
 `;
 
 class Feed extends React.Component {
@@ -31,7 +38,9 @@ class Feed extends React.Component {
     const { posts } = this.state;
     return (
       <StyledFeed>
-        <NewPostButton newPostClicked={this.toggleNewPost} />
+        <div className="new-post">
+          <NewPostButton newPostClicked={this.toggleNewPost} />
+        </div>
         <PoseGroup>
           {this.state.newPost && [
             <ModalBackground

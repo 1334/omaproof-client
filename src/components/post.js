@@ -35,8 +35,8 @@ const StyledPost = styled.div`
 
     span:last-child {
       flex-grow: 2;
-      align-self: flex-end;
       text-align: right;
+      color: ${props => props.theme.colors.grey};
     }
   }
 `;
@@ -80,7 +80,9 @@ export default class Post extends React.Component {
         />
         <h1 className="post-title">{post.content.title}</h1>
         <div className="post-description">{post.content.description}</div>
-        <div className="social">LIKE SHARE</div>
+        <div className="social">
+          LIKE <label htmlFor={`comment-${post.id}`}>COMMENT</label>
+        </div>
         <div className="comments">
           {hiddenComments.length > 0 ? (
             <a href="#" onClick={this.showComments}>
