@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './test.css';
 
-class AddMemberManually extends Component {
+class Member extends Component {
   state = {
     avatar: 'https://randomuser.me/api/portraits/thumb/men/89.jpg',
     firstName: '',
@@ -20,6 +20,7 @@ class AddMemberManually extends Component {
   };
 
   render() {
+    console.log(this.state);
     return (
       <React.Fragment>
         <div className="popup" onClick={this.props.closePopup} />
@@ -63,4 +64,4 @@ class AddMemberManually extends Component {
   }
 }
 
-export default AddMemberManually;
+export default Member;

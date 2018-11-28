@@ -193,7 +193,6 @@ class GroupCreation extends Component {
         <hr />
         <div className="page3">
           <h3>Set up group questions</h3> <br />
-          <button onClick={this.addGroupQA}>add questions</button> <br />
           {groupInformations.map(el => (
             <Questions
               key={el.id}
@@ -201,6 +200,7 @@ class GroupCreation extends Component {
               updateQuestions={this.gropuQuestionsOnChange}
             />
           ))}
+          <button onClick={this.addGroupQA}>add questions</button> <br />
           <button>submit</button>
         </div>
         <hr />

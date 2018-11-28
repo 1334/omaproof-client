@@ -10,7 +10,7 @@ import Feed from './components/feed';
 import Auth from './components/auth';
 import NewPost from './components/newPost';
 import NavBar from './components/navBar';
-import GroupCreation from './components/group-creation';
+import AdminView from './components/admin-main';
 
 const theme = {
   colors: {
@@ -122,7 +122,12 @@ class App extends Component {
                   )}
                 />
                 <Route path="/login" exact component={Auth} key="login" />
-                <Route path="/new-group" exact component={GroupCreation} key="new-group" />
+                <Route
+                  path="/new-group"
+                  exact
+                  component={AdminView}
+                  key="new-group"
+                />
                 <Route
                   path="/new-post"
                   exact
