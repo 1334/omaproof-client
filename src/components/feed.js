@@ -12,6 +12,8 @@ import data from '../data/oma.json';
 const StyledFeed = styled.div`
   background-color: ${props => props.theme.colors.creme};
   padding: 0.2em 0 1em;
+  max-width: 700px;
+  margin: 0 auto;
 
   & > * > * {
     padding: 0 18px;
