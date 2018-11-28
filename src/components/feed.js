@@ -1,11 +1,31 @@
 import React from 'react';
 import { PoseGroup } from 'react-pose';
+import styled from 'styled-components';
 
 import Posts from './posts';
 import NewPost from './newPost';
+import NewPostButton from './newPostButton';
 import { Modal, ModalBackground } from './animations/modal';
 
 import data from '../data/oma.json';
+
+const StyledFeed = styled.div`
+  background-color: ${props => props.theme.colors.creme};
+  padding: 0.2em 0 1em;
+  max-width: 700px;
+  margin: 0 auto;
+
+  & > * > * {
+    padding: 0 18px;
+  }
+
+  .new-post {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    opacity: 0.8;
+  }
+`;
 
 class Feed extends React.Component {
   state = {
@@ -21,8 +41,10 @@ class Feed extends React.Component {
   render() {
     const { posts } = this.state;
     return (
-      <React.Fragment>
-        <button onClick={this.toggleNewPost}>Add new post</button>
+      <StyledFeed>
+        <div className="new-post">
+          <NewPostButton newPostClicked={this.toggleNewPost} />
+        </div>
         <PoseGroup>
           {this.state.newPost && [
             <ModalBackground
@@ -36,10 +58,9 @@ class Feed extends React.Component {
           ]}
         </PoseGroup>
         <div className="feed">
-          <h1>Feed</h1>
           <Posts posts={posts} />
         </div>
-      </React.Fragment>
+      </StyledFeed>
     );
   }
 }

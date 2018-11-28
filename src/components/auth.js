@@ -4,7 +4,6 @@ import { PoseGroup } from 'react-pose';
 import Login from './login';
 import Password from './password';
 import StepsFlow from './animations/stepsFlow';
-import '../styles/auth.scss';
 
 const questions = [
   "What's Jovan favourite food",

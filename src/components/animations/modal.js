@@ -1,6 +1,7 @@
 import posed from 'react-pose';
+import styled from 'styled-components';
 
-export const Modal = posed.div({
+const ModalPose = posed.div({
   enter: {
     y: 0,
     opacity: 1,
@@ -17,7 +18,27 @@ export const Modal = posed.div({
   }
 });
 
-export const ModalBackground = posed.div({
+const ModalBackgroundPose = posed.div({
   enter: { opacity: 1 },
   exit: { opacity: 0 }
 });
+
+export const Modal = styled(ModalPose)`
+  position: fixed;
+  bottom: 0px;
+  left: 0;
+  width: 100vw;
+  margin: 0 auto;
+  background: white;
+  z-index: 10;
+`;
+
+export const ModalBackground = styled(ModalBackgroundPose)`
+  position: fixed;
+  background: rgba(0, 0, 0, 0.8);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 5;
+`;
