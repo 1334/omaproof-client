@@ -9,8 +9,7 @@ import NewPostButton from './newPostButton';
 import { Modal, ModalBackground } from './animations/modal';
 
 import data from '../data/oma.json';
-
-import LOGIN_MUTATION from '../graphql/mutations/login';
+import SELECT_GROUP from '../graphql/mutations/selectGroup';
 
 const StyledFeed = styled.div`
   background-color: ${props => props.theme.colors.creme};
@@ -38,13 +37,6 @@ class Feed extends React.Component {
     groupToken: ''
   };
 
-  componentDidMount() {
-    this.setState({
-      userToken: localStorage.getItem('userToken') || '',
-      groupToken: localStorage.getItem('groupToken') || ''
-    });
-  }
-
   toggleNewPost = () => {
     document.body.style.overflow = this.state.newPost ? 'auto' : 'hidden';
     this.setState({ newPost: !this.state.newPost });
@@ -52,30 +44,33 @@ class Feed extends React.Component {
 
   render() {
     const { posts } = this.state;
+    const { group } = this.props;
+    console.log(group);
+
     return (
       <StyledFeed>
         <div className="new-post">
           <NewPostButton newPostClicked={this.toggleNewPost} />
         </div>
-        {!this.state.userToken && (
+        {this.props.group && (
           <Mutation
-            mutation={LOGIN_MUTATION}
-            variables={{ contactNumber: 'codeworks', password: 'any' }}
+            mutation={SELECT_GROUP}
+            variables={{ groupId: this.props.group }}
           >
-            {(login, { loading, error, called, data }) => {
+            {(selectGroup, { loading, error, called, data }) => {
               if (loading) return <div>Loading...</div>;
               if (error) return <div>There have been an error :(</div>;
               if (data) {
                 {
-                  localStorage.setItem('userToken', data.login.token);
+                  console.log(data);
                 }
-                return <React.Fragment />;
+                return null;
               }
               if (!called) {
                 {
-                  login();
+                  selectGroup();
                 }
-                return <React.Fragment />;
+                return null;
               }
             }}
           </Mutation>

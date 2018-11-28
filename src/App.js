@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { createGlobalStyle, ThemeProvider } from 'styled-components';
 import ApolloClient from 'apollo-boost';
 import { ApolloProvider } from 'react-apollo';
+import { Mutation } from 'react-apollo';
+import LOGIN_MUTATION from './graphql/mutations/login';
 
 import Feed from './components/feed';
 import Auth from './components/auth';
@@ -50,13 +52,27 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 const client = new ApolloClient({
-  uri: 'http://localhost:4000'
+  uri: 'http://localhost:4000',
+  headers: {
+    authorization: `Bearer ${localStorage.getItem('userToken')}`
+  }
 });
 
 class App extends Component {
   state = {
-    theme: 'default'
+    theme: 'default',
+    user: { groups: [] }
   };
+
+  componentDidMount() {
+    this.setState({
+      userToken: localStorage.getItem('userToken') || ''
+    });
+  }
+
+  shouldComponentUpdate(_, nextState) {
+    return this.state.user.id !== nextState.user.id ? true : false;
+  }
 
   render() {
     return (
@@ -66,8 +82,44 @@ class App extends Component {
             <GlobalStyle />
             <Router>
               <div>
-                <NavBar />
-                <Route path="/" exact component={Feed} key="home" />
+                {!this.state.user.id && (
+                  <Mutation
+                    mutation={LOGIN_MUTATION}
+                    variables={{ contactNumber: 'codeworks', password: 'any' }}
+                  >
+                    {(login, { loading, error, called, data }) => {
+                      if (loading) return <div>Loading...</div>;
+                      if (error) return <div>There have been an error :(</div>;
+                      if (data) {
+                        {
+                          const { user } = data.login;
+
+                          const groups = user.groups.map(g => g.id);
+                          this.setState({
+                            user: { id: user.id, name: user.name, groups }
+                          });
+                          localStorage.setItem('userToken', data.login.token);
+                        }
+                        return null;
+                      }
+                      if (!called) {
+                        {
+                          login();
+                        }
+                        return null;
+                      }
+                    }}
+                  </Mutation>
+                )}
+                <NavBar user={this.state.user} />
+                <Route
+                  path="/"
+                  exact
+                  key="home"
+                  render={props => (
+                    <Feed {...props} group={this.state.user.groups[0]} />
+                  )}
+                />
                 <Route path="/login" exact component={Auth} key="login" />
                 <Route
                   path="/new-post"
