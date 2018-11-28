@@ -4,8 +4,6 @@ import Members from './members';
 import Questions from './questions';
 import GroupEnd from './groupEnd';
 
-import { PoseGroup } from 'react-pose';
-
 class AdminView extends Component {
   state = {
     step: 0,
@@ -44,7 +42,11 @@ class AdminView extends Component {
       });
     } else if (this.state.step === 2) {
       this.setState({
-        step: this.state.step + 1
+        step: this.state.step + 1,
+        group: {
+          ...this.state.group,
+          security: [...this.state.group.security, ...data]
+        }
       });
     } else if (this.state.step === 3) {
       this.setState({});
@@ -68,17 +70,5 @@ class AdminView extends Component {
     );
   }
 }
-
-//   render() {
-//     const A = this.state.component[this.state.step];
-
-//     return (
-//       <React.Fragment>
-//         <p>test</p>
-//         <A />
-//       </React.Fragment>
-//     );
-//   }
-// }
 
 export default AdminView;

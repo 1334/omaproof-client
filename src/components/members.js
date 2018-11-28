@@ -72,11 +72,10 @@ class Members extends Component {
     });
   };
 
-  somefunction = () => {
+  passProps = () => {
     this.props.handleSubmit(this.state.members);
   };
   render() {
-    console.log(this.state);
     return (
       <React.Fragment>
         <h2>Add members</h2> <br />
@@ -129,7 +128,7 @@ class Members extends Component {
           />
         ) : null}
         <br />
-        <button onClick={this.somefunction}> next </button>
+        <button onClick={this.passProps}> next </button>
       </React.Fragment>
     );
   }

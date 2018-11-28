@@ -12,15 +12,12 @@ class Member extends Component {
     const target = event.target;
     this.setState({ [target.name]: target.value });
   };
-  consoleLogThis = () => {
-    console.log(this.state);
-  };
+
   createMember = () => {
     this.props.submitMember(this.state);
   };
 
   render() {
-    console.log(this.state);
     return (
       <React.Fragment>
         <div className="popup" onClick={this.props.closePopup} />

@@ -10,9 +10,10 @@ class GroupInfo extends Component {
   createGroup = () => {
     this.props.handleSubmit(this.state);
   };
-
+  passProps = () => {
+    this.props.handleSubmit(this.state);
+  };
   render() {
-    console.log(this.state);
     return (
       <React.Fragment>
         <h4>Insert group name</h4>
@@ -31,7 +32,7 @@ class GroupInfo extends Component {
         />
         <br />
 
-        <button onClick={this.createGroup}> next </button>
+        <button onClick={this.passProps}> next </button>
       </React.Fragment>
     );
   }
