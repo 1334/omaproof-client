@@ -85,7 +85,7 @@ export default class Post extends React.Component {
         </div>
         <div className="comments">
           {hiddenComments.length > 0 ? (
-            <a href="#" onClick={this.showComments}>
+            <a href="/more-comments" onClick={this.showComments}>
               show {hiddenComments.length} comments more
             </a>
           ) : null}
