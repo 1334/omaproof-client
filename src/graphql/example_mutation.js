@@ -13,6 +13,7 @@ const ADD_TODO = gql`
 
 export const AddTodo = () => {
   let input;
+  //{ loading, error, called, data }
 
   return (
     <Mutation mutation={ADD_TODO}>
