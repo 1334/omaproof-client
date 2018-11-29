@@ -54,7 +54,7 @@ const GlobalStyle = createGlobalStyle`
 const client = new ApolloClient({
   uri: 'http://localhost:4000',
   headers: {
-    authorization: `Bearer ${localStorage.getItem('userToken')}`
+    authorization: `Bearer ${localStorage.getItem('token')}`
   }
 });
 
@@ -66,7 +66,7 @@ class App extends Component {
 
   componentDidMount() {
     this.setState({
-      userToken: localStorage.getItem('userToken') || ''
+      userToken: localStorage.getItem('token') || ''
     });
   }
 
@@ -98,7 +98,7 @@ class App extends Component {
                           this.setState({
                             user: { id: user.id, name: user.name, groups }
                           });
-                          localStorage.setItem('userToken', data.login.token);
+                          localStorage.setItem('token', data.login.token);
                         }
                         return null;
                       }

@@ -1,14 +1,13 @@
 import React from 'react';
 import { PoseGroup } from 'react-pose';
 import styled from 'styled-components';
-import { Mutation } from 'react-apollo';
+import { Query } from 'react-apollo';
 
 import Posts from './posts';
 import NewPost from './newPost';
 import NewPostButton from './newPostButton';
 import { Modal, ModalBackground } from './animations/modal';
-
-import SELECT_GROUP from '../graphql/mutations/selectGroup';
+import GET_POSTS_QUERY from '../graphql/queries/getPosts';
 
 const StyledFeed = styled.div`
   background-color: ${props => props.theme.colors.creme};
@@ -30,7 +29,6 @@ const StyledFeed = styled.div`
 
 class Feed extends React.Component {
   state = {
-    posts: [],
     users: [],
     newPost: false
   };
@@ -40,14 +38,8 @@ class Feed extends React.Component {
     this.setState({ newPost: !this.state.newPost });
   };
 
-  shouldComponentUpdate() {
-    return !this.state.users.length ? true : false;
-  }
-
   render() {
-    const { posts } = this.state;
     const { group } = this.props;
-    console.log(group);
 
     return (
       <StyledFeed>
@@ -55,30 +47,17 @@ class Feed extends React.Component {
           <NewPostButton newPostClicked={this.toggleNewPost} />
         </div>
         {group && (
-          <Mutation
-            mutation={SELECT_GROUP}
-            variables={{ id: this.props.group }}
-          >
-            {(selectGroup, { loading, error, called, data }) => {
-              if (loading) return <div>Loading...</div>;
-              if (error) return <div>There have been an error :(</div>;
-              if (data) {
-                {
-                  console.log(data);
-
-                  const { posts, users } = data.selectGroup.group;
-                  this.setState({ posts, users });
-                }
-                return null;
-              }
-              if (!called) {
-                {
-                  selectGroup();
-                }
-                return null;
-              }
+          <Query query={GET_POSTS_QUERY} variables={{ id: this.props.group }}>
+            {({ loading, error, data }) => {
+              if (loading) return <p>Loading...</p>;
+              if (error) return <p>{error.message} :(</p>;
+              return (
+                <div className="feed">
+                  <Posts posts={data.getPosts} />
+                </div>
+              );
             }}
-          </Mutation>
+          </Query>
         )}
         <PoseGroup>
           {this.state.newPost && [
@@ -92,9 +71,6 @@ class Feed extends React.Component {
             </Modal>
           ]}
         </PoseGroup>
-        <div className="feed">
-          <Posts posts={posts} />
-        </div>
       </StyledFeed>
     );
   }
