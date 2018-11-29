@@ -4,6 +4,7 @@ const GET_POSTS_QUERY = gql`
   query GetPosts($id: String!) {
     getPosts(where: { group: { id: $id } }) {
       id
+      description
       createdAt
       contentType
       mediaUrl

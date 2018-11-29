@@ -1,7 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import Textarea from '../styledComponents/textarea';
+import { Mutation } from 'react-apollo';
 
+import CREATE_COMMENT_MUTATION from '../graphql/mutations/createComment';
+import Textarea from '../styledComponents/textarea';
 import Button from '../styledComponents/button';
 
 const StyledAddComment = styled.div`
@@ -26,26 +28,55 @@ const StyledAddComment = styled.div`
 `;
 
 export default class AddComment extends React.Component {
-  createComment = () => {
-    console.log('create comment for post with id', this.props.postId);
+  state = {
+    description: ''
+  };
+
+  handleChange = e => {
+    this.setState({ [e.target.name]: e.target.value });
+  };
+
+  isCommentValid = () => {
+    return this.state.description.length;
   };
 
   render() {
     const { postId } = this.props;
     return (
-      <StyledAddComment>
-        <img src="http://placehold.it/32x32" alt="me" />
-        <Textarea
-          id={`comment-${postId}`}
-          type="text"
-          placeholder="Add your comment"
-        />
-        <div className="buttons">
-          <Button type="submit" onClick={this.createComment}>
-            Add
-          </Button>
-        </div>
-      </StyledAddComment>
+      <Mutation
+        mutation={CREATE_COMMENT_MUTATION}
+        variables={{
+          description: this.state.description,
+          postId: this.props.postId
+        }}
+      >
+        {createComment => (
+          <StyledAddComment>
+            <img src="http://placehold.it/32x32" alt="me" />
+            <Textarea
+              value={this.state.description}
+              id={`comment-${postId}`}
+              name="description"
+              type="text"
+              placeholder="Add your comment"
+              onChange={this.handleChange}
+            />
+            <div className="buttons">
+              <Button
+                type="submit"
+                onClick={() => {
+                  if (this.isCommentValid()) {
+                    createComment();
+                    this.setState({ description: '' });
+                  }
+                }}
+              >
+                Add
+              </Button>
+            </div>
+          </StyledAddComment>
+        )}
+      </Mutation>
     );
   }
 }
