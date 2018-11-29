@@ -47,9 +47,14 @@ class Feed extends React.Component {
           <NewPostButton newPostClicked={this.toggleNewPost} />
         </div>
         {group && (
-          <Query query={GET_POSTS_QUERY} variables={{ id: group }}>
+          <Query
+            query={GET_POSTS_QUERY}
+            variables={{ id: group }}
+            pollInterval={2000}
+            // notifyOnNetworkStatusChange
+          >
             {({ loading, error, data }) => {
-              if (loading) return <p>Loading...</p>;
+              if (loading) return null;
               if (error) return <p>{error.message} :(</p>;
               return (
                 <div className="feed">

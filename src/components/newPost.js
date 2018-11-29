@@ -4,6 +4,7 @@ import { Mutation } from 'react-apollo';
 import Textarea from '../styledComponents/textarea';
 import Button from '../styledComponents/button';
 import CREATE_POST_MUTATION from '../graphql/mutations/createPost';
+import GET_POSTS_QUERY from '../graphql/queries/getPosts';
 
 const StyledNewPost = styled.div`
   position: relative;
@@ -67,6 +68,12 @@ class NewPost extends React.Component {
           description: this.state.description,
           mediaUrl: this.state.mediaUrl
         }}
+        refetchQueries={[
+          {
+            query: GET_POSTS_QUERY,
+            variables: { id: localStorage.getItem('currentGroup') }
+          }
+        ]}
       >
         {createPost => (
           <StyledNewPost>
