@@ -2,7 +2,7 @@ import gql from 'graphql-tag';
 
 const GET_POSTS_QUERY = gql`
   query GetPosts($id: String!) {
-    getPosts(where: { group: { id: $id } }) {
+    getPosts(where: { group: { id: $id } }, orderBy: createdAt_DESC) {
       id
       description
       createdAt
