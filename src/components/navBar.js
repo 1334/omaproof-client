@@ -10,7 +10,8 @@ const StyledNavBar = styled.nav`
   height: 50px;
   padding: 0.5em 0;
 
-  a {
+  a,
+  div {
     margin-right: 0.7em;
     color: white;
   }
@@ -20,6 +21,7 @@ class NavBar extends React.Component {
   render() {
     return (
       <StyledNavBar>
+        <div>{this.props.user.name}</div>
         <Link to="/">Home</Link>
         <Link to="/login">Login</Link>
         <Link to="/new-post">New Post</Link>
