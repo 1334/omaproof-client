@@ -8,7 +8,6 @@ import NewPost from './newPost';
 import NewPostButton from './newPostButton';
 import { Modal, ModalBackground } from './animations/modal';
 
-import data from '../data/oma.json';
 import SELECT_GROUP from '../graphql/mutations/selectGroup';
 
 const StyledFeed = styled.div`
@@ -31,16 +30,19 @@ const StyledFeed = styled.div`
 
 class Feed extends React.Component {
   state = {
-    posts: data,
-    newPost: false,
-    userToken: '',
-    groupToken: ''
+    posts: [],
+    users: [],
+    newPost: false
   };
 
   toggleNewPost = () => {
     document.body.style.overflow = this.state.newPost ? 'auto' : 'hidden';
     this.setState({ newPost: !this.state.newPost });
   };
+
+  shouldComponentUpdate() {
+    return this.state.users.length ? true : false;
+  }
 
   render() {
     const { posts } = this.state;
@@ -62,7 +64,8 @@ class Feed extends React.Component {
               if (error) return <div>There have been an error :(</div>;
               if (data) {
                 {
-                  console.log(data);
+                  const { posts, users } = data.selectGroup.group;
+                  this.setState({ posts, users });
                 }
                 return null;
               }
