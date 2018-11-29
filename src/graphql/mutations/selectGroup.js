@@ -6,28 +6,6 @@ const SELECT_GROUP = gql`
       token
       group {
         id
-        posts {
-          id
-          createdAt
-          contentType
-          mediaUrl
-          user {
-            name
-            profilePicture
-          }
-          comments {
-            id
-            description
-            user {
-              name
-              profilePicture
-            }
-            createdAt
-          }
-        }
-        users {
-          contactNumber
-        }
       }
     }
   }

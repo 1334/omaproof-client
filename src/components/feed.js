@@ -39,7 +39,7 @@ class Feed extends React.Component {
   };
 
   render() {
-    const { group } = this.props;
+    const group = localStorage.getItem('currentGroup');
 
     return (
       <StyledFeed>
@@ -47,7 +47,7 @@ class Feed extends React.Component {
           <NewPostButton newPostClicked={this.toggleNewPost} />
         </div>
         {group && (
-          <Query query={GET_POSTS_QUERY} variables={{ id: this.props.group }}>
+          <Query query={GET_POSTS_QUERY} variables={{ id: group }}>
             {({ loading, error, data }) => {
               if (loading) return <p>Loading...</p>;
               if (error) return <p>{error.message} :(</p>;
@@ -67,7 +67,7 @@ class Feed extends React.Component {
               onClick={this.toggleNewPost}
             />,
             <Modal key="modal" className="modal">
-              <NewPost />
+              <NewPost close={this.toggleNewPost} />
             </Modal>
           ]}
         </PoseGroup>
