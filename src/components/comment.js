@@ -17,7 +17,6 @@ const StyledComment = styled.div`
 export default class Comment extends React.Component {
   render() {
     const { comment } = this.props;
-    console.log(this.props);
 
     return (
       <StyledComment>

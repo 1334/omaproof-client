@@ -12,6 +12,7 @@ class Authenticator extends React.Component {
 
   render() {
     const { groups } = this.state;
+    const { userToken } = this.state;
 
     return !groups.length ? (
       <Mutation
@@ -21,7 +22,7 @@ class Authenticator extends React.Component {
         {(login, { loading, error }) => {
           if (loading) return <div>Loading...</div>;
           if (error) return <div>{error.message} :(</div>;
-          return (
+          return !userToken ? (
             <Button
               onClick={() => {
                 login().then(({ data }) => {
@@ -33,7 +34,7 @@ class Authenticator extends React.Component {
             >
               Login
             </Button>
-          );
+          ) : null;
         }}
       </Mutation>
     ) : (
