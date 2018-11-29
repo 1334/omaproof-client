@@ -47,10 +47,6 @@ export default class Auth extends React.Component {
     }
   };
 
-  validate(username, password) {
-    console.log('user validated with', username, password);
-  }
-
   render() {
     const ComponentType = this.state.component;
     const props = {
