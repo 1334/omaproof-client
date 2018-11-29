@@ -17,7 +17,10 @@ export default class CommentUser extends React.Component {
     const { user } = this.props;
     return (
       <StyledCommentUser>
-        <img src={user.profilePicture} alt={user.name} />
+        <img
+          src={user.profilePicture || 'http://placehold.it/32x32'}
+          alt={user.name}
+        />
         <span>{user.name}</span>
       </StyledCommentUser>
     );
