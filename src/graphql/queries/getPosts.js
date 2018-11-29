@@ -3,6 +3,7 @@ import gql from 'graphql-tag';
 const GET_POSTS_QUERY = gql`
   query GetPosts($id: String!) {
     getPosts(where: { group: { id: $id } }) {
+      id
       createdAt
       contentType
       mediaUrl

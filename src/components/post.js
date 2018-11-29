@@ -65,7 +65,7 @@ export default class Post extends React.Component {
   render() {
     const { post } = this.props;
     const { shownComments, hiddenComments } = this.state;
-
+    console.log('POST', post);
     return (
       <StyledPost>
         <div className="post-info">
@@ -75,11 +75,11 @@ export default class Post extends React.Component {
         </div>
         <img
           className="post-image"
-          src={post.content.mediaUrl}
-          alt={post.content.title}
+          src={post.mediaUrl}
+          alt={post.description}
         />
-        <h1 className="post-title">{post.content.title}</h1>
-        <div className="post-description">{post.content.description}</div>
+        <h1 className="post-title">{post.description}</h1>
+        <div className="post-description">{post.description}</div>
         <div className="social">
           LIKE <label htmlFor={`comment-${post.id}`}>COMMENT</label>
         </div>
