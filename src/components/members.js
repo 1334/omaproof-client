@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import Member from './member';
 
+import Button from '../styledComponents/button';
+import ButtonLarge from '../styledComponents/buttonLarge';
+
 class Members extends Component {
   state = {
     displayComponent: false,
@@ -77,17 +80,17 @@ class Members extends Component {
   };
   render() {
     return (
-      <React.Fragment>
-        <h2>Add members</h2> <br />
+      <div className="groupInfo">
+        <p>Add members</p> <br />
         <table className="table">
           <thead className="thead-dark">
             <tr>
-              <th scope="col">#</th>
-              <th scope="col">Avatar</th>
-              <th scope="col">Name</th>
-              <th scope="col">Last Name</th>
-              <th scope="col">Phone Number</th>
-              <th scope="col">Action</th>
+              <th scope="col" />
+              <th scope="col" />
+              <th scope="col" />
+              <th scope="col"> </th>
+              <th scope="col" />
+              <th scope="col" />
             </tr>
           </thead>
           <tbody>
@@ -102,12 +105,20 @@ class Members extends Component {
                   <td>{member.lastName}</td>
                   <td>{member.phoneNumber}</td>
                   <td>
-                    <button
+                    {/* <Button
                       onClick={() => this.removeMember(member)}
                       type="button"
                       className="btn  btn-default btn-sm"
                     >
                       remove contact
+                    </Button> */}
+                    <button
+                      type="button"
+                      className="close"
+                      aria-label="Close"
+                      onClick={() => this.removeMember(member)}
+                    >
+                      <span aria-hidden="true">&times;</span>
                     </button>
                   </td>
                 </tr>
@@ -115,10 +126,12 @@ class Members extends Component {
             })}
           </tbody>
         </table>
-        <button onClick={this.addMember}>Add Member</button>
-        <button type="button" onClick={this.toggleModal}>
-          Add member manualy
-        </button>
+        <div>
+          <Button onClick={this.addMember}>+</Button>
+          <Button type="button" onClick={this.toggleModal}>
+            Add
+          </Button>
+        </div>
         {this.state.displayComponent ? (
           <Member
             text="Close Me"
@@ -128,8 +141,8 @@ class Members extends Component {
           />
         ) : null}
         <br />
-        <button onClick={this.passProps}> next </button>
-      </React.Fragment>
+        <ButtonLarge onClick={this.passProps}> next </ButtonLarge>
+      </div>
     );
   }
 }

@@ -1,15 +1,36 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { PoseGroup } from 'react-pose';
+
+import StepsFlow from './animations/stepsFlow';
 import GroupInfo from './groupInfo';
 import Members from './members';
 import Questions from './questions';
 import GroupEnd from './groupEnd';
+import Feed from './feed';
 
-class AdminView extends Component {
+import styled from 'styled-components';
+
+const StyledAddComment = styled.div`
+  position: relative;
+  margin-top: 1.5em;
+  padding-bottom: 1.5em;
+
+  textarea {
+    width: 100%;
+  }
+
+  .buttons {
+    display: flex;
+    justify-content: flex-end;
+  }
+`;
+
+export default class AdminView extends React.Component {
   state = {
     step: 0,
     displayComponent: false,
     isVisible: false,
-    component: [GroupInfo, Members, Questions, GroupEnd],
+    component: [GroupInfo, Members, Questions, GroupEnd, Feed],
     group: {
       description: '',
       security: [],
@@ -34,7 +55,7 @@ class AdminView extends Component {
       });
     } else if (this.state.step === 1) {
       this.setState({
-        step: this.state.step + 1,
+        step: this.state.step + 2,
         group: {
           ...this.state.group,
           members: [...this.state.group.members, ...data]
@@ -49,7 +70,12 @@ class AdminView extends Component {
         }
       });
     } else if (this.state.step === 3) {
-      this.setState({});
+      this.setState({
+        step: this.state.step + 1
+      });
+    } else if (this.state.step === 4) {
+      // this.props.history.push('/');
+      console.log('ada');
     }
   };
   render() {
@@ -57,18 +83,23 @@ class AdminView extends Component {
     const ComponentType = this.state.component[this.state.step];
     const props = {
       handleSubmit: this.handleSubmit,
-      key: this.state.step
+      key: this.state.step,
+      group: this.state.group
       // style: `background-color: blue`
     };
     // if (ComponentType === Password) {
     //   props.question = questions[this.state.step - 1];
     // }
     return (
-      <div className="auth">
-        <ComponentType {...props} />
-      </div>
+      <StyledAddComment className="auth">
+        <PoseGroup preEnterPose="pre-enter">
+          {this.state.isVisible && (
+            <StepsFlow key={this.state.step}>
+              <ComponentType {...props} />
+            </StepsFlow>
+          )}
+        </PoseGroup>
+      </StyledAddComment>
     );
   }
 }
-
-export default AdminView;

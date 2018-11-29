@@ -25,6 +25,7 @@ class NavBar extends React.Component {
         <Link to="/">Home</Link>
         <Link to="/login">Login</Link>
         <Link to="/new-post">New Post</Link>
+        <Link to="/new-group">New Group</Link>
       </StyledNavBar>
     );
   }

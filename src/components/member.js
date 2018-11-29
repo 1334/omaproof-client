@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
+import Textarea from '../styledComponents/textarea';
+import Button from '../styledComponents/button';
 import './test.css';
+
+import { ModalBackground, ModalMiddle } from './animations/modal';
 
 class Member extends Component {
   state = {
@@ -8,6 +12,7 @@ class Member extends Component {
     lastName: '',
     phoneNumber: ''
   };
+
   handleChangee = event => {
     const target = event.target;
     this.setState({ [target.name]: target.value });
@@ -19,44 +24,46 @@ class Member extends Component {
 
   render() {
     return (
-      <React.Fragment>
-        <div className="popup" onClick={this.props.closePopup} />
-        <div className="popup_inner">
-          <h1>Add member</h1>
-          <h4>Add image</h4>
-          <input
-            type="file"
-            name="avatar"
-            accept="image/*"
-            onChange={this.handleChangee}
-            //   placeholder="add profile picture"
-          />
-          <h4>Name</h4>
-          <input
-            type="text"
-            name="firstName"
-            placeholder="first name"
-            onChange={this.handleChangee}
-          />
-          <h4>Last Name</h4>
-          <input
-            type="text"
-            name="lastName"
-            placeholder="last name"
-            onChange={this.handleChangee}
-          />
-          <h4>Phone</h4>
-          <input
-            type="text"
-            name="phoneNumber"
-            placeholder="phone number"
-            onChange={this.handleChangee}
-          />
-          <br />
-          <button onClick={this.createMember}>submit</button>
-          {/* <button onClick={this.consoleLogThis}>submit</button> */}
-        </div>
-      </React.Fragment>
+      <div className="member-div">
+        <ModalBackground onClick={this.props.closePopup} />
+        <ModalMiddle>
+          <div className="popup_inner">
+            <h3>Add member</h3>
+            <h4>Add image</h4>
+            <input
+              type="file"
+              name="avatar"
+              accept="image/*"
+              onChange={this.handleChangee}
+              //   placeholder="add profile picture"
+            />
+            <h4>Name</h4>
+            <Textarea
+              type="text"
+              name="firstName"
+              placeholder="first name"
+              onChange={this.handleChangee}
+            />
+            <h4>Last Name</h4>
+            <Textarea
+              type="text"
+              name="lastName"
+              placeholder="last name"
+              onChange={this.handleChangee}
+            />
+            <h4>Phone</h4>
+            <Textarea
+              type="text"
+              name="phoneNumber"
+              placeholder="phone number"
+              onChange={this.handleChangee}
+            />
+            <br />
+            <Button onClick={this.createMember}>submit</Button>
+            {/* <button onClick={this.consoleLogThis}>submit</button> */}
+          </div>
+        </ModalMiddle>
+      </div>
     );
   }
 }

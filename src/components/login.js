@@ -1,4 +1,28 @@
 import React from 'react';
+import Textarea from '../styledComponents/textarea';
+import Button from '../styledComponents/button';
+import styled from 'styled-components';
+
+const StyledAddComment = styled.div`
+  position: relative;
+  margin-top: 1.5em;
+  padding-bottom: 1.5em;
+
+  img {
+    position: absolute;
+    border-radius: 50%;
+    top: -0.85em;
+  }
+
+  textarea {
+    width: 100%;
+  }
+
+  .buttons {
+    display: flex;
+    justify-content: flex-end;
+  }
+`;
 
 export default class Login extends React.Component {
   state = {
@@ -19,10 +43,10 @@ export default class Login extends React.Component {
 
   render() {
     return (
-      <div className="login">
+      <StyledAddComment className="login">
         <label htmlFor="login">
           Enter your phone number
-          <input
+          <Textarea
             value={this.state.value}
             type="tel"
             id="login"
@@ -32,14 +56,14 @@ export default class Login extends React.Component {
             onChange={this.onKeyPress}
           />
         </label>
-        <button
+        <Button
           type="submit"
           onClick={this.onSubmit}
           // disabled={this.state.submit ? null : 'disabled'}
         >
           Next
-        </button>
-      </div>
+        </Button>
+      </StyledAddComment>
     );
   }
 }

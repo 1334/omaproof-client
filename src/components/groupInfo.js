@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import Textarea from '../styledComponents/textarea';
+import ButtonLarge from '../styledComponents/buttonLarge';
+import './test.css';
 
 class GroupInfo extends Component {
   state = {
@@ -15,16 +18,16 @@ class GroupInfo extends Component {
   };
   render() {
     return (
-      <React.Fragment>
-        <h4>Insert group name</h4>
-        <input
+      <div className="groupInfo">
+        <p>Insert group name</p>
+        <Textarea
           type="text"
           name="name"
           placeholder="GROUP NAME"
           onChange={this.onChange}
         />
-        <h4>Set group discription</h4>
-        <input
+        <p>Set group discription</p>
+        <Textarea
           type="text"
           name="description"
           placeholder="DESCRIPTION"
@@ -32,8 +35,8 @@ class GroupInfo extends Component {
         />
         <br />
 
-        <button onClick={this.passProps}> next </button>
-      </React.Fragment>
+        <ButtonLarge onClick={this.passProps}> next </ButtonLarge>
+      </div>
     );
   }
 }

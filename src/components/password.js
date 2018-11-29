@@ -1,4 +1,6 @@
 import React from 'react';
+import Textarea from '../styledComponents/textarea';
+import Button from '../styledComponents/button';
 
 export default class Password extends React.Component {
   state = {
@@ -21,7 +23,7 @@ export default class Password extends React.Component {
       <div className="password">
         <label htmlFor="password">
           {this.props.question}
-          <input
+          <Textarea
             value={this.state.value}
             type="text"
             id="password"
@@ -29,13 +31,13 @@ export default class Password extends React.Component {
             onChange={this.onKeyPress}
           />
         </label>
-        <button
+        <Button
           type="submit"
           onClick={this.onSubmit}
           // disabled={this.state.submit ? null : 'disabled'}
         >
           Next
-        </button>
+        </Button>
       </div>
     );
   }

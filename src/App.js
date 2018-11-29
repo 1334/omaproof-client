@@ -6,11 +6,11 @@ import { ApolloProvider } from 'react-apollo';
 import { Mutation } from 'react-apollo';
 import LOGIN_MUTATION from './graphql/mutations/login';
 
-import Feed from './components/feed';
 import Auth from './components/auth';
 import NewPost from './components/newPost';
 import NavBar from './components/navBar';
 import AdminView from './components/admin-main';
+import LandingPage from './components/landingPage';
 
 const theme = {
   colors: {
@@ -117,9 +117,10 @@ class App extends Component {
                   path="/"
                   exact
                   key="home"
-                  render={props => (
-                    <Feed {...props} group={this.state.user.groups[0]} />
-                  )}
+                  // render={props => (
+                  //   <Feed {...props} group={this.state.user.groups[0]} />
+                  // )}
+                  component={LandingPage}
                 />
                 <Route path="/login" exact component={Auth} key="login" />
                 <Route

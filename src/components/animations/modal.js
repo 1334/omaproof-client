@@ -42,3 +42,13 @@ export const ModalBackground = styled(ModalBackgroundPose)`
   bottom: 0;
   z-index: 5;
 `;
+
+export const ModalMiddle = styled(ModalPose)`
+  position: fixed;
+  bottom: 15vh;
+  left: auto;
+  width: 80vw;
+  margin: 0 auto;
+  background: white;
+  z-index: 10;
+`;

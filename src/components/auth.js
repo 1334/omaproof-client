@@ -4,6 +4,29 @@ import { PoseGroup } from 'react-pose';
 import Login from './login';
 import Password from './password';
 import StepsFlow from './animations/stepsFlow';
+import styled from 'styled-components';
+import Feed from './feed';
+
+const StyledAddComment = styled.div`
+  position: relative;
+  margin-top: 1.5em;
+  padding-bottom: 1.5em;
+
+  img {
+    position: absolute;
+    border-radius: 50%;
+    top: -0.85em;
+  }
+
+  textarea {
+    width: 100%;
+  }
+
+  .buttons {
+    display: flex;
+    justify-content: flex-end;
+  }
+`;
 
 const questions = [
   "What's Jovan favourite food",
@@ -39,8 +62,12 @@ export default class Auth extends React.Component {
         },
         () => {
           if (this.state.step > questions.length) {
+            console.log('1234567890');
             this.validate(this.state.username, this.state.password);
-            this.props.history.push('/');
+            // this.props.history.push('/');
+            this.setState({
+              component: Feed
+            });
           }
         }
       );
@@ -62,7 +89,7 @@ export default class Auth extends React.Component {
       props.question = questions[this.state.step - 1];
     }
     return (
-      <div className="auth">
+      <StyledAddComment className="auth">
         <PoseGroup preEnterPose="pre-enter">
           {this.state.isVisible && (
             <StepsFlow key={this.state.step}>
@@ -70,7 +97,7 @@ export default class Auth extends React.Component {
             </StepsFlow>
           )}
         </PoseGroup>
-      </div>
+      </StyledAddComment>
     );
   }
 }
