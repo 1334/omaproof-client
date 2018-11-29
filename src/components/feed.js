@@ -41,7 +41,7 @@ class Feed extends React.Component {
   };
 
   shouldComponentUpdate() {
-    return this.state.users.length ? true : false;
+    return !this.state.users.length ? true : false;
   }
 
   render() {
@@ -54,16 +54,18 @@ class Feed extends React.Component {
         <div className="new-post">
           <NewPostButton newPostClicked={this.toggleNewPost} />
         </div>
-        {this.props.group && (
+        {group && (
           <Mutation
             mutation={SELECT_GROUP}
-            variables={{ groupId: this.props.group }}
+            variables={{ id: this.props.group }}
           >
             {(selectGroup, { loading, error, called, data }) => {
               if (loading) return <div>Loading...</div>;
               if (error) return <div>There have been an error :(</div>;
               if (data) {
                 {
+                  console.log(data);
+
                   const { posts, users } = data.selectGroup.group;
                   this.setState({ posts, users });
                 }
