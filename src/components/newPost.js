@@ -7,14 +7,17 @@ import CREATE_POST_MUTATION from '../graphql/mutations/createPost';
 import GET_POSTS_QUERY from '../graphql/queries/getPosts';
 
 const StyledNewPost = styled.div`
-  position: relative;
   margin-top: 1.5em;
   padding: 1.5em 18px;
 
-  img {
+  div.input {
+    position: relative;
+  }
+
+  .user-profile {
     position: absolute;
     border-radius: 50%;
-    bottom: 110px;
+    bottom: 22px;
   }
 
   input[type='file'] {
@@ -27,6 +30,9 @@ const StyledNewPost = styled.div`
     }
   }
 
+  .uploaded-media {
+  }
+
   textarea {
     width: 100%;
     margin: 1em 0;
@@ -34,6 +40,10 @@ const StyledNewPost = styled.div`
 
   button {
     margin: 1em 0;
+    width: 100%;
+  }
+
+  img.uploaded-media {
     width: 100%;
   }
 `;
@@ -88,21 +98,27 @@ class NewPost extends React.Component {
       >
         {createPost => (
           <StyledNewPost>
-            <img
-              src="http://placehold.it/32x32"
-              alt="me"
-              onChange={this.handleChange}
-            />
-            <Textarea
-              value={this.state.description}
-              name="description"
-              id="description"
-              placeholder="Tell me something"
-              onChange={this.handleChange}
-            />
+            <div className="input">
+              <img
+                src="http://placehold.it/32x32"
+                alt="me"
+                onChange={this.handleChange}
+                className="user-profile"
+              />
+              <Textarea
+                value={this.state.description}
+                name="description"
+                id="description"
+                placeholder="Tell me something"
+                onChange={this.handleChange}
+              />
+            </div>
             <label className="media-label" htmlFor="media">
               Add a photo
             </label>
+            {this.state.mediaUrl && (
+              <img src={this.state.mediaUrl} className="uploaded-media" />
+            )}
             <input
               accept="image/*"
               id="media"

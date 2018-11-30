@@ -26,6 +26,8 @@ class Authenticator extends React.Component {
             <Button
               onClick={() => {
                 login().then(({ data }) => {
+                  console.log(data);
+
                   const groups = data.login.user.groups;
                   this.setState({ groups });
                   localStorage.setItem('userToken', data.login.token);

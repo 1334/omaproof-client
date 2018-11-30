@@ -56,7 +56,7 @@ export default class AddComment extends React.Component {
             variables: { id: this.props.postId }
           }
         ]}
-        update={cache => console.log(cache)}
+        // update={cache => console.log(cache)}
       >
         {createComment => (
           <StyledAddComment>

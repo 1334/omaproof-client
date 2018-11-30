@@ -51,7 +51,7 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 const client = new ApolloClient({
-  uri: 'http://localhost:4000',
+  uri: `http://${window.location.hostname}:4000`,
   headers: {
     authorization: `Bearer ${localStorage.getItem('groupToken') ||
       localStorage.getItem('userToken')}`
