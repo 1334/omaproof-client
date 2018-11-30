@@ -11,12 +11,25 @@ import NavBar from './components/navBar';
 import Demo from './components/demo';
 import Authenticator from './components/authenticator';
 
-const theme = {
+const lightTheme = {
   colors: {
-    black: 'rgb(30,34,38)',
-    grey: 'rgb(119,119,119)',
-    blue: 'rgb(14,52,82)',
-    creme: 'rgb(246,244,234)'
+    text: 'rgb(30,34,38)',
+    textLight: 'rgb(119,119,119)',
+    textPrimary: 'rgb(255,255,255)',
+    bg: 'rgb(255,255,255)',
+    primary: 'rgb(14,52,82)',
+    bg2: 'rgb(246,244,234)'
+  }
+};
+
+const darkTheme = {
+  colors: {
+    text: 'rgb(225,221,217)',
+    textLight: 'rgb(119,119,119)',
+    textPrimary: 'rgb(255,255,255)',
+    bg: 'rgb(30,34,38)',
+    primary: 'rgb(125,125,125)',
+    bg2: 'rgb(30,34,38)'
   }
 };
 
@@ -36,6 +49,7 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
     line-height: 1.5;
     font-family: 'Titillium Web', sans-serif;
+    color: ${props => props.theme.colors.text};
   }
 
   input, textarea {
@@ -61,7 +75,7 @@ const client = new ApolloClient({
 
 class App extends Component {
   state = {
-    theme: 'default'
+    theme: lightTheme
   };
 
   componentDidMount() {
@@ -72,7 +86,7 @@ class App extends Component {
 
   render() {
     return (
-      <ThemeProvider theme={theme}>
+      <ThemeProvider theme={this.state.theme}>
         <ApolloProvider client={client}>
           <React.Fragment>
             <GlobalStyle />

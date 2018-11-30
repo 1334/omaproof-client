@@ -6,7 +6,7 @@ import Comment from './comment';
 import AddComment from './addComment';
 
 const StyledPost = styled.div`
-  background-color: white;
+  background-color: ${props => props.theme.colors.bg};
   margin: 1em 0;
 
   img.post-image {
@@ -36,7 +36,7 @@ const StyledPost = styled.div`
     span:last-child {
       flex-grow: 2;
       text-align: right;
-      color: ${props => props.theme.colors.grey};
+      color: ${props => props.theme.colors.textLight};
     }
   }
 `;

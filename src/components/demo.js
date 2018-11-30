@@ -13,7 +13,7 @@ const StyledDemo = styled.div`
 
   .item {
     text-align: center;
-    background-color: ${props => props.theme.colors.creme};
+    background-color: ${props => props.theme.colors.bg2};
     border-radius: 10px;
     box-shadow: 3px 3px 5px grey;
     font-size: 1.3em;

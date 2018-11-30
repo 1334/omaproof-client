@@ -51,8 +51,7 @@ export default class Auth extends React.Component {
     const ComponentType = this.state.component;
     const props = {
       handleSubmit: this.handleSubmit,
-      key: this.state.step,
-      style: `background-color: blue`
+      key: this.state.step
     };
     if (ComponentType === Password) {
       props.question = questions[this.state.step - 1];

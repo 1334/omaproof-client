@@ -10,7 +10,7 @@ import { Modal, ModalBackground } from './animations/modal';
 import GET_POSTS_QUERY from '../graphql/queries/getPosts';
 
 const StyledFeed = styled.div`
-  background-color: ${props => props.theme.colors.creme};
+  background-color: ${props => props.theme.colors.bg2};
   padding: 0.2em 0 1em;
   max-width: 700px;
   margin: 0 auto;
@@ -54,8 +54,6 @@ class Feed extends React.Component {
             // notifyOnNetworkStatusChange
           >
             {({ loading, error, data }) => {
-              console.log('rerender', data);
-
               if (loading) return null;
               if (error) return <p>{error.message} :(</p>;
               return (
