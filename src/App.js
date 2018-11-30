@@ -10,6 +10,7 @@ import Feed from './components/feed';
 import Auth from './components/auth';
 import NewPost from './components/newPost';
 import NavBar from './components/navBar';
+import GroupInfo from './components/admin-view/groupFirst';
 
 const theme = {
   colors: {
@@ -77,7 +78,7 @@ class App extends Component {
   render() {
     return (
       <ThemeProvider theme={theme}>
-        <ApolloProvider client={client}>
+        {/* <ApolloProvider client={client}>
           <React.Fragment>
             <GlobalStyle />
             <Router>
@@ -130,7 +131,8 @@ class App extends Component {
               </div>
             </Router>
           </React.Fragment>
-        </ApolloProvider>
+        </ApolloProvider> */}
+        <GroupInfo />
       </ThemeProvider>
     );
   }
