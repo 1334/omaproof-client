@@ -54,6 +54,8 @@ class Feed extends React.Component {
             // notifyOnNetworkStatusChange
           >
             {({ loading, error, data }) => {
+              console.log('rerender', data);
+
               if (loading) return null;
               if (error) return <p>{error.message} :(</p>;
               return (

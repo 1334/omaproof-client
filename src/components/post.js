@@ -64,7 +64,7 @@ export default class Post extends React.Component {
 
   render() {
     const { post } = this.props;
-    const { shownComments, hiddenComments } = this.state;
+    // const { shownComments, hiddenComments } = this.state;
     return (
       <StyledPost>
         <div className="post-info">
@@ -86,12 +86,12 @@ export default class Post extends React.Component {
           LIKE <label htmlFor={`comment-${post.id}`}>COMMENT</label>
         </div>
         <div className="comments">
-          {hiddenComments.length > 0 ? (
+          {/* {hiddenComments.length > 0 ? (
             <a href="/more-comments" onClick={this.showComments}>
               show {hiddenComments.length} comments more
             </a>
-          ) : null}
-          {shownComments.map(comment => (
+          ) : null} */}
+          {this.props.post.comments.map(comment => (
             <Comment comment={comment} key={comment.id} />
           ))}
           <AddComment postId={post.id} />

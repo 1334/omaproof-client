@@ -8,6 +8,7 @@ import Feed from './components/feed';
 import Auth from './components/auth';
 import NewPost from './components/newPost';
 import NavBar from './components/navBar';
+import Demo from './components/demo';
 import Authenticator from './components/authenticator';
 
 const theme = {
@@ -81,6 +82,7 @@ class App extends Component {
                 <Authenticator />
                 <Route path="/" exact component={Feed} key="home" />
                 <Route path="/login" exact component={Auth} key="login" />
+                <Route path="/demo" exact component={Demo} key="demo" />
                 <Route
                   path="/new-post"
                   exact
