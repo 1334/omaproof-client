@@ -22,9 +22,8 @@ class NavBar extends React.Component {
     return (
       <StyledNavBar>
         <div>{this.props.user.name}</div>
-        <Link to="/">Home</Link>
+        <Link to="/">Feed</Link>
         <Link to="/login">Login</Link>
-        <Link to="/new-post">New Post</Link>
       </StyledNavBar>
     );
   }

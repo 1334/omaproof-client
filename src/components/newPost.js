@@ -14,11 +14,22 @@ const StyledNewPost = styled.div`
   img {
     position: absolute;
     border-radius: 50%;
-    top: 12px;
+    bottom: 110px;
+  }
+
+  input[type='file'] {
+    display: none;
+  }
+
+  .media-label {
+    &:hover {
+      cursor: pointer;
+    }
   }
 
   textarea {
     width: 100%;
+    margin: 1em 0;
   }
 
   button {
@@ -89,6 +100,9 @@ class NewPost extends React.Component {
               placeholder="Tell me something"
               onChange={this.handleChange}
             />
+            <label className="media-label" htmlFor="media">
+              Add a photo
+            </label>
             <input
               accept="image/*"
               id="media"

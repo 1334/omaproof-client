@@ -50,7 +50,7 @@ class Feed extends React.Component {
           <Query
             query={GET_POSTS_QUERY}
             variables={{ id: group }}
-            pollInterval={2000}
+            // pollInterval={2000}
             // notifyOnNetworkStatusChange
           >
             {({ loading, error, data }) => {

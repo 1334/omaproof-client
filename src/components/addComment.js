@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Mutation } from 'react-apollo';
 
-import GET_POSTS_QUERY from '../graphql/queries/getPosts';
+import GET_COMMENTS_QUERY from '../graphql/queries/getComments';
 import CREATE_COMMENT_MUTATION from '../graphql/mutations/createComment';
 import Textarea from '../styledComponents/textarea';
 import Button from '../styledComponents/button';
@@ -52,10 +52,11 @@ export default class AddComment extends React.Component {
         }}
         refetchQueries={[
           {
-            query: GET_POSTS_QUERY,
-            variables: { id: localStorage.getItem('currentGroup') }
+            query: GET_COMMENTS_QUERY,
+            variables: { id: this.props.postId }
           }
         ]}
+        update={cache => console.log(cache)}
       >
         {createComment => (
           <StyledAddComment>
