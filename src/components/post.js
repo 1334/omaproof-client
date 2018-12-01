@@ -3,6 +3,7 @@ import moment from 'moment';
 import styled from 'styled-components';
 
 import Comment from './comment';
+import DeletePost from './deletePost';
 import AddComment from './addComment';
 
 const StyledPost = styled.div`
@@ -73,7 +74,7 @@ export default class Post extends React.Component {
         <div className="post-description">{post.description}</div>
         <div className="social">
           LIKE <label htmlFor={`comment-${post.id}`}>COMMENT</label>{' '}
-          {console.log(post, user)}
+          {post.user.id === user.id && <DeletePost post={post} user={user} />}
         </div>
         <div className="comments">
           {/* {hiddenComments.length > 0 ? (
