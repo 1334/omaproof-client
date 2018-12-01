@@ -5,6 +5,7 @@ const CREATE_POST_MUTATION = gql`
     $contentType: CONTENT_TYPE!
     $description: String!
     $mediaUrl: String!
+    $token: String!
   ) {
     createPost(
       content: {
@@ -12,6 +13,7 @@ const CREATE_POST_MUTATION = gql`
         description: $description
         mediaUrl: $mediaUrl
       }
+      token: $token
     ) {
       id
     }

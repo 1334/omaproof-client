@@ -27,7 +27,8 @@ class GroupChooser extends React.Component {
                             variables: { id: group.id, token: user.userToken }
                           }).then(({ data }) => {
                             const groupToken = data.selectGroup.token;
-                            updateUser({ groupToken });
+                            const activeGroup = data.selectGroup.group.id;
+                            updateUser({ groupToken, activeGroup });
                           });
                         }}
                       >
@@ -35,7 +36,7 @@ class GroupChooser extends React.Component {
                       </Button>
                     ))
                   ) : (
-                    <div>Group with token {user.groupToken} selected</div>
+                    <div>Group with id {user.activeGroup} selected</div>
                   )}
                 </React.Fragment>
               );

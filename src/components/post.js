@@ -42,18 +42,6 @@ const StyledPost = styled.div`
 `;
 
 export default class Post extends React.Component {
-  state = {
-    shownComments: [],
-    hiddenComments: []
-  };
-
-  componentDidMount() {
-    this.setState({
-      shownComments: this.props.post.comments.slice(-3),
-      hiddenComments: this.props.post.comments.slice(0, -3)
-    });
-  }
-
   showComments = e => {
     e.preventDefault();
     this.setState({
@@ -64,6 +52,8 @@ export default class Post extends React.Component {
 
   render() {
     const { post } = this.props;
+    const shownComments = post.comments.slice(-3);
+    // const hiddenComments = post.comments.slice(0, -3);
     // const { shownComments, hiddenComments } = this.state;
     return (
       <StyledPost>
@@ -80,7 +70,6 @@ export default class Post extends React.Component {
           src={post.mediaUrl}
           alt={post.description}
         />
-        {/* <h1 className="post-title">{post.description}</h1> */}
         <div className="post-description">{post.description}</div>
         <div className="social">
           LIKE <label htmlFor={`comment-${post.id}`}>COMMENT</label>
@@ -91,7 +80,7 @@ export default class Post extends React.Component {
               show {hiddenComments.length} comments more
             </a>
           ) : null} */}
-          {this.props.post.comments.map(comment => (
+          {shownComments.map(comment => (
             <Comment comment={comment} key={comment.id} />
           ))}
           <AddComment postId={post.id} />

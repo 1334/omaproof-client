@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Mutation } from 'react-apollo';
+
+import UserContext from '../contexts/userContext';
 import Textarea from '../styledComponents/textarea';
 import Button from '../styledComponents/button';
 import CREATE_POST_MUTATION from '../graphql/mutations/createPost';
@@ -82,63 +84,68 @@ class NewPost extends React.Component {
 
   render() {
     return (
-      <Mutation
-        mutation={CREATE_POST_MUTATION}
-        variables={{
-          contentType: 'IMAGE',
-          description: this.state.description,
-          mediaUrl: this.state.mediaUrl
-        }}
-        refetchQueries={[
-          {
-            query: GET_POSTS_QUERY,
-            variables: { id: localStorage.getItem('currentGroup') }
-          }
-        ]}
-      >
-        {createPost => (
-          <StyledNewPost>
-            <div className="input">
-              <img
-                src="http://placehold.it/32x32"
-                alt="me"
-                onChange={this.handleChange}
-                className="user-profile"
-              />
-              <Textarea
-                value={this.state.description}
-                name="description"
-                id="description"
-                placeholder="Tell me something"
-                onChange={this.handleChange}
-              />
-            </div>
-            <label className="media-label" htmlFor="media">
-              Add a photo
-            </label>
-            {this.state.mediaUrl && (
-              <img src={this.state.mediaUrl} className="uploaded-media" />
+      <UserContext.Consumer>
+        {({ user }) => (
+          <Mutation
+            mutation={CREATE_POST_MUTATION}
+            variables={{
+              contentType: 'IMAGE',
+              description: this.state.description,
+              mediaUrl: this.state.mediaUrl,
+              token: user.groupToken
+            }}
+            refetchQueries={[
+              {
+                query: GET_POSTS_QUERY,
+                variables: { id: user.activeGroup, token: user.groupToken }
+              }
+            ]}
+          >
+            {createPost => (
+              <StyledNewPost>
+                <div className="input">
+                  <img
+                    src="http://placehold.it/32x32"
+                    alt="me"
+                    onChange={this.handleChange}
+                    className="user-profile"
+                  />
+                  <Textarea
+                    value={this.state.description}
+                    name="description"
+                    id="description"
+                    placeholder="Tell me something"
+                    onChange={this.handleChange}
+                  />
+                </div>
+                <label className="media-label" htmlFor="media">
+                  Add a photo
+                </label>
+                {this.state.mediaUrl && (
+                  <img src={this.state.mediaUrl} className="uploaded-media" />
+                )}
+                <input
+                  accept="image/*"
+                  id="media"
+                  type="file"
+                  ref={this.fileInput}
+                  onChange={this.uploadImage}
+                />
+                <Button
+                  onClick={() => {
+                    if (this.isPostValid()) {
+                      createPost();
+                      this.props.close();
+                    }
+                  }}
+                >
+                  Publish
+                </Button>
+              </StyledNewPost>
             )}
-            <input
-              accept="image/*"
-              id="media"
-              type="file"
-              ref={this.fileInput}
-              onChange={this.uploadImage}
-            />
-            <Button
-              onClick={() => {
-                if (this.isPostValid()) {
-                  createPost();
-                  this.props.close();
-                }
-              }}
-            >
-              Publish
-            </Button>
-          </StyledNewPost>
+          </Mutation>
         )}
-      </Mutation>
+      </UserContext.Consumer>
     );
   }
 }

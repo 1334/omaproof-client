@@ -40,8 +40,6 @@ class Feed extends React.Component {
   };
 
   render() {
-    const group = localStorage.getItem('currentGroup');
-
     return (
       <UserContext.Consumer>
         {({ user }) => (
@@ -49,22 +47,20 @@ class Feed extends React.Component {
             <div className="new-post">
               <NewPostButton newPostClicked={this.toggleNewPost} />
             </div>
-            {group && (
-              <Query
-                query={GET_POSTS_QUERY}
-                variables={{ id: group, token: user.groupToken }}
-              >
-                {({ loading, error, data }) => {
-                  if (loading) return null;
-                  if (error) return <p>{error.message} :(</p>;
-                  return (
-                    <div className="feed">
-                      <Posts posts={data.getPosts} />
-                    </div>
-                  );
-                }}
-              </Query>
-            )}
+            <Query
+              query={GET_POSTS_QUERY}
+              variables={{ id: user.activeGroup, token: user.groupToken }}
+            >
+              {({ loading, error, data }) => {
+                if (loading) return <div>Loading...</div>;
+                if (error) return <p>{error.message} :(</p>;
+                return (
+                  <div className="feed">
+                    <Posts posts={data.getPosts} />
+                  </div>
+                );
+              }}
+            </Query>
             <PoseGroup>
               {this.state.newPost && [
                 <ModalBackground
