@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import CommentUser from './commentUser';
+import DeleteComment from './deleteComment';
 
 const StyledComment = styled.div`
   position: relative;
@@ -16,12 +17,15 @@ const StyledComment = styled.div`
 
 export default class Comment extends React.Component {
   render() {
-    const { comment } = this.props;
+    const { comment, user } = this.props;
 
     return (
       <StyledComment>
         <CommentUser user={comment.user} />
-        {comment.description}
+        {comment.description}{' '}
+        {comment.user.id === user.id && (
+          <DeleteComment comment={comment} user={user} />
+        )}
       </StyledComment>
     );
   }
