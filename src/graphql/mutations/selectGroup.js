@@ -1,8 +1,8 @@
 import gql from 'graphql-tag';
 
 const SELECT_GROUP = gql`
-  mutation SelectGroup($id: String!) {
-    selectGroup(id: $id) {
+  mutation SelectGroup($id: String!, $token: String!) {
+    selectGroup(id: $id, token: $token) {
       token
       group {
         id

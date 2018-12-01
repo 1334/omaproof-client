@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { createGlobalStyle, ThemeProvider } from 'styled-components';
 
-import { UserContext } from './contexts/userContext';
+import UserContext from './contexts/userContext';
 import Auth from './components/auth';
 import NewPost from './components/newPost';
 import NavBar from './components/navBar';
@@ -71,10 +71,16 @@ class App extends Component {
       id: '',
       name: 'Guest',
       profilePicture: '',
-      currentGroup: '',
+      activeGroup: '',
       groups: []
     }
   };
+
+  // {
+  //   "userId": "cjp171pq4palt0a03j9x3i6lm",
+  //   "activeGroup": "cjp1789vspd250a03xnzvr0ky",
+  //   "iat": 1543655712
+  // }
 
   componentDidMount() {
     this.setState({
@@ -84,31 +90,39 @@ class App extends Component {
 
   render() {
     return (
-      <ThemeProvider theme={this.state.theme}>
-        <React.Fragment>
-          <GlobalStyle />
-          <Router>
-            <div>
-              <NavBar user={this.state.use || ''} />
-              <Route path="/" exact component={Landing} key="landing" />
-              <Route path="/login" exact component={Auth} key="login" />
-              <Route
-                path="/group-chooser"
-                exact
-                component={GroupChooser}
-                key="group"
-              />
-              <Route path="/demo" exact component={Demo} key="demo" />
-              <Route
-                path="/new-post"
-                exact
-                component={NewPost}
-                key="new-post"
-              />
-            </div>
-          </Router>
-        </React.Fragment>
-      </ThemeProvider>
+      <UserContext.Provider
+        value={{
+          user: this.state.user,
+          updateUser: user =>
+            this.setState({ user: { ...this.state.user, ...user } })
+        }}
+      >
+        <ThemeProvider theme={this.state.theme}>
+          <React.Fragment>
+            <GlobalStyle />
+            <Router>
+              <div>
+                <NavBar user={this.state.use || ''} />
+                <Route path="/" exact component={Landing} key="landing" />
+                <Route path="/login" exact component={Auth} key="login" />
+                <Route
+                  path="/group-chooser"
+                  exact
+                  component={GroupChooser}
+                  key="group"
+                />
+                <Route path="/demo" exact component={Demo} key="demo" />
+                <Route
+                  path="/new-post"
+                  exact
+                  component={NewPost}
+                  key="new-post"
+                />
+              </div>
+            </Router>
+          </React.Fragment>
+        </ThemeProvider>
+      </UserContext.Provider>
     );
   }
 }

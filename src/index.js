@@ -7,12 +7,7 @@ import './index.css';
 import App from './App';
 
 const client = new ApolloClient({
-  uri: `http://${window.location.hostname}:4000`,
-
-  headers: {
-    authorization: `Bearer ${localStorage.getItem('groupToken') ||
-      localStorage.getItem('userToken')}`
-  }
+  uri: `http://${window.location.hostname}:4000`
 });
 
 ReactDOM.render(
