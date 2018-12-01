@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { Router } from '@reach/router';
 import { ThemeProvider } from 'styled-components';
 
 import GlobalStyle from './styledComponents/globalStyles';
@@ -49,29 +49,17 @@ class App extends Component {
         <ThemeProvider theme={this.state.theme ? lightTheme : darkTheme}>
           <React.Fragment>
             <GlobalStyle />
+            <NavBar
+              theme={this.state.theme ? 'light' : 'dark'}
+              toggleTheme={this.toggleTheme}
+            />
             <Router>
-              <div>
-                <NavBar
-                  theme={this.state.theme ? 'light' : 'dark'}
-                  toggleTheme={this.toggleTheme}
-                />
-                <Route path="/" exact component={Landing} key="landing" />
-                <Route path="/feed" exact component={Feed} key="feed" />
-                <Route path="/login" exact component={Auth} key="login" />
-                <Route
-                  path="/group-chooser"
-                  exact
-                  component={GroupChooser}
-                  key="group"
-                />
-                <Route path="/demo" exact component={Demo} key="demo" />
-                <Route
-                  path="/new-post"
-                  exact
-                  component={NewPost}
-                  key="new-post"
-                />
-              </div>
+              <Landing path="/" />
+              <Feed path="/feed" />
+              <Auth path="/login" />
+              <GroupChooser path="/group-chooser" />
+              <Demo path="/demo" />
+              <NewPost path="/new-post" />
             </Router>
           </React.Fragment>
         </ThemeProvider>
