@@ -68,13 +68,7 @@ const GlobalStyle = createGlobalStyle`
 class App extends Component {
   state = {
     theme: lightTheme,
-    user: {
-      id: '',
-      name: 'Guest',
-      profilePicture: '',
-      activeGroup: '',
-      groups: []
-    }
+    user: {}
   };
 
   // {
@@ -85,7 +79,13 @@ class App extends Component {
 
   componentDidMount() {
     this.setState({
-      userToken: localStorage.getItem('userToken') || ''
+      user: JSON.parse(localStorage.getItem('user')) || {
+        id: '',
+        name: 'Guest',
+        profilePicture: '',
+        activeGroup: '',
+        groups: []
+      }
     });
   }
 
@@ -95,7 +95,9 @@ class App extends Component {
         value={{
           user: this.state.user,
           updateUser: user =>
-            this.setState({ user: { ...this.state.user, ...user } })
+            this.setState({ user: { ...this.state.user, ...user } }, () =>
+              localStorage.setItem('user', JSON.stringify(this.state.user))
+            )
         }}
       >
         <ThemeProvider theme={this.state.theme}>
