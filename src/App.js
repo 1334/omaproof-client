@@ -9,6 +9,7 @@ import NavBar from './components/navBar';
 import Demo from './components/demo';
 import GroupChooser from './components/groupChooser';
 import Landing from './components/landing';
+import Feed from './components/feed';
 
 const lightTheme = {
   colors: {
@@ -104,6 +105,7 @@ class App extends Component {
               <div>
                 <NavBar user={this.state.use || ''} />
                 <Route path="/" exact component={Landing} key="landing" />
+                <Route path="/feed" exact component={Feed} key="feed" />
                 <Route path="/login" exact component={Auth} key="login" />
                 <Route
                   path="/group-chooser"

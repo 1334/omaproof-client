@@ -3,6 +3,7 @@ import { PoseGroup } from 'react-pose';
 import styled from 'styled-components';
 import { Query } from 'react-apollo';
 
+import UserContext from '../contexts/userContext';
 import Posts from './posts';
 import NewPost from './newPost';
 import NewPostButton from './newPostButton';
@@ -42,41 +43,43 @@ class Feed extends React.Component {
     const group = localStorage.getItem('currentGroup');
 
     return (
-      <StyledFeed>
-        <div className="new-post">
-          <NewPostButton newPostClicked={this.toggleNewPost} />
-        </div>
-        {group && (
-          <Query
-            query={GET_POSTS_QUERY}
-            variables={{ id: group }}
-            // pollInterval={2000}
-            // notifyOnNetworkStatusChange
-          >
-            {({ loading, error, data }) => {
-              if (loading) return null;
-              if (error) return <p>{error.message} :(</p>;
-              return (
-                <div className="feed">
-                  <Posts posts={data.getPosts} />
-                </div>
-              );
-            }}
-          </Query>
+      <UserContext.Consumer>
+        {({ user }) => (
+          <StyledFeed>
+            <div className="new-post">
+              <NewPostButton newPostClicked={this.toggleNewPost} />
+            </div>
+            {group && (
+              <Query
+                query={GET_POSTS_QUERY}
+                variables={{ id: group, token: user.groupToken }}
+              >
+                {({ loading, error, data }) => {
+                  if (loading) return null;
+                  if (error) return <p>{error.message} :(</p>;
+                  return (
+                    <div className="feed">
+                      <Posts posts={data.getPosts} />
+                    </div>
+                  );
+                }}
+              </Query>
+            )}
+            <PoseGroup>
+              {this.state.newPost && [
+                <ModalBackground
+                  key="shade"
+                  className="shade"
+                  onClick={this.toggleNewPost}
+                />,
+                <Modal key="modal" className="modal">
+                  <NewPost close={this.toggleNewPost} />
+                </Modal>
+              ]}
+            </PoseGroup>
+          </StyledFeed>
         )}
-        <PoseGroup>
-          {this.state.newPost && [
-            <ModalBackground
-              key="shade"
-              className="shade"
-              onClick={this.toggleNewPost}
-            />,
-            <Modal key="modal" className="modal">
-              <NewPost close={this.toggleNewPost} />
-            </Modal>
-          ]}
-        </PoseGroup>
-      </StyledFeed>
+      </UserContext.Consumer>
     );
   }
 }
