@@ -51,7 +51,7 @@ export default class Post extends React.Component {
   };
 
   render() {
-    const { post } = this.props;
+    const { post, user } = this.props;
     const shownComments = post.comments.slice(-3);
     // const hiddenComments = post.comments.slice(0, -3);
     // const { shownComments, hiddenComments } = this.state;
@@ -81,9 +81,9 @@ export default class Post extends React.Component {
             </a>
           ) : null} */}
           {shownComments.map(comment => (
-            <Comment comment={comment} key={comment.id} />
+            <Comment comment={comment} key={comment.id} user={user} />
           ))}
-          <AddComment postId={post.id} />
+          <AddComment postId={post.id} user={user} />
         </div>
       </StyledPost>
     );

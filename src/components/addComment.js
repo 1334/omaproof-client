@@ -42,21 +42,21 @@ export default class AddComment extends React.Component {
   };
 
   render() {
-    const { postId } = this.props;
+    const { postId, user } = this.props;
     return (
       <Mutation
         mutation={CREATE_COMMENT_MUTATION}
         variables={{
           description: this.state.description,
-          postId: this.props.postId
+          postId: postId,
+          token: user.groupToken
         }}
         refetchQueries={[
           {
             query: GET_POSTS_QUERY,
-            variables: { id: localStorage.getItem('currentGroup') }
+            variables: { id: user.activeGroup, token: user.groupToken }
           }
         ]}
-        // update={cache => console.log(cache)}
       >
         {createComment => (
           <StyledAddComment>

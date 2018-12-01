@@ -56,7 +56,7 @@ class Feed extends React.Component {
                 if (error) return <p>{error.message} :(</p>;
                 return (
                   <div className="feed">
-                    <Posts posts={data.getPosts} />
+                    <Posts posts={data.getPosts} user={user} />
                   </div>
                 );
               }}
@@ -69,7 +69,7 @@ class Feed extends React.Component {
                   onClick={this.toggleNewPost}
                 />,
                 <Modal key="modal" className="modal">
-                  <NewPost close={this.toggleNewPost} />
+                  <NewPost close={this.toggleNewPost} user={user} />
                 </Modal>
               ]}
             </PoseGroup>
