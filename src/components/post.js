@@ -72,7 +72,8 @@ export default class Post extends React.Component {
         />
         <div className="post-description">{post.description}</div>
         <div className="social">
-          LIKE <label htmlFor={`comment-${post.id}`}>COMMENT</label>
+          LIKE <label htmlFor={`comment-${post.id}`}>COMMENT</label>{' '}
+          {console.log(post, user)}
         </div>
         <div className="comments">
           {/* {hiddenComments.length > 0 ? (

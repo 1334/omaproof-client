@@ -13,6 +13,7 @@ const GET_POSTS_QUERY = gql`
       contentType
       mediaUrl
       user {
+        id
         name
         profilePicture
       }
@@ -20,6 +21,7 @@ const GET_POSTS_QUERY = gql`
         id
         description
         user {
+          id
           name
           profilePicture
         }
