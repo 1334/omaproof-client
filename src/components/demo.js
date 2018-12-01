@@ -36,40 +36,40 @@ class Demo extends React.Component {
   render() {
     return (
       <StyledDemo>
-        <div onClick={this.goToFeed} className="item">
+        <div className="item">
           <Link to="/">Frederik</Link>
         </div>
-        <div onClick={this.goToFeed} className="item">
+        <div className="item">
           <Link to="/">Jovan</Link>
         </div>
-        <div onClick={this.goToFeed} className="item">
+        <div className="item">
           <Link to="/">Maxim</Link>
         </div>
-        <div onClick={this.goToFeed} className="item">
+        <div className="item">
           <Link to="/">Cristina</Link>
         </div>
-        <div onClick={this.goToFeed} className="item">
+        <div className="item">
           <Link to="/">Arol</Link>
         </div>
-        <div onClick={this.goToFeed} className="item">
+        <div className="item">
           <Link to="/">Sarah</Link>
         </div>
-        <div onClick={this.goToFeed} className="item">
+        <div className="item">
           <Link to="/">Marco</Link>
         </div>
-        <div onClick={this.goToFeed} className="item">
+        <div className="item">
           <Link to="/">Indi</Link>
         </div>
-        <div onClick={this.goToFeed} className="item">
+        <div className="item">
           <Link to="/">Laura</Link>
         </div>
-        <div onClick={this.goToFeed} className="item">
+        <div className="item">
           <Link to="/">Alice</Link>
         </div>
-        <div onClick={this.goToFeed} className="item">
+        <div className="item">
           <Link to="/">Sonia</Link>
         </div>
-        <div onClick={this.goToFeed} className="item">
+        <div className="item">
           <Link to="/">None of them</Link>
         </div>
       </StyledDemo>
