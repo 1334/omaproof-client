@@ -6,7 +6,7 @@
   justify-content: space-around;
 }
 .familyStatus {
-  display: inline-block;
+  display: inline;
 }
 .buttonMember {
   border: none;

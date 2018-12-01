@@ -5,35 +5,27 @@ import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import Input from '@material-ui/core/Input';
-import './test.css';
 
-export default class Member extends React.Component {
+export default class Grandchild extends React.Component {
   state = {
     memberName: '',
-    phoneNumber: '',
-    familyStatus: '',
+    familyStatus: 'child',
     month: '',
     year: '',
-    expanded: false
+    picture: ''
   };
-
   handleChangee = event => {
     const target = event.target;
     this.setState({ [target.name]: target.value });
   };
-  handleClick = event => {
-    const target = event.target;
-    this.setState({ familyStatus: target.name });
-  };
+
   createMember = () => {
-    this.props.submitMember(this.state);
+    this.props.submitGrandChild(this.state);
     this.setState({
       memberName: '',
-      phoneNumber: '',
-      familyStatus: '',
       month: '',
       year: '',
-      expanded: false
+      picture: ''
     });
   };
 
@@ -41,7 +33,7 @@ export default class Member extends React.Component {
     return (
       <ExpansionPanel>
         <ExpansionPanelSummary>
-          <p> member </p>
+          <p> Grandchild </p>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails className="memberDetails">
           <FormControl>
@@ -50,15 +42,6 @@ export default class Member extends React.Component {
               type="text"
               name="memberName"
               value={this.state.memberName}
-              onChange={this.handleChangee}
-            />
-          </FormControl>
-          <FormControl>
-            <InputLabel>Phone</InputLabel>
-            <Input
-              type="text"
-              name="phoneNumber"
-              value={this.state.phoneNumber}
               onChange={this.handleChangee}
             />
           </FormControl>
@@ -83,29 +66,13 @@ export default class Member extends React.Component {
             </FormControl>
           </div>
           <br />
-          <div className="familyStatus">
-            <button
-              className="buttonMember"
-              name="child"
-              onClick={this.handleClick}
-            >
-              child
-            </button>
-            <button
-              className="buttonMember"
-              name="parent"
-              onClick={this.handleClick}
-            >
-              parent
-            </button>
-            <button
-              className="buttonMember"
-              name="grandparent"
-              onClick={this.handleClick}
-            >
-              grandparent
-            </button>
-          </div>
+          <input
+            accept="image/*"
+            name="picture"
+            id="media"
+            type="file"
+            ref={this.fileInput}
+          />
           <br />
 
           <button onClick={this.createMember}>Done</button>
