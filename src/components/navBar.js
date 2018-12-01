@@ -18,10 +18,17 @@ const StyledNavBar = styled.nav`
 `;
 
 class NavBar extends React.Component {
+  toggleTheme = e => {
+    e.preventDefault();
+    this.props.toggleTheme();
+  };
+
   render() {
     return (
       <StyledNavBar>
-        <div>{this.props.user.name}</div>
+        <a href="/theme" onClick={this.toggleTheme}>
+          {this.props.theme}
+        </a>
         <Link to="/feed">Feed</Link>
         <Link to="/">Login</Link>
       </StyledNavBar>

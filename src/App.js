@@ -22,16 +22,16 @@ const lightTheme = {
   }
 };
 
-// const darkTheme = {
-//   colors: {
-//     text: 'rgb(225,221,217)',
-//     textLight: 'rgb(119,119,119)',
-//     textPrimary: 'rgb(255,255,255)',
-//     bg: 'rgb(30,34,38)',
-//     primary: 'rgb(125,125,125)',
-//     bg2: 'rgb(30,34,38)'
-//   }
-// };
+const darkTheme = {
+  colors: {
+    text: 'rgb(225,221,217)',
+    textLight: 'rgb(119,119,119)',
+    textPrimary: 'rgb(255,255,255)',
+    bg: 'rgb(30,34,38)',
+    primary: 'rgb(125,125,125)',
+    bg2: 'rgb(30,34,38)'
+  }
+};
 
 const GlobalStyle = createGlobalStyle`
   @import url('https://fonts.googleapis.com/css?family=Titillium+Web:200,300,400,700');
@@ -67,15 +67,9 @@ const GlobalStyle = createGlobalStyle`
 
 class App extends Component {
   state = {
-    theme: lightTheme,
+    theme: true,
     user: {}
   };
-
-  // {
-  //   "userId": "cjp171pq4palt0a03j9x3i6lm",
-  //   "activeGroup": "cjp1789vspd250a03xnzvr0ky",
-  //   "iat": 1543655712
-  // }
 
   componentDidMount() {
     this.setState({
@@ -89,6 +83,10 @@ class App extends Component {
     });
   }
 
+  toggleTheme = () => {
+    this.setState({ theme: !this.state.theme });
+  };
+
   render() {
     return (
       <UserContext.Provider
@@ -100,12 +98,15 @@ class App extends Component {
             )
         }}
       >
-        <ThemeProvider theme={this.state.theme}>
+        <ThemeProvider theme={this.state.theme ? lightTheme : darkTheme}>
           <React.Fragment>
             <GlobalStyle />
             <Router>
               <div>
-                <NavBar user={this.state.use || ''} />
+                <NavBar
+                  theme={this.state.theme ? 'light' : 'dark'}
+                  toggleTheme={this.toggleTheme}
+                />
                 <Route path="/" exact component={Landing} key="landing" />
                 <Route path="/feed" exact component={Feed} key="feed" />
                 <Route path="/login" exact component={Auth} key="login" />
