@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import { createGlobalStyle, ThemeProvider } from 'styled-components';
+import { ThemeProvider } from 'styled-components';
 
+import GlobalStyle from './styledComponents/globalStyles';
 import UserContext from './contexts/userContext';
 import Auth from './components/auth';
 import NewPost from './components/newPost';
@@ -10,60 +11,7 @@ import Demo from './components/demo';
 import GroupChooser from './components/groupChooser';
 import Landing from './components/landing';
 import Feed from './components/feed';
-
-const lightTheme = {
-  colors: {
-    text: 'rgb(30,34,38)',
-    textLight: 'rgb(119,119,119)',
-    textPrimary: 'rgb(255,255,255)',
-    bg: 'rgb(255,255,255)',
-    primary: 'rgb(14,52,82)',
-    bg2: 'rgb(246,244,234)'
-  }
-};
-
-const darkTheme = {
-  colors: {
-    text: 'rgb(225,221,217)',
-    textLight: 'rgb(119,119,119)',
-    textPrimary: 'rgb(255,255,255)',
-    bg: 'rgb(30,34,38)',
-    primary: 'rgb(125,125,125)',
-    bg2: 'rgb(30,34,38)'
-  }
-};
-
-const GlobalStyle = createGlobalStyle`
-  @import url('https://fonts.googleapis.com/css?family=Titillium+Web:200,300,400,700');
-
-  html {
-    box-sizing: border-box;
-  }
-
-  *, *:before, *:after {
-    box-sizing: inherit;
-  }
-
-  body {
-    padding: 0;
-    margin: 0;
-    line-height: 1.5;
-    font-family: 'Titillium Web', sans-serif;
-    color: ${props => props.theme.colors.text};
-  }
-
-  input, textarea {
-    font-size: 1rem;
-    font-family: inherit;
-    line-height: 1.5;
-    resize: none;
-    border-radius: 0;
-  }
-
-  a {
-    text-decoration: none;
-  }
-`;
+import { lightTheme, darkTheme } from './themes/themes';
 
 class App extends Component {
   state = {
