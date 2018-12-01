@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { createGlobalStyle, ThemeProvider } from 'styled-components';
-import ApolloClient from 'apollo-boost';
-import { ApolloProvider } from 'react-apollo';
 
-import Feed from './components/feed';
+import { UserContext } from './contexts/userContext';
 import Auth from './components/auth';
 import NewPost from './components/newPost';
 import NavBar from './components/navBar';
 import Demo from './components/demo';
-import Authenticator from './components/authenticator';
+import GroupChooser from './components/groupChooser';
+import Landing from './components/landing';
 
 const lightTheme = {
   colors: {
@@ -22,16 +21,16 @@ const lightTheme = {
   }
 };
 
-const darkTheme = {
-  colors: {
-    text: 'rgb(225,221,217)',
-    textLight: 'rgb(119,119,119)',
-    textPrimary: 'rgb(255,255,255)',
-    bg: 'rgb(30,34,38)',
-    primary: 'rgb(125,125,125)',
-    bg2: 'rgb(30,34,38)'
-  }
-};
+// const darkTheme = {
+//   colors: {
+//     text: 'rgb(225,221,217)',
+//     textLight: 'rgb(119,119,119)',
+//     textPrimary: 'rgb(255,255,255)',
+//     bg: 'rgb(30,34,38)',
+//     primary: 'rgb(125,125,125)',
+//     bg2: 'rgb(30,34,38)'
+//   }
+// };
 
 const GlobalStyle = createGlobalStyle`
   @import url('https://fonts.googleapis.com/css?family=Titillium+Web:200,300,400,700');
@@ -65,17 +64,16 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
-const client = new ApolloClient({
-  uri: `http://${window.location.hostname}:4000`,
-  headers: {
-    authorization: `Bearer ${localStorage.getItem('groupToken') ||
-      localStorage.getItem('userToken')}`
-  }
-});
-
 class App extends Component {
   state = {
-    theme: lightTheme
+    theme: lightTheme,
+    user: {
+      id: '',
+      name: 'Guest',
+      profilePicture: '',
+      currentGroup: '',
+      groups: []
+    }
   };
 
   componentDidMount() {
@@ -87,26 +85,29 @@ class App extends Component {
   render() {
     return (
       <ThemeProvider theme={this.state.theme}>
-        <ApolloProvider client={client}>
-          <React.Fragment>
-            <GlobalStyle />
-            <Router>
-              <div>
-                <NavBar user={this.state.use || ''} />
-                <Authenticator />
-                <Route path="/" exact component={Feed} key="home" />
-                <Route path="/login" exact component={Auth} key="login" />
-                <Route path="/demo" exact component={Demo} key="demo" />
-                <Route
-                  path="/new-post"
-                  exact
-                  component={NewPost}
-                  key="new-post"
-                />
-              </div>
-            </Router>
-          </React.Fragment>
-        </ApolloProvider>
+        <React.Fragment>
+          <GlobalStyle />
+          <Router>
+            <div>
+              <NavBar user={this.state.use || ''} />
+              <Route path="/" exact component={Landing} key="landing" />
+              <Route path="/login" exact component={Auth} key="login" />
+              <Route
+                path="/group-chooser"
+                exact
+                component={GroupChooser}
+                key="group"
+              />
+              <Route path="/demo" exact component={Demo} key="demo" />
+              <Route
+                path="/new-post"
+                exact
+                component={NewPost}
+                key="new-post"
+              />
+            </div>
+          </Router>
+        </React.Fragment>
       </ThemeProvider>
     );
   }
