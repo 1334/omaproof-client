@@ -25,7 +25,6 @@ const StyledPost = styled.div`
 
   .post-info {
     display: flex;
-    /* justify-content: space-between; */
     align-items: center;
     padding: 0.8em 0;
 
@@ -43,19 +42,27 @@ const StyledPost = styled.div`
 `;
 
 export default class Post extends React.Component {
+  state = {
+    showAllComments: false
+  };
+
   showComments = e => {
     e.preventDefault();
     this.setState({
-      shownComments: this.props.post.comments,
-      hiddenComments: []
+      showAllComments: !this.state.showAllComments
     });
   };
 
   render() {
     const { post, user } = this.props;
-    const shownComments = post.comments.slice(-3);
-    // const hiddenComments = post.comments.slice(0, -3);
-    // const { shownComments, hiddenComments } = this.state;
+    const { showAllComments } = this.state;
+
+    const shownComments = showAllComments
+      ? post.comments
+      : post.comments.slice(-3);
+
+    const moreComments = post.comments > shownComments;
+
     return (
       <StyledPost>
         <div className="post-info">
@@ -77,11 +84,11 @@ export default class Post extends React.Component {
           {post.user.id === user.id && <DeletePost post={post} user={user} />}
         </div>
         <div className="comments">
-          {/* {hiddenComments.length > 0 ? (
+          {!showAllComments && moreComments ? (
             <a href="/more-comments" onClick={this.showComments}>
-              show {hiddenComments.length} comments more
+              show more comments
             </a>
-          ) : null} */}
+          ) : null}
           {shownComments.map(comment => (
             <Comment comment={comment} key={comment.id} user={user} />
           ))}
