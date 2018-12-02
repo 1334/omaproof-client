@@ -52,7 +52,8 @@ const StyledNewPost = styled.div`
 class NewPost extends React.Component {
   state = {
     description: '',
-    mediaUrl: ''
+    mediaUrl: '',
+    uploading: false
   };
 
   fileInput = React.createRef();
@@ -64,6 +65,7 @@ class NewPost extends React.Component {
   uploadImage = async e => {
     const file = e.target.files[0];
     if (!file) return;
+    this.setState({ uploading: true });
 
     const data = new FormData();
     data.append('file', file);
@@ -74,7 +76,9 @@ class NewPost extends React.Component {
       body: data
     })
       .then(data => data.json())
-      .then(data => this.setState({ mediaUrl: data.secure_url }));
+      .then(data =>
+        this.setState({ mediaUrl: data.secure_url, uploading: false })
+      );
   };
 
   isPostValid() {
@@ -119,13 +123,6 @@ class NewPost extends React.Component {
             <label className="media-label" htmlFor="media">
               Add a photo
             </label>
-            {this.state.mediaUrl && (
-              <img
-                src={this.state.mediaUrl}
-                className="uploaded-media"
-                alt="uploaded-media"
-              />
-            )}
             <input
               accept="image/*"
               id="media"
@@ -133,6 +130,14 @@ class NewPost extends React.Component {
               ref={this.fileInput}
               onChange={this.uploadImage}
             />
+            {this.state.uploading && <div>Uploading picture</div>}
+            {this.state.mediaUrl && (
+              <img
+                src={this.state.mediaUrl}
+                className="uploaded-media"
+                alt="uploaded-media"
+              />
+            )}
             <Button
               onClick={() => {
                 if (this.isPostValid()) {

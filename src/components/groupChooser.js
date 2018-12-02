@@ -4,6 +4,7 @@ import { Mutation } from 'react-apollo';
 import UserContext from '../contexts/userContext';
 import SELECT_GROUP from '../graphql/mutations/selectGroup';
 import Button from '../styledComponents/button';
+import { navigate } from '@reach/router';
 
 class GroupChooser extends React.Component {
   render() {
@@ -29,6 +30,7 @@ class GroupChooser extends React.Component {
                             const groupToken = data.selectGroup.token;
                             const activeGroup = data.selectGroup.group.id;
                             updateUser({ groupToken, activeGroup });
+                            navigate('/feed');
                           });
                         }}
                       >
