@@ -12,6 +12,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   body {
+    background-color: ${props => props.theme.colors.bg2};
     padding: 0;
     margin: 0;
     line-height: 1.5;

@@ -120,7 +120,11 @@ class NewPost extends React.Component {
               Add a photo
             </label>
             {this.state.mediaUrl && (
-              <img src={this.state.mediaUrl} className="uploaded-media" />
+              <img
+                src={this.state.mediaUrl}
+                className="uploaded-media"
+                alt="uploaded-media"
+              />
             )}
             <input
               accept="image/*"
