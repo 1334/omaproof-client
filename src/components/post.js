@@ -3,10 +3,11 @@ import moment from 'moment';
 import styled from 'styled-components';
 
 import Comment from './comment';
+import DeletePost from './deletePost';
 import AddComment from './addComment';
 
 const StyledPost = styled.div`
-  background-color: white;
+  background-color: ${props => props.theme.colors.bg};
   margin: 1em 0;
 
   img.post-image {
@@ -24,7 +25,6 @@ const StyledPost = styled.div`
 
   .post-info {
     display: flex;
-    /* justify-content: space-between; */
     align-items: center;
     padding: 0.8em 0;
 
@@ -36,63 +36,63 @@ const StyledPost = styled.div`
     span:last-child {
       flex-grow: 2;
       text-align: right;
-      color: ${props => props.theme.colors.grey};
+      color: ${props => props.theme.colors.textLight};
     }
   }
 `;
 
 export default class Post extends React.Component {
   state = {
-    shownComments: [],
-    hiddenComments: []
+    showAllComments: false
   };
-
-  componentDidMount() {
-    this.setState({
-      shownComments: this.props.post.comments.slice(-3),
-      hiddenComments: this.props.post.comments.slice(0, -3)
-    });
-  }
 
   showComments = e => {
     e.preventDefault();
     this.setState({
-      shownComments: this.props.post.comments,
-      hiddenComments: []
+      showAllComments: !this.state.showAllComments
     });
   };
 
   render() {
-    const { post } = this.props;
-    const { shownComments, hiddenComments } = this.state;
+    const { post, user } = this.props;
+    const { showAllComments } = this.state;
+
+    const shownComments = showAllComments
+      ? post.comments
+      : post.comments.slice(-3);
+
+    const moreComments = post.comments > shownComments;
 
     return (
       <StyledPost>
         <div className="post-info">
-          <img src={post.user.profilePicture} alt="post.user.name" />
+          <img
+            src={post.user.profilePicture || 'http://placehold.it/32x32'}
+            alt="post.user.name"
+          />
           <span>{post.user.name}</span>
           <span>{moment(post.createdAt).fromNow()}</span>
         </div>
         <img
           className="post-image"
-          src={post.content.mediaUrl}
-          alt={post.content.title}
+          src={post.mediaUrl}
+          alt={post.description}
         />
-        <h1 className="post-title">{post.content.title}</h1>
-        <div className="post-description">{post.content.description}</div>
+        <div className="post-description">{post.description}</div>
         <div className="social">
-          LIKE <label htmlFor={`comment-${post.id}`}>COMMENT</label>
+          LIKE <label htmlFor={`comment-${post.id}`}>COMMENT</label>{' '}
+          {post.user.id === user.id && <DeletePost post={post} user={user} />}
         </div>
         <div className="comments">
-          {hiddenComments.length > 0 ? (
+          {!showAllComments && moreComments ? (
             <a href="/more-comments" onClick={this.showComments}>
-              show {hiddenComments.length} comments more
+              show more comments
             </a>
           ) : null}
           {shownComments.map(comment => (
-            <Comment comment={comment} key={comment.id} />
+            <Comment comment={comment} key={comment.id} user={user} />
           ))}
-          <AddComment postId={post.id} />
+          <AddComment postId={post.id} user={user} />
         </div>
       </StyledPost>
     );

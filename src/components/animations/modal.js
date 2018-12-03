@@ -25,9 +25,10 @@ const ModalBackgroundPose = posed.div({
 
 export const Modal = styled(ModalPose)`
   position: fixed;
-  bottom: 0px;
-  left: 0;
-  width: 100vw;
+  bottom: 40vh;
+  left: 5vw;
+  width: 90vw;
+  /* height: 40vh; */
   margin: 0 auto;
   background: white;
   z-index: 10;

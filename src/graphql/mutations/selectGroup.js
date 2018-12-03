@@ -1,33 +1,11 @@
 import gql from 'graphql-tag';
 
 const SELECT_GROUP = gql`
-  mutation SelectGroup($groupId: String!) {
-    selectGroup(groupId: $groupId) {
+  mutation SelectGroup($id: String!, $token: String!) {
+    selectGroup(id: $id, token: $token) {
       token
       group {
         id
-        posts {
-          id
-          createdAt
-          contentType
-          mediaUrl
-          user {
-            name
-            profilePicture
-          }
-          comments {
-            id
-            description
-            user {
-              name
-              profilePicture
-            }
-            createdAt
-          }
-        }
-        users {
-          contactNumber
-        }
       }
     }
   }

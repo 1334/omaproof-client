@@ -1,17 +1,17 @@
 import React from 'react';
 import { PoseGroup } from 'react-pose';
 import styled from 'styled-components';
-import { Mutation } from 'react-apollo';
+import { Query } from 'react-apollo';
 
+import UserContext from '../contexts/userContext';
 import Posts from './posts';
 import NewPost from './newPost';
 import NewPostButton from './newPostButton';
 import { Modal, ModalBackground } from './animations/modal';
-
-import SELECT_GROUP from '../graphql/mutations/selectGroup';
+import GET_POSTS_QUERY from '../graphql/queries/getPosts';
 
 const StyledFeed = styled.div`
-  background-color: ${props => props.theme.colors.creme};
+  background-color: ${props => props.theme.colors.bg2};
   padding: 0.2em 0 1em;
   max-width: 700px;
   margin: 0 auto;
@@ -30,7 +30,6 @@ const StyledFeed = styled.div`
 
 class Feed extends React.Component {
   state = {
-    posts: [],
     users: [],
     newPost: false
   };
@@ -40,60 +39,44 @@ class Feed extends React.Component {
     this.setState({ newPost: !this.state.newPost });
   };
 
-  shouldComponentUpdate() {
-    return this.state.users.length ? true : false;
-  }
-
   render() {
-    const { posts } = this.state;
-    const { group } = this.props;
-    console.log(group);
-
     return (
-      <StyledFeed>
-        <div className="new-post">
-          <NewPostButton newPostClicked={this.toggleNewPost} />
-        </div>
-        {this.props.group && (
-          <Mutation
-            mutation={SELECT_GROUP}
-            variables={{ groupId: this.props.group }}
-          >
-            {(selectGroup, { loading, error, called, data }) => {
-              if (loading) return <div>Loading...</div>;
-              if (error) return <div>There have been an error :(</div>;
-              if (data) {
-                {
-                  const { posts, users } = data.selectGroup.group;
-                  this.setState({ posts, users });
-                }
-                return null;
-              }
-              if (!called) {
-                {
-                  selectGroup();
-                }
-                return null;
-              }
-            }}
-          </Mutation>
+      <UserContext.Consumer>
+        {({ user }) => (
+          <StyledFeed>
+            <div className="new-post">
+              <NewPostButton newPostClicked={this.toggleNewPost} />
+            </div>
+            <Query
+              query={GET_POSTS_QUERY}
+              variables={{ id: user.activeGroup, token: user.groupToken }}
+              // pollInterval={2000}
+            >
+              {({ loading, error, data }) => {
+                if (loading) return <div>Loading...</div>;
+                if (error) return <p>{error.message} :(</p>;
+                return (
+                  <div className="feed">
+                    <Posts posts={data.getPosts} user={user} />
+                  </div>
+                );
+              }}
+            </Query>
+            <PoseGroup>
+              {this.state.newPost && [
+                <ModalBackground
+                  key="shade"
+                  className="shade"
+                  onClick={this.toggleNewPost}
+                />,
+                <Modal key="modal" className="modal">
+                  <NewPost close={this.toggleNewPost} user={user} />
+                </Modal>
+              ]}
+            </PoseGroup>
+          </StyledFeed>
         )}
-        <PoseGroup>
-          {this.state.newPost && [
-            <ModalBackground
-              key="shade"
-              className="shade"
-              onClick={this.toggleNewPost}
-            />,
-            <Modal key="modal" className="modal">
-              <NewPost />
-            </Modal>
-          ]}
-        </PoseGroup>
-        <div className="feed">
-          <Posts posts={posts} />
-        </div>
-      </StyledFeed>
+      </UserContext.Consumer>
     );
   }
 }

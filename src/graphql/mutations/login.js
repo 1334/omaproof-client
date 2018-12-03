@@ -9,6 +9,7 @@ const LOGIN_MUTATION = gql`
         name
         groups {
           id
+          description
         }
       }
     }

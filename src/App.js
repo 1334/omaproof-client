@@ -1,137 +1,72 @@
+// @flow
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
-import { createGlobalStyle, ThemeProvider } from 'styled-components';
-import ApolloClient from 'apollo-boost';
-import { ApolloProvider } from 'react-apollo';
-import { Mutation } from 'react-apollo';
-import LOGIN_MUTATION from './graphql/mutations/login';
+import { Router } from '@reach/router';
+import { ThemeProvider } from 'styled-components';
 
-import Feed from './components/feed';
+import GlobalStyle from './styledComponents/globalStyles';
+import UserContext from './contexts/userContext';
 import Auth from './components/auth';
 import NewPost from './components/newPost';
 import NavBar from './components/navBar';
+import Demo from './components/demo';
+import GroupChooser from './components/groupChooser';
+import Landing from './components/landing';
+import Feed from './components/feed';
+import { lightTheme, darkTheme } from './themes/themes';
+import type { AppState } from './flow/types';
 
-const theme = {
-  colors: {
-    black: 'rgb(30,34,38)',
-    grey: 'rgb(119,119,119)',
-    blue: 'rgb(14,52,82)',
-    creme: 'rgb(246,244,234)'
-  }
-};
-
-const GlobalStyle = createGlobalStyle`
-  @import url('https://fonts.googleapis.com/css?family=Titillium+Web:200,300,400,700');
-
-  html {
-    box-sizing: border-box;
-  }
-
-  *, *:before, *:after {
-    box-sizing: inherit;
-  }
-
-  body {
-    padding: 0;
-    margin: 0;
-    line-height: 1.5;
-    font-family: 'Titillium Web', sans-serif;
-  }
-
-  input, textarea {
-    font-size: 1rem;
-    font-family: inherit;
-    line-height: 1.5;
-    resize: none;
-    border-radius: 0;
-  }
-
-  a {
-    text-decoration: none;
-  }
-`;
-
-const client = new ApolloClient({
-  uri: 'http://localhost:4000',
-  headers: {
-    authorization: `Bearer ${localStorage.getItem('userToken')}`
-  }
-});
-
-class App extends Component {
+class App extends Component<null, AppState> {
   state = {
-    theme: 'default',
-    user: { groups: [] }
+    theme: true,
+    user: {}
   };
 
   componentDidMount() {
+    const lsUser = localStorage.getItem('user') || '';
     this.setState({
-      userToken: localStorage.getItem('userToken') || ''
+      user: JSON.parse(lsUser) || {
+        id: '',
+        name: 'Guest',
+        profilePicture: '',
+        activeGroup: '',
+        groups: []
+      }
     });
   }
 
-  shouldComponentUpdate(_, nextState) {
-    return this.state.user.id !== nextState.user.id ? true : false;
-  }
+  toggleTheme = () => {
+    this.setState({ theme: !this.state.theme });
+  };
 
   render() {
     return (
-      <ThemeProvider theme={theme}>
-        <ApolloProvider client={client}>
+      <UserContext.Provider
+        value={{
+          user: this.state.user,
+          updateUser: user =>
+            this.setState({ user: { ...this.state.user, ...user } }, () =>
+              localStorage.setItem('user', JSON.stringify(this.state.user))
+            )
+        }}
+      >
+        <ThemeProvider theme={this.state.theme ? lightTheme : darkTheme}>
           <React.Fragment>
             <GlobalStyle />
+            <NavBar
+              theme={this.state.theme ? 'light' : 'dark'}
+              toggleTheme={this.toggleTheme}
+            />
             <Router>
-              <div>
-                {!this.state.user.id && (
-                  <Mutation
-                    mutation={LOGIN_MUTATION}
-                    variables={{ contactNumber: 'codeworks', password: 'any' }}
-                  >
-                    {(login, { loading, error, called, data }) => {
-                      if (loading) return <div>Loading...</div>;
-                      if (error) return <div>There have been an error :(</div>;
-                      if (data) {
-                        {
-                          const { user } = data.login;
-
-                          const groups = user.groups.map(g => g.id);
-                          this.setState({
-                            user: { id: user.id, name: user.name, groups }
-                          });
-                          localStorage.setItem('userToken', data.login.token);
-                        }
-                        return null;
-                      }
-                      if (!called) {
-                        {
-                          login();
-                        }
-                        return null;
-                      }
-                    }}
-                  </Mutation>
-                )}
-                <NavBar user={this.state.user} />
-                <Route
-                  path="/"
-                  exact
-                  key="home"
-                  render={props => (
-                    <Feed {...props} group={this.state.user.groups[0]} />
-                  )}
-                />
-                <Route path="/login" exact component={Auth} key="login" />
-                <Route
-                  path="/new-post"
-                  exact
-                  component={NewPost}
-                  key="new-post"
-                />
-              </div>
+              <Landing path="/" />
+              <Feed path="/feed" />
+              <Auth path="/login" />
+              <GroupChooser path="/group-chooser" />
+              <Demo path="/demo" />
+              <NewPost path="/new-post" />
             </Router>
           </React.Fragment>
-        </ApolloProvider>
-      </ThemeProvider>
+        </ThemeProvider>
+      </UserContext.Provider>
     );
   }
 }
