@@ -24,6 +24,10 @@ const StyledDemo = styled.div`
     justify-content: flex-end;
     margin-right: 3px;
   }
+
+  .icon-arrow-right {
+    margin-top: 1em;
+  }
 `;
 
 class Demo extends React.Component {

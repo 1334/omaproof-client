@@ -31,7 +31,7 @@ class DeletePost extends React.Component {
               response && deletePost();
             }}
           >
-            DELETE IT!!!
+            <span className="icon-trash" />
           </a>
         )}
       </Mutation>

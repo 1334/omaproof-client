@@ -56,6 +56,7 @@ class App extends Component<null, AppState> {
           <React.Fragment>
             <GlobalStyle />
             <NavBar
+              user={this.state.user}
               theme={this.state.theme ? 'light' : 'dark'}
               toggleTheme={this.toggleTheme}
             />
