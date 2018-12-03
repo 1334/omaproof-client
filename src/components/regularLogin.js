@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import UserContext from '../contexts/userContext';
 import LOGIN_MUTATION from '../graphql/mutations/login';
-import Button from '../styledComponents/button';
+import ButtonOption from '../styledComponents/buttonOption';
 
 const StyledLogin = styled.div`
   display: flex;
@@ -63,7 +63,7 @@ class RegularLogin extends React.Component {
                     value={this.state.password}
                     onChange={this.handleClick}
                   />
-                  <Button
+                  <ButtonOption
                     type="submit"
                     onClick={() => {
                       login().then(({ data }) => {
@@ -76,7 +76,7 @@ class RegularLogin extends React.Component {
                     }}
                   >
                     Login
-                  </Button>
+                  </ButtonOption>
                 </StyledLogin>
               );
             }}

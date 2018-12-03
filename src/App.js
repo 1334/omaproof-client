@@ -11,6 +11,7 @@ import NavBar from './components/navBar';
 import Demo from './components/demo';
 import GroupChooser from './components/groupChooser';
 import Landing from './components/landing';
+import LandingOption from './components/landingOption';
 import Feed from './components/feed';
 import { lightTheme, darkTheme } from './themes/themes';
 import type { AppState } from './flow/types';
@@ -61,7 +62,7 @@ class App extends Component<null, AppState> {
               toggleTheme={this.toggleTheme}
             />
             <Router>
-              <Landing path="/" />
+              <LandingOption path="/" />
               <Feed path="/feed" />
               <Auth path="/login" />
               <CreateGroup path="/create-group" />

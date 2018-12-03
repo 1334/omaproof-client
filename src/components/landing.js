@@ -11,7 +11,6 @@ const StyledLanding = styled.div`
   flex-direction: column;
   width: 50vw;
   margin: 0 auto;
-
   & > * {
     margin: 0.5em 0;
   }
