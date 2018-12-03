@@ -2,33 +2,52 @@ import React from 'react';
 import styled from 'styled-components';
 
 import Tile from '../styledComponents/questionTile';
+import Button from '../styledComponents/button';
 
 const StyledDemo = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr 1fr;
-  /* height: 87vh; */
-  grid-gap: 20px;
-  width: 90vw;
-  margin: 1em auto;
+  padding: 0 5vw;
+
+  .tiles {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    grid-gap: 5vw;
+    margin: 1em auto;
+  }
+
+  h1 {
+    font-size: 1.3rem;
+  }
+
+  .buttons {
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 3px;
+  }
 `;
 
 class Demo extends React.Component {
   render() {
     return (
       <StyledDemo>
-        <Tile text="Frederik" />
-        <Tile text="Jovan" />
-        <Tile text="Maxim" />
-        <Tile text="Cristina" />
-        <Tile text="Arol" />
-        <Tile text="Sarah" />
-        <Tile text="Marco" />
-        <Tile text="Indi" />
-        <Tile text="Laura" />
-        <Tile text="Alice" />
-        <Tile text="Sonia" />
-        <Tile text="None" />
+        <h1>Select all the names of your grandchild</h1>
+        <div className="tiles">
+          <Tile text="Frederik" />
+          <Tile text="Jovan" />
+          <Tile text="Maxim" />
+          <Tile text="Cristina" />
+          <Tile text="Arol" />
+          <Tile text="Sarah" />
+          <Tile text="Marco" />
+          <Tile text="Indi" />
+          <Tile text="Laura" />
+          <Tile text="Alice" />
+          <Tile text="Sonia" />
+          <Tile text="None" q />
+        </div>
+        <div className="buttons">
+          <Button>Contiue</Button>
+        </div>
       </StyledDemo>
     );
   }
