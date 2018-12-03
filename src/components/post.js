@@ -21,6 +21,17 @@ const StyledPost = styled.div`
 
   .social {
     margin: 0.7em 0;
+
+    & > * {
+      display: inline-block;
+      margin-right: 0.6em;
+
+      &:hover,
+      &:active {
+        cursor: pointer;
+        opacity: 0.7;
+      }
+    }
   }
 
   .post-info {
