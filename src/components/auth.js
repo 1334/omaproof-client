@@ -47,16 +47,11 @@ export default class Auth extends React.Component {
     }
   };
 
-  validate(username, password) {
-    console.log('user validated with', username, password);
-  }
-
   render() {
     const ComponentType = this.state.component;
     const props = {
       handleSubmit: this.handleSubmit,
-      key: this.state.step,
-      style: `background-color: blue`
+      key: this.state.step
     };
     if (ComponentType === Password) {
       props.question = questions[this.state.step - 1];

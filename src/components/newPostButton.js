@@ -4,7 +4,7 @@ import styled from 'styled-components';
 const PostButton = styled.div`
   height: 80px;
   margin: 0.8em 0;
-  background-color: white;
+  background-color: ${props => props.theme.colors.bg};
 
   input {
     border: none;
@@ -12,8 +12,8 @@ const PostButton = styled.div`
     width: 100%;
     height: 80%;
     font-size: 1rem;
-    color: ${props => props.theme.colors.blue};
-    border-bottom: 1px solid ${props => props.theme.colors.blue};
+    color: ${props => props.theme.colors.primary};
+    border-bottom: 1px solid ${props => props.theme.colors.primary};
     padding-left: 40px;
   }
 
