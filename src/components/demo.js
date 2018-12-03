@@ -1,34 +1,32 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Link } from '@reach/router';
+
+import Tile from '../styledComponents/questionTile';
+import Button from '../styledComponents/button';
 
 const StyledDemo = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr 1fr;
-  height: 87vh;
-  grid-gap: 20px;
-  width: 90vw;
-  margin: 1em auto;
+  padding: 0 5vw;
 
-  .item {
-    text-align: center;
-    background-color: ${props => props.theme.colors.bg2};
-    border-radius: 10px;
-    box-shadow: 3px 3px 5px grey;
-    font-size: 1.3em;
+  .tiles {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    grid-gap: 5vw;
+    margin: 1em auto;
+  }
+
+  h1 {
+    font-size: 1.3rem;
+  }
+
+  .buttons {
     display: flex;
-    align-items: center;
-    justify-content: center;
+    justify-content: flex-end;
+    margin-right: 3px;
+  }
 
-    a {
-      color: inherit;
-    }
-
-    &:hover {
-      box-shadow: 1px 1px 5px grey;
-      cursor: pointer;
-    }
+  .icon-arrow-right {
+    margin-top: 1em;
   }
 `;
 
@@ -36,41 +34,23 @@ class Demo extends React.Component {
   render() {
     return (
       <StyledDemo>
-        <div className="item">
-          <Link to="/">Frederik</Link>
+        <h1>Select all the names of your grandchild</h1>
+        <div className="tiles">
+          <Tile text="Frederik" />
+          <Tile text="Jovan" />
+          <Tile text="Maxim" />
+          <Tile text="Cristina" />
+          <Tile text="Arol" />
+          <Tile text="Sarah" />
+          <Tile text="Marco" />
+          <Tile text="Indi" />
+          <Tile text="Laura" />
+          <Tile text="Alice" />
+          <Tile text="Sonia" />
+          <Tile text="None" q />
         </div>
-        <div className="item">
-          <Link to="/">Jovan</Link>
-        </div>
-        <div className="item">
-          <Link to="/">Maxim</Link>
-        </div>
-        <div className="item">
-          <Link to="/">Cristina</Link>
-        </div>
-        <div className="item">
-          <Link to="/">Arol</Link>
-        </div>
-        <div className="item">
-          <Link to="/">Sarah</Link>
-        </div>
-        <div className="item">
-          <Link to="/">Marco</Link>
-        </div>
-        <div className="item">
-          <Link to="/">Indi</Link>
-        </div>
-        <div className="item">
-          <Link to="/">Laura</Link>
-        </div>
-        <div className="item">
-          <Link to="/">Alice</Link>
-        </div>
-        <div className="item">
-          <Link to="/">Sonia</Link>
-        </div>
-        <div className="item">
-          <Link to="/">None of them</Link>
+        <div className="buttons">
+          <Button>Contiue</Button>
         </div>
       </StyledDemo>
     );

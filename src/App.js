@@ -16,6 +16,8 @@ import { lightTheme, darkTheme } from './themes/themes';
 import type { AppState } from './flow/types';
 import CreateGroup from './components/createGroup/createGroup';
 
+import './style.css';
+
 class App extends Component<null, AppState> {
   state = {
     theme: true,
@@ -23,7 +25,7 @@ class App extends Component<null, AppState> {
   };
 
   componentDidMount() {
-    const lsUser = localStorage.getItem('user') || '';
+    const lsUser = localStorage.getItem('user') || '{}';
     this.setState({
       user: JSON.parse(lsUser) || {
         id: '',
@@ -54,6 +56,7 @@ class App extends Component<null, AppState> {
           <React.Fragment>
             <GlobalStyle />
             <NavBar
+              user={this.state.user}
               theme={this.state.theme ? 'light' : 'dark'}
               toggleTheme={this.toggleTheme}
             />

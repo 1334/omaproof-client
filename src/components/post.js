@@ -80,7 +80,10 @@ export default class Post extends React.Component {
         />
         <div className="post-description">{post.description}</div>
         <div className="social">
-          LIKE <label htmlFor={`comment-${post.id}`}>COMMENT</label>{' '}
+          <span className="icon-like" />{' '}
+          <label htmlFor={`comment-${post.id}`}>
+            <span className="icon-comment" />
+          </label>{' '}
           {post.user.id === user.id && <DeletePost post={post} user={user} />}
         </div>
         <div className="comments">
