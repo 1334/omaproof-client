@@ -1,7 +1,9 @@
+// @flow
+import type { PostsProps } from '../flow/types';
 import React from 'react';
 import Post from './post';
 
-export default class Posts extends React.Component {
+export default class Posts extends React.Component<PostsProps> {
   render() {
     const { posts, user } = this.props;
 

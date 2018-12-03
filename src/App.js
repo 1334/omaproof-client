@@ -1,3 +1,4 @@
+// @flow
 import React, { Component } from 'react';
 import { Router } from '@reach/router';
 import { ThemeProvider } from 'styled-components';
@@ -12,16 +13,18 @@ import GroupChooser from './components/groupChooser';
 import Landing from './components/landing';
 import Feed from './components/feed';
 import { lightTheme, darkTheme } from './themes/themes';
+import type { AppState } from './flow/types';
 
-class App extends Component {
+class App extends Component<null, AppState> {
   state = {
     theme: true,
     user: {}
   };
 
   componentDidMount() {
+    const lsUser = localStorage.getItem('user') || '';
     this.setState({
-      user: JSON.parse(localStorage.getItem('user')) || {
+      user: JSON.parse(lsUser) || {
         id: '',
         name: 'Guest',
         profilePicture: '',
