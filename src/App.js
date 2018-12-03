@@ -23,7 +23,7 @@ class App extends Component<null, AppState> {
   };
 
   componentDidMount() {
-    const lsUser = localStorage.getItem('user') || '';
+    const lsUser = localStorage.getItem('user') || '{}';
     this.setState({
       user: JSON.parse(lsUser) || {
         id: '',
