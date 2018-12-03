@@ -16,6 +16,8 @@ import { lightTheme, darkTheme } from './themes/themes';
 import type { AppState } from './flow/types';
 import CreateGroup from './components/createGroup/createGroup';
 
+import './style.css';
+
 class App extends Component<null, AppState> {
   state = {
     theme: true,
