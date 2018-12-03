@@ -3,7 +3,7 @@ import Member from './member';
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 
-export default class Group2 extends React.Component {
+export default class AddMembers extends React.Component {
   state = {
     displayComponent: false,
     members: []

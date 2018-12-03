@@ -10,7 +10,7 @@ import Feed from './components/feed';
 import Auth from './components/auth';
 import NewPost from './components/newPost';
 import NavBar from './components/navBar';
-import GroupInfo from './components/admin-view/groupFirst';
+import CreateGroup from './components/createGroup/createGroup';
 
 const theme = {
   colors: {
@@ -132,7 +132,7 @@ class App extends Component {
             </Router>
           </React.Fragment>
         </ApolloProvider> */}
-        <GroupInfo />
+        <CreateGroup />
       </ThemeProvider>
     );
   }

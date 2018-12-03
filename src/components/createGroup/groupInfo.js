@@ -4,7 +4,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import Input from '@material-ui/core/Input';
 import './test.css';
 
-export default class Group1 extends React.Component {
+export default class GroupInfo extends React.Component {
   state = {
     name: '',
     welcomeMsg: ''

@@ -5,11 +5,11 @@ import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import Input from '@material-ui/core/Input';
-import Grandchild from './grandchildren';
+import Grandchild from './addGrandChild';
 
-export default class Group3 extends React.Component {
+export default class AddGrandchildren extends React.Component {
   state = {
-    grandKids: []
+    grandChildren: []
   };
 
   createGrandchild = child => {
@@ -18,7 +18,7 @@ export default class Group3 extends React.Component {
       id: Math.floor(1000 + Math.random() * 9000)
     };
     this.setState({
-      grandKids: [...this.state.grandKids, newGrandChild]
+      grandChildren: [...this.state.grandChildren, newGrandChild]
     });
   };
   componentDidMount() {
@@ -26,25 +26,25 @@ export default class Group3 extends React.Component {
       member => member.familyStatus === 'child'
     );
     this.setState({
-      grandKids: [...newArr]
+      grandChildren: [...newArr]
     });
   }
 
   passProps = () => {
-    this.props.handleSubmit(this.state.grandKids);
+    this.props.handleSubmit(this.state.grandChildren);
   };
   render() {
-    console.log('grandkids', this.state);
+    console.log('grandChildren', this.state);
     console.log('props', this.props);
 
     return (
       <div>
-        <p>grandkids </p>
-        {this.state.grandKids.map(grandKid => {
+        <p>grandChildren </p>
+        {this.state.grandChildren.map(grandChild => {
           return (
-            <ExpansionPanel key={grandKid.id}>
+            <ExpansionPanel key={grandChild.id}>
               <ExpansionPanelSummary>
-                {grandKid.memberName}
+                {grandChild.memberName}
               </ExpansionPanelSummary>
               <ExpansionPanelDetails className="memberDetails">
                 <FormControl>
@@ -52,7 +52,7 @@ export default class Group3 extends React.Component {
                   <Input
                     type="text"
                     name="memberName"
-                    value={grandKid.memberName}
+                    value={grandChild.memberName}
                     onChange={this.handleChangee}
                   />
                 </FormControl>
@@ -62,7 +62,7 @@ export default class Group3 extends React.Component {
                     <Input
                       type="number"
                       name="month"
-                      value={grandKid.month}
+                      value={grandChild.month}
                       onChange={this.handleChangee}
                     />
                   </FormControl>
@@ -71,7 +71,7 @@ export default class Group3 extends React.Component {
                     <Input
                       type="number"
                       name="year"
-                      value={grandKid.year}
+                      value={grandChild.year}
                       onChange={this.handleChangee}
                     />
                   </FormControl>
