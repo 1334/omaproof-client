@@ -14,6 +14,7 @@ import Landing from './components/landing';
 import Feed from './components/feed';
 import { lightTheme, darkTheme } from './themes/themes';
 import type { AppState } from './flow/types';
+import CreateGroup from './components/createGroup/createGroup';
 
 class App extends Component<null, AppState> {
   state = {
@@ -60,6 +61,7 @@ class App extends Component<null, AppState> {
               <Landing path="/" />
               <Feed path="/feed" />
               <Auth path="/login" />
+              <CreateGroup path="/create-group" />
               <GroupChooser path="/group-chooser" />
               <Demo path="/demo" />
               <NewPost path="/new-post" />
