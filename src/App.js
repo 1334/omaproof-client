@@ -11,13 +11,13 @@ import NavBar from './components/navBar';
 import Demo from './components/demo';
 import GroupChooser from './components/groupChooser';
 import Landing from './components/landing';
-import LandingOption from './components/landingOption';
 import Feed from './components/feed';
 import { lightTheme, darkTheme } from './themes/themes';
 import type { AppState } from './flow/types';
 import CreateGroup from './components/createGroup/createGroup';
 
 import './style.css';
+import RegularLogin from './components/regularLogin';
 
 class App extends Component<null, AppState> {
   state = {
@@ -62,13 +62,14 @@ class App extends Component<null, AppState> {
               toggleTheme={this.toggleTheme}
             />
             <Router>
-              <LandingOption path="/" />
+              <Landing path="/" />
+              <RegularLogin path="/regular-login" />
               <Feed path="/feed" />
               <Auth path="/login" />
               <CreateGroup path="/create-group" />
               <GroupChooser path="/group-chooser" />
               <Demo path="/demo" />
-              <NewPost path="/new-post" />
+              <NewPost path="/new-post" user={this.state.user} />
             </Router>
           </React.Fragment>
         </ThemeProvider>

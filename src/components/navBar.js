@@ -36,6 +36,9 @@ class NavBar extends React.Component {
     const { theme, user } = this.props;
     return (
       <StyledNavBar>
+        <Link to="/new-post" user={user}>
+          New Post
+        </Link>
         <Link to="/feed">Feed</Link>
         <Link to="/">Login</Link>
         <a href="/theme" onClick={this.toggleTheme}>
