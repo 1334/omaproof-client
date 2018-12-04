@@ -14,6 +14,7 @@ export default class Member extends React.Component {
     familyStatus: '',
     month: '',
     year: '',
+    status: 'member',
     expanded: false
   };
 
@@ -39,8 +40,12 @@ export default class Member extends React.Component {
 
   render() {
     return (
-      <ExpansionPanel>
-        <ExpansionPanelSummary>
+      <ExpansionPanel expanded={this.state.expanded}>
+        <ExpansionPanelSummary
+          onClick={() => {
+            this.setState({ expanded: !this.state.expanded });
+          }}
+        >
           <p> member </p>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails className="memberDetails">

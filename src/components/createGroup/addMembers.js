@@ -2,11 +2,23 @@ import React from 'react';
 import Member from './member';
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
+import Button from '../../styledComponents/button';
+import styled from 'styled-components';
 
+const StyledMembers = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 90vw;
+  margin: 20px auto;
+
+  & > * {
+    margin: 0.5em 0;
+  }
+`;
 export default class AddMembers extends React.Component {
   state = {
     displayComponent: false,
-    members: []
+    members: [...this.props.group.members]
   };
 
   createMember = member1 => {
@@ -45,7 +57,7 @@ export default class AddMembers extends React.Component {
   render() {
     // console.log('page2', this.state);
     return (
-      <div>
+      <StyledMembers>
         <p>members</p>
         {this.state.members.map(member => {
           return (
@@ -56,8 +68,10 @@ export default class AddMembers extends React.Component {
         })}
 
         <Member submitMember={this.createMember} />
-        <button onClick={this.passProps}>next</button>
-      </div>
+        <div>
+          <Button onClick={this.passProps}>next</Button>
+        </div>
+      </StyledMembers>
     );
   }
 }

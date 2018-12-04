@@ -2,7 +2,27 @@ import React from 'react';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import Input from '@material-ui/core/Input';
-import './test.css';
+import Button from '../../styledComponents/button';
+
+import styled from 'styled-components';
+
+const StyledLogin = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 90vw;
+  margin: 80px auto;
+
+  & > * {
+    margin: 1em 0;
+  }
+  .input {
+    background: white;
+    margin: 0.2em 0;
+  }
+  .button-next {
+    align-self: flex-end;
+  }
+`;
 
 export default class GroupInfo extends React.Component {
   state = {
@@ -15,17 +35,19 @@ export default class GroupInfo extends React.Component {
   };
   render() {
     return (
-      <div className="group1">
-        <FormControl>
+      <StyledLogin>
+        <FormControl className="input">
           <InputLabel>Group Name</InputLabel>
           <Input type="text" name="name" onChange={this.onChange} />
         </FormControl>
-        <FormControl>
+        <FormControl className="input">
           <InputLabel>Welcome message</InputLabel>
           <Input type="text" name="welcomeMsg" onChange={this.onChange} />
         </FormControl>
-        <button onClick={this.passProps}>next</button>
-      </div>
+        <div className="button-next">
+          <Button onClick={this.passProps}>next</Button>
+        </div>
+      </StyledLogin>
     );
   }
 }

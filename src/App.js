@@ -23,7 +23,7 @@ class App extends Component<null, AppState> {
   };
 
   componentDidMount() {
-    const lsUser = localStorage.getItem('user') || '';
+    const lsUser = localStorage.getItem('user') || '{}';
     this.setState({
       user: JSON.parse(lsUser) || {
         id: '',
@@ -61,7 +61,7 @@ class App extends Component<null, AppState> {
               <Landing path="/" />
               <Feed path="/feed" />
               <Auth path="/login" />
-              <CreateGroup path="/create-group" />
+              <CreateGroup path="/new-group" />
               <GroupChooser path="/group-chooser" />
               <Demo path="/demo" />
               <NewPost path="/new-post" />
