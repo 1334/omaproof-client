@@ -21,6 +21,17 @@ const StyledPost = styled.div`
 
   .social {
     margin: 0.7em 0;
+
+    & > * {
+      display: inline-block;
+      margin-right: 0.6em;
+
+      &:hover,
+      &:active {
+        cursor: pointer;
+        opacity: 0.7;
+      }
+    }
   }
 
   .post-info {
@@ -29,6 +40,8 @@ const StyledPost = styled.div`
     padding: 0.8em 0;
 
     img {
+      width: 32px;
+      height: 32px;
       border-radius: 50%;
       margin-right: 0.8em;
     }
@@ -67,7 +80,7 @@ export default class Post extends React.Component {
       <StyledPost>
         <div className="post-info">
           <img
-            src={post.user.profilePicture || 'http://placehold.it/32x32'}
+            src={post.user.picture || 'http://placehold.it/32x32'}
             alt="post.user.name"
           />
           <span>{post.user.name}</span>

@@ -7,7 +7,7 @@ const GET_COMMENTS_QUERY = gql`
       description
       user {
         name
-        profilePicture
+        picture
       }
       createdAt
     }

@@ -12,7 +12,7 @@ export type PostsProps = {
 export type UserCtx = {
   id?: string,
   name?: string,
-  profilePicture?: string,
+  picture?: string,
   activeGroup?: string,
   groups?: string[]
 };
@@ -30,7 +30,7 @@ export type PostType = {
 export type UserType = {
   id: string,
   name: string,
-  profilePicture: string
+  picture: string
 };
 
 export type CommentType = {

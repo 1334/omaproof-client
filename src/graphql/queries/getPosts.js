@@ -15,7 +15,7 @@ const GET_POSTS_QUERY = gql`
       user {
         id
         name
-        profilePicture
+        picture
       }
       comments {
         id
@@ -23,7 +23,7 @@ const GET_POSTS_QUERY = gql`
         user {
           id
           name
-          profilePicture
+          picture
         }
         createdAt
       }

@@ -1,10 +1,11 @@
 import React from 'react';
 import { Link } from '@reach/router';
 import styled from 'styled-components';
+import Logo from '../styledComponents/logo';
 
 const StyledNavBar = styled.nav`
   display: flex;
-  justify-content: flex-end;
+  justify-content: flex-start;
   align-items: center;
   background-color: ${props => props.theme.colors.primary};
   color: ${props => props.theme.colors.bg};
@@ -24,6 +25,12 @@ const StyledNavBar = styled.nav`
   .icon {
     font-size: 1.2rem;
   }
+
+  .logo {
+    flex-grow: 3;
+    height: 2rem;
+    fill: white;
+  }
 `;
 
 class NavBar extends React.Component {
@@ -39,6 +46,12 @@ class NavBar extends React.Component {
         <Link to="/new-post" user={user}>
           New Post
         </Link>
+        <div className="logo">
+          <Link to="/">
+            {' '}
+            <Logo />
+          </Link>
+        </div>
         <Link to="/feed">Feed</Link>
         <Link to="/">Login</Link>
         <a href="/theme" onClick={this.toggleTheme}>
@@ -47,7 +60,7 @@ class NavBar extends React.Component {
           />
         </a>
         <img
-          src={user.profilePicture || 'http://placehold.it/32x32'}
+          src={user.picture || 'http://placehold.it/32x32'}
           alt={user.name}
         />
       </StyledNavBar>
