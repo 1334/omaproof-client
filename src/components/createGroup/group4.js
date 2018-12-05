@@ -4,7 +4,12 @@ export default class Group4 extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <p>somethign</p>
+        <h1>WELCOME</h1>
+        <p>
+          {' '}
+          {this.props.group.members[0].memberName}, you created group{' '}
+          {this.props.group.name} enjoy new way to reconnect with your family{' '}
+        </p>
       </React.Fragment>
     );
   }

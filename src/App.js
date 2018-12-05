@@ -66,7 +66,7 @@ class App extends Component<null, AppState> {
               <RegularLogin path="/regular-login" />
               <Feed path="/feed" />
               <Auth path="/login" />
-              <CreateGroup path="/create-group" />
+              <CreateGroup path="/new-group" />
               <GroupChooser path="/group-chooser" />
               <NewPost path="/new-post" user={this.state.user} />
               <OmaLogin path="/oma-login" />

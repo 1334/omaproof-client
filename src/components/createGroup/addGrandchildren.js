@@ -5,7 +5,58 @@ import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import Input from '@material-ui/core/Input';
+import Button from '../../styledComponents/button';
+
+import styled from 'styled-components';
+
 import Grandchild from './addGrandChild';
+
+const StyledGrandChildren = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 90vw;
+  margin: 20px auto;
+
+  & > * {
+    margin: 0.5em 0;
+  }
+  p {
+    color: black;
+  }
+  img {
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+  }
+  .text-p {
+    text-align: center;
+  }
+  .memberCard {
+    display: flex;
+    padding: 2.5vh 7vw;
+  }
+  .test1 {
+    display: flex;
+    background-color: purple;
+  }
+  .memberCard img {
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+  }
+  .test2 {
+    display: flex;
+    align-self: center;
+    padding-left: 6.1vw;
+  }
+  .next-button {
+    display: flex;
+    justify-content: flex-end;
+  }
+  .pic {
+    width: 40px;
+  }
+`;
 
 export default class AddGrandchildren extends React.Component {
   state = {
@@ -34,68 +85,90 @@ export default class AddGrandchildren extends React.Component {
     this.props.handleSubmit(this.state.grandChildren);
   };
   render() {
-    console.log('grandChildren', this.state);
-    console.log('props', this.props);
-
     return (
-      <div>
-        <p>grandChildren </p>
+      <StyledGrandChildren>
+        <p
+          tyle={{
+            marginTop: '0',
+            marginBottom: '3vh'
+          }}
+        >
+          Grandchildren{' '}
+        </p>
         {this.state.grandChildren.map(grandChild => {
           return (
-            <ExpansionPanel key={grandChild.id}>
-              <ExpansionPanelSummary>
-                {grandChild.memberName}
-              </ExpansionPanelSummary>
-              <ExpansionPanelDetails className="memberDetails">
-                <FormControl>
-                  <InputLabel>Name</InputLabel>
-                  <Input
-                    type="text"
-                    name="memberName"
-                    value={grandChild.memberName}
-                    onChange={this.handleChangee}
-                  />
-                </FormControl>
-                <div className="familyStatus">
+            <div
+              key={grandChild.id}
+              style={{
+                margin: '0.5vh 0'
+              }}
+            >
+              <ExpansionPanel key={grandChild.id}>
+                <ExpansionPanelSummary>
+                  <div
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      height: '4vh'
+                    }}
+                  >
+                    <img src={grandChild.mediaUrl} className="pic" />
+                    <div
+                      style={{
+                        marginLeft: '5vw'
+                      }}
+                    >
+                      <p>{grandChild.memberName}</p>
+                    </div>
+                  </div>
+                </ExpansionPanelSummary>
+                <ExpansionPanelDetails className="memberDetails">
                   <FormControl>
-                    <InputLabel>Month</InputLabel>
+                    <InputLabel>Name</InputLabel>
                     <Input
-                      type="number"
-                      name="month"
-                      value={grandChild.month}
+                      type="text"
+                      name="memberName"
+                      value={grandChild.memberName}
                       onChange={this.handleChangee}
                     />
                   </FormControl>
-                  <FormControl>
-                    <InputLabel>Year</InputLabel>
-                    <Input
-                      type="number"
-                      name="year"
-                      value={grandChild.year}
-                      onChange={this.handleChangee}
-                    />
-                  </FormControl>
-                </div>
-                <br />
-                <input
-                  accept="image/*"
-                  name="picture"
-                  id="media"
-                  type="file"
-                  ref={this.fileInput}
-                />
-                <br />
+                  <div className="familyStatus">
+                    <FormControl>
+                      <InputLabel>Month</InputLabel>
+                      <Input
+                        type="number"
+                        name="month"
+                        value={grandChild.month}
+                        onChange={this.handleChangee}
+                      />
+                    </FormControl>
+                    <FormControl>
+                      <InputLabel>Year</InputLabel>
+                      <Input
+                        type="number"
+                        name="year"
+                        value={grandChild.year}
+                        onChange={this.handleChangee}
+                      />
+                    </FormControl>
+                  </div>
+                  <br />
 
-                <button onClick={this.createMember}>Done</button>
-              </ExpansionPanelDetails>
-            </ExpansionPanel>
+                  <Button onClick={this.createMember}>Edit grandchild</Button>
+                </ExpansionPanelDetails>
+              </ExpansionPanel>
+            </div>
           );
         })}
-        <p>Add more grandchildren</p>
+        <p className="text-p">
+          To provide secure authentication, please add more grandhildren{' '}
+        </p>
         <br />
         <Grandchild submitGrandChild={this.createGrandchild} />
-        <button onClick={this.passProps}>next</button>
-      </div>
+        <div className="next-button">
+          <Button onClick={this.passProps}>next</Button>
+        </div>
+      </StyledGrandChildren>
     );
   }
 }

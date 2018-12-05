@@ -1,4 +1,3 @@
-// @flow
 import React from 'react';
 import styled from 'styled-components';
 
@@ -37,25 +36,34 @@ const StyledInput = styled.div`
   }
 `;
 
-type Props = {
-  name: string,
-  label: string,
-  placeholder: string,
-  required?: boolean
-};
+// type Props = {
+//   name: string,
+//   label: string,
+//   value: string,
+//   // placeholder: string,
+//   required?: boolean
+// };
 
-function Input(props: Props) {
-  return (
-    <StyledInput>
-      <input
-        type="text"
-        id={props.name}
-        placeholder={props.placeholder}
-        required={props.required}
-      />
-      <label htmlFor={props.name}>{props.label}</label>
-    </StyledInput>
-  );
+class Input extends React.Component {
+  handleChange = e => {
+    this.props.onChange(e);
+  };
+  render() {
+    const props = this.props;
+    return (
+      <StyledInput>
+        <input
+          type="text"
+          id={props.name}
+          placeholder={props.placeholder}
+          required={props.required}
+          value={props.value}
+          onChange={props.handleChange}
+        />
+        <label htmlFor={props.name}>{props.label}</label>
+      </StyledInput>
+    );
+  }
 }
 
 export default Input;

@@ -2,6 +2,7 @@ import React from 'react';
 import { PoseGroup } from 'react-pose';
 
 import StepsFlow from '../animations/stepsFlow';
+import FirstMember from './firstMember';
 import GroupInfo from './groupInfo';
 import AddMembers from './addMembers';
 import AddGrandchildren from './addGrandchildren';
@@ -12,7 +13,7 @@ export default class CreateGroup extends React.Component {
     step: 0,
     displayComponent: false,
     isVisible: false,
-    component: [GroupInfo, AddMembers, AddGrandchildren, Group4],
+    component: [FirstMember, GroupInfo, AddMembers, AddGrandchildren, Group4],
     group: {
       welcomeMsg: '',
       members: [],
@@ -31,9 +32,7 @@ export default class CreateGroup extends React.Component {
       this.setState({
         step: this.state.step + 1,
         group: {
-          ...this.state.group,
-          welcomeMsg: data.welcomeMsg,
-          name: data.name
+          members: [data]
         }
       });
     } else if (this.state.step === 1) {
@@ -41,7 +40,8 @@ export default class CreateGroup extends React.Component {
         step: this.state.step + 1,
         group: {
           ...this.state.group,
-          members: [...data]
+          welcomeMsg: data.welcomeMsg,
+          name: data.name
         }
       });
     } else if (this.state.step === 2) {
@@ -50,10 +50,17 @@ export default class CreateGroup extends React.Component {
         step: this.state.step + 1,
         group: {
           ...this.state.group,
-          grandChildren: [...data]
+          members: [...data]
         }
       });
     } else if (this.state.step === 3) {
+      this.setState({
+        step: this.state.step + 1,
+        group: {
+          ...this.state.group,
+          grandChildren: [...data]
+        }
+      });
       // this.setState({
       //   step: this.state.step + 1
       // });
