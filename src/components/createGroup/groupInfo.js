@@ -1,6 +1,5 @@
 import React from 'react';
 import FormControl from '@material-ui/core/FormControl';
-import InputLabel from '@material-ui/core/InputLabel';
 import Input from '../../styledComponents/input';
 import Button from '../../styledComponents/button';
 
@@ -18,6 +17,7 @@ const StyledLogin = styled.div`
   .input {
     background: white;
     margin: 2vh 0;
+    padding-top: 0.5em;
   }
   .button-next {
     align-self: flex-end;

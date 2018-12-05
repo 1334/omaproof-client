@@ -8,7 +8,7 @@ const StyledInput = styled.div`
 
   label {
     position: absolute;
-    top: 0;
+    top: -5px;
     transition: all 200ms;
     opacity: 0.5;
   }
@@ -55,8 +55,7 @@ class Input extends React.Component {
         <input
           type="text"
           id={props.name}
-          placeholder={props.placeholder}
-          required={props.required}
+          required
           value={props.value}
           onChange={props.handleChange}
         />

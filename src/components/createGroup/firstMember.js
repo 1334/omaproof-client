@@ -1,7 +1,5 @@
 import React from 'react';
 import FormControl from '@material-ui/core/FormControl';
-import InputLabel from '@material-ui/core/InputLabel';
-// import Input from '@material-ui/core/Input';
 import styled from 'styled-components';
 import Button from '../../styledComponents/button';
 
@@ -20,7 +18,7 @@ const StyledFirstMember = styled.div`
     width: 80px;
   }
   .next-button {
-    
+
   }
   input[type='file'] {
     display: none;

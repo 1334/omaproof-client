@@ -130,7 +130,11 @@ class OmaLogin extends React.Component {
                 onClick={e => {
                   e.preventDefault();
                   omaLogin().then(({ data }) => {
-                    console.log('sdfsdf', data);
+                    const questionType = data.grandParentLogin.question.type;
+                    if (questionType === 'success') {
+                      console.log(data);
+                      return navigate('/group-chooser');
+                    }
 
                     localStorage.setItem(
                       'omalogin',

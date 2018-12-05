@@ -9,13 +9,12 @@ import GroupChooser from './groupChooser';
 import { Mutation } from 'react-apollo';
 import GRAND_PARENT_LOGIN_MUTATION from '../graphql/mutations/grandParentLogin';
 import Logo from '../styledComponents/logo';
+// import './landing.css';
 
 const LandingBackground = styled.div`
-  height: 94vh;
-  background-image: url('https://res.cloudinary.com/truroer/image/upload/v1544016596/allen-taylor-709552-unsplash_copy.jpg');
-  background-size: auto 110%;
-  background-repeat: no-repeat;
-  background-position: center center;
+  background: url('https://res.cloudinary.com/truroer/image/upload/v1544016596/allen-taylor-709552-unsplash_copy.jpg')
+    no-repeat center center fixed;
+  background-size: cover;
 `;
 
 const StyledLanding = styled.div`
@@ -73,7 +72,7 @@ class Landing extends React.Component {
 
               <div
                 style={{
-                  marginTop: '40vw',
+                  marginTop: '5vh',
                   height: '40vh',
                   display: 'flex',
                   flexDirection: 'column',
@@ -115,7 +114,7 @@ class Landing extends React.Component {
                         justifyContent: 'center',
                         padding: '4vw',
                         fontSize: '6vw',
-                        marginBottom: '10vh'
+                        marginBottom: '5vh'
                       }}
                       onClick={e => {
                         e.preventDefault();
