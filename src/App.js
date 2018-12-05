@@ -8,7 +8,7 @@ import UserContext from './contexts/userContext';
 import Auth from './components/auth';
 import NewPost from './components/newPost';
 import NavBar from './components/navBar';
-import Demo from './components/demo';
+import OmaLogin from './components/omaLogin';
 import GroupChooser from './components/groupChooser';
 import Landing from './components/landing';
 import Feed from './components/feed';
@@ -30,7 +30,7 @@ class App extends Component<null, AppState> {
       user: JSON.parse(lsUser) || {
         id: '',
         name: 'Guest',
-        profilePicture: '',
+        picture: '',
         activeGroup: '',
         groups: []
       }
@@ -66,8 +66,8 @@ class App extends Component<null, AppState> {
               <Auth path="/login" />
               <CreateGroup path="/create-group" />
               <GroupChooser path="/group-chooser" />
-              <Demo path="/demo" />
               <NewPost path="/new-post" />
+              <OmaLogin path="/oma-login" />
             </Router>
           </React.Fragment>
         </ThemeProvider>

@@ -38,7 +38,9 @@ class Tile extends React.Component {
   };
 
   toggleSelect = () => {
-    this.setState({ selected: !this.state.selected });
+    this.setState({ selected: !this.state.selected }, () => {
+      this.props.onSelect(this.props.text, this.state.selected);
+    });
   };
 
   render() {

@@ -31,7 +31,7 @@ class DeleteComment extends React.Component {
               response && deletePost();
             }}
           >
-            DELETE IT!!!
+            <span className="icon-trash" style={{ fontSize: 1 + 'rem' }} />
           </a>
         )}
       </Mutation>

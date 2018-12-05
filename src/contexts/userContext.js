@@ -4,7 +4,7 @@ export const userCtx = {
   user: {
     id: '',
     name: 'Guest',
-    profilePicture: '',
+    picture: '',
     activeGroup: '',
     groups: [],
     userToken: '',
