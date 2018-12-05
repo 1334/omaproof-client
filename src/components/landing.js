@@ -8,7 +8,6 @@ import UserContext from '../contexts/userContext';
 import GroupChooser from './groupChooser';
 import { Mutation } from 'react-apollo';
 import GRAND_PARENT_LOGIN_MUTATION from '../graphql/mutations/grandParentLogin';
-import Button from '../styledComponents/button';
 
 const LandingBackground = styled.div`
   height: 94vh;
@@ -92,45 +91,45 @@ class Landing extends React.Component {
                 </Link>
 
                 <div className="lg">OR</div>
-            <Mutation
-              mutation={GRAND_PARENT_LOGIN_MUTATION}
-              variables={{
-                sessionToken: null,
-                selected: [],
-                unselected: []
-              }}
-            >
-              {omaLogin => (
-                <Button
-                  type="submit"
-                  className="buttonLanding"
-                    style={{
-                      width: '80vw',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      padding: '4vw',
-                      fontSize: '6vw',
-                      marginBottom: '10vh'
-                    }}
-                  onClick={e => {
-                    e.preventDefault();
-                    omaLogin().then(({ data }) => {
-                      localStorage.setItem(
-                        'omalogin',
-                        JSON.stringify(data.grandParentLogin)
-                      );
-                      navigate('/oma-login');
-                    });
+                <Mutation
+                  mutation={GRAND_PARENT_LOGIN_MUTATION}
+                  variables={{
+                    sessionToken: null,
+                    selected: [],
+                    unselected: []
                   }}
                 >
-                  <span style={{ marginRight: '3vw' }}>
-                      Oma, click to start{' '}
-                    </span>
-                    <span className="icon-arrow-right" />
-                </Button>
-              )}
-            </Mutation>
+                  {omaLogin => (
+                    <Button
+                      type="submit"
+                      className="buttonLanding"
+                      style={{
+                        width: '80vw',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        padding: '4vw',
+                        fontSize: '6vw',
+                        marginBottom: '10vh'
+                      }}
+                      onClick={e => {
+                        e.preventDefault();
+                        omaLogin().then(({ data }) => {
+                          localStorage.setItem(
+                            'omalogin',
+                            JSON.stringify(data.grandParentLogin)
+                          );
+                          navigate('/oma-login');
+                        });
+                      }}
+                    >
+                      <span style={{ marginRight: '3vw' }}>
+                        Oma, click to start{' '}
+                      </span>
+                      <span className="icon-arrow-right" />
+                    </Button>
+                  )}
+                </Mutation>
                 {!user.userToken ? (
                   <span>
                     <span className="lg1">You can also </span>
