@@ -119,14 +119,14 @@ const StyledNewPost = styled.div`
 
 export default class Member extends React.Component {
   state = {
-    memberName: '',
-    phoneNumber: '',
-    familyStatus: '',
-    month: '',
-    year: '',
+    name: '',
+    contactNumber: '',
+    generation: '',
+    monthOfBirth: '',
+    yearOfBirth: '',
     status: 'member',
     expanded: false,
-    mediaUrl:
+    picture:
       'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgQvLfGDGZtXgxzo4avCQJjtWT-EfhpF7EF4gFLWmL6Exm07koLA',
     uploading: false
   };
@@ -136,18 +136,18 @@ export default class Member extends React.Component {
     this.setState({ [target.name]: target.value });
   };
   handleClick = e => {
-    this.setState({ familyStatus: e.target.value });
+    this.setState({ generation: e.target.value });
   };
   createMember = () => {
     this.props.submitMember(this.state);
     this.setState({
-      memberName: '',
-      phoneNumber: '',
-      familyStatus: '',
-      month: '',
-      year: '',
+      name: '',
+      contactNumber: '',
+      generation: '',
+      monthOfBirth: '',
+      yearOfBirth: '',
       expanded: false,
-      mediaUrl:
+      picture:
         'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgQvLfGDGZtXgxzo4avCQJjtWT-EfhpF7EF4gFLWmL6Exm07koLA',
       uploading: false
     });
@@ -167,12 +167,12 @@ export default class Member extends React.Component {
     })
       .then(data => data.json())
       .then(data =>
-        this.setState({ mediaUrl: data.secure_url, uploading: false })
+        this.setState({ picture: data.secure_url, uploading: false })
       );
   };
 
   isPostValid() {
-    return this.state.description.length && this.state.mediaUrl.length;
+    return this.state.description.length && this.state.picture.length;
   }
 
   render() {
@@ -195,7 +195,7 @@ export default class Member extends React.Component {
                   style={{ display: 'flex', alignItems: 'center' }}
                 >
                   <img
-                    src={this.state.mediaUrl}
+                    src={this.state.picture}
                     alt="me"
                     onChange={this.handleChange}
                     className="user-profile"
@@ -219,8 +219,8 @@ export default class Member extends React.Component {
               <InputLabel>Name</InputLabel>
               <Input
                 type="text"
-                name="memberName"
-                value={this.state.memberName}
+                name="name"
+                value={this.state.name}
                 onChange={this.handleChangee}
               />
             </FormControl>
@@ -228,8 +228,8 @@ export default class Member extends React.Component {
               <InputLabel>Phone</InputLabel>
               <Input
                 type="text"
-                name="phoneNumber"
-                value={this.state.phoneNumber}
+                name="contactNumber"
+                value={this.state.contactNumber}
                 onChange={this.handleChangee}
               />
             </FormControl>
@@ -237,18 +237,18 @@ export default class Member extends React.Component {
               <FormControl>
                 <InputLabel>Month</InputLabel>
                 <Input
-                  type="number"
-                  name="month"
-                  value={this.state.month}
+                  type="text"
+                  name="monthOfBirth"
+                  value={this.state.monthOfBirth}
                   onChange={this.handleChangee}
                 />
               </FormControl>
               <FormControl>
                 <InputLabel>Year</InputLabel>
                 <Input
-                  type="number"
-                  name="year"
-                  value={this.state.year}
+                  type="text"
+                  name="yearOfBirth"
+                  value={this.state.yearOfBirth}
                   onChange={this.handleChangee}
                 />
               </FormControl>

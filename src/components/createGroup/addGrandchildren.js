@@ -76,7 +76,7 @@ export default class AddGrandchildren extends React.Component {
   };
   componentDidMount() {
     const newArr = this.props.group.members.filter(
-      member => member.familyStatus === 'CHILD'
+      member => member.generation === 'CHILD'
     );
     this.setState({
       grandChildren: [...newArr]
@@ -87,6 +87,7 @@ export default class AddGrandchildren extends React.Component {
     this.props.handleSubmit(this.state.grandChildren);
   };
   render() {
+    console.log('hello', this.props.group);
     const { user } = this.props;
     return (
       <StyledGrandChildren>
@@ -101,12 +102,12 @@ export default class AddGrandchildren extends React.Component {
         {this.state.grandChildren.map(grandChild => {
           return (
             <div
-              key={grandChild.id}
+              key={grandChild.contactNumber}
               style={{
                 margin: '0.5vh 0'
               }}
             >
-              <ExpansionPanel key={grandChild.id}>
+              <ExpansionPanel key={grandChild.contactNumber}>
                 <ExpansionPanelSummary>
                   <div
                     style={{
@@ -115,13 +116,17 @@ export default class AddGrandchildren extends React.Component {
                       height: '4vh'
                     }}
                   >
-                    <img src={grandChild.mediaUrl} className="pic" />
+                    <img
+                      src={grandChild.picture}
+                      alt="special pic"
+                      className="pic"
+                    />
                     <div
                       style={{
                         marginLeft: '5vw'
                       }}
                     >
-                      <p>{grandChild.memberName}</p>
+                      <p>{grandChild.name}</p>
                     </div>
                   </div>
                 </ExpansionPanelSummary>
@@ -130,8 +135,8 @@ export default class AddGrandchildren extends React.Component {
                     <InputLabel>Name</InputLabel>
                     <Input
                       type="text"
-                      name="memberName"
-                      value={grandChild.memberName}
+                      name="name"
+                      value={grandChild.name}
                       onChange={this.handleChangee}
                     />
                   </FormControl>
@@ -139,18 +144,18 @@ export default class AddGrandchildren extends React.Component {
                     <FormControl>
                       <InputLabel>Month</InputLabel>
                       <Input
-                        type="number"
-                        name="month"
-                        value={grandChild.month}
+                        type="text"
+                        name="monthOfBirth"
+                        value={grandChild.monthOfBirth}
                         onChange={this.handleChangee}
                       />
                     </FormControl>
                     <FormControl>
                       <InputLabel>Year</InputLabel>
                       <Input
-                        type="number"
-                        name="year"
-                        value={grandChild.year}
+                        type="text"
+                        name="yearOfBirth"
+                        value={grandChild.yearOfBirth}
                         onChange={this.handleChangee}
                       />
                     </FormControl>
@@ -172,8 +177,8 @@ export default class AddGrandchildren extends React.Component {
           <Mutation
             mutation={CREATE_GROUP_MUTATION}
             variables={{
-              welcomeText: this.props.group.welcomeMsg,
-              description: this.props.group.name,
+              welcomeText: this.props.group.welcomeText,
+              description: this.props.group.description,
               members: this.props.group.members,
               grandChildren: this.props.group.grandChildren,
               token: user.groupToken

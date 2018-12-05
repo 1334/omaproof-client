@@ -1,6 +1,6 @@
 import React from 'react';
 import FormControl from '@material-ui/core/FormControl';
-import InputLabel from '@material-ui/core/InputLabel';
+//import InputLabel from '@material-ui/core/InputLabel';
 // import Input from '@material-ui/core/Input';
 import styled from 'styled-components';
 import Button from '../../styledComponents/button';
@@ -121,13 +121,13 @@ const StyledFirstMember = styled.div`
 export default class FirstMember extends React.Component {
   state = {
     id: 1,
-    memberName: 'Frederik',
-    phoneNumber: '4522131',
-    familyStatus: 'child',
-    month: '06',
-    year: '1994',
+    name: 'Frederik',
+    contactNumber: '4522131',
+    generation: '',
+    monthOfBirth: '06',
+    yearOfBirth: '1994',
     status: 'admin',
-    mediaUrl:
+    picture:
       'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgQvLfGDGZtXgxzo4avCQJjtWT-EfhpF7EF4gFLWmL6Exm07koLA',
     uploading: false
   };
@@ -139,7 +139,7 @@ export default class FirstMember extends React.Component {
   };
   handleClick = event => {
     const target = event.target;
-    this.setState({ familyStatus: target.value });
+    this.setState({ generation: target.value });
   };
   passProps = () => {
     this.props.handleSubmit(this.state);
@@ -159,12 +159,12 @@ export default class FirstMember extends React.Component {
     })
       .then(data => data.json())
       .then(data =>
-        this.setState({ mediaUrl: data.secure_url, uploading: false })
+        this.setState({ picture: data.secure_url, uploading: false })
       );
   };
 
   isPostValid() {
-    return this.state.description.length && this.state.mediaUrl.length;
+    return this.state.description.length && this.state.picture.length;
   }
   render() {
     console.log(this.state);
@@ -177,7 +177,7 @@ export default class FirstMember extends React.Component {
         <div className="input" />
         <label className="media-label" htmlFor="media">
           <img
-            src={this.state.mediaUrl}
+            src={this.state.picture}
             alt="me"
             onChange={this.handleChange}
             className="user-profile"
@@ -194,20 +194,18 @@ export default class FirstMember extends React.Component {
         {/* <input accept="image/*" id="media" type="file" ref={this.fileInput} /> */}
         <div className="nameAndPhone">
           <FormControl>
-            {/* <InputLabel>Name</InputLabel> */}
             <Input
               type="text"
               label="Name"
-              name="memberName"
+              name="name"
               onChange={this.handleChange}
             />
           </FormControl>
           <FormControl>
-            {/* <InputLabel>Phone</InputLabel> */}
             <Input
               type="text"
               label="Phone"
-              name="phoneNumber"
+              name="contactNumber"
               onChange={this.handleChange}
             />
           </FormControl>
@@ -217,8 +215,8 @@ export default class FirstMember extends React.Component {
             {/* <InputLabel>Month</InputLabel> */}
             <Input
               label="Month"
-              type="number"
-              name="month"
+              type="text"
+              name="monthOfBirth"
               onChange={this.handleChange}
             />
           </FormControl>
@@ -226,8 +224,8 @@ export default class FirstMember extends React.Component {
             {/* <InputLabel>Year</InputLabel> */}
             <Input
               label="Year"
-              type="number"
-              name="year"
+              type="text"
+              name="yearOfBirth"
               onChange={this.handleChange}
             />
           </FormControl>
@@ -238,7 +236,7 @@ export default class FirstMember extends React.Component {
             type="radio"
             id="switch_3_left"
             name="switch_3"
-            value="child"
+            value="CHILD"
             onClick={this.handleClick}
           />
           <label htmlFor="switch_3_left">Child</label>
@@ -246,7 +244,7 @@ export default class FirstMember extends React.Component {
             type="radio"
             id="switch_3_center"
             name="switch_3"
-            value="parent"
+            value="PARENT"
             onClick={this.handleClick}
           />
           <label htmlFor="switch_3_center">Parent</label>
@@ -254,46 +252,12 @@ export default class FirstMember extends React.Component {
             type="radio"
             id="switch_3_right"
             name="switch_3"
-            value="grandparent"
+            value="GRANDPARENT"
             onClick={this.handleClick}
           />
           <label htmlFor="switch_3_right">Grandparent</label>
         </div>
-        {/* <div className="familyStatus">
-          {' '}
-          <input
-            type="radio"
-            className="buttonMember"
-            value="child"
-            onClick={this.handleClick}
-            name="maxim"
-          />
-          <label className="buttonMember" htmlFor="one">
-            Child
-          </label>
-          <input
-            type="radio"
-            className="buttonMember"
-            value="parent"
-            onClick={this.handleClick}
-            name="maxim"
-          />
-          <label className="buttonMember" htmlFor="two">
-            Parent
-          </label>
-          <input
-            type="radio"
-            className="buttonMember"
-            value="grandparent"
-            onClick={this.handleClick}
-            name="maxim"
-          />
-          <label className="buttonMember" htmlFor="three">
-            Grandparent
-          </label>
-        </div> */}
         <br />
-
         <Button onClick={this.passProps} className="next-button">
           Next
         </Button>

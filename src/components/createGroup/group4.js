@@ -19,8 +19,9 @@ export default class Group4 extends React.Component {
         </div>
         <div>
           {' '}
-          {this.props.group.members[0].memberName}, you created group{' '}
-          {this.props.group.name}. Enjoy the new way to connect with your family{' '}
+          {this.props.group.members[0].name}, you created group{' '}
+          {this.props.group.description}. Enjoy the new way to connect with your
+          family{' '}
         </div>
       </StyledHeader>
     );
