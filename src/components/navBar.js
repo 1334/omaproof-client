@@ -11,6 +11,7 @@ const StyledNavBar = styled.nav`
   color: ${props => props.theme.colors.bg};
   height: 50px;
   padding: 0.5em 14px;
+  position: relative;
 
   a,
   div {
@@ -30,6 +31,8 @@ const StyledNavBar = styled.nav`
     flex-grow: 3;
     height: 2rem;
     fill: white;
+    position: relative;
+    top: -1px;
   }
 `;
 
@@ -42,7 +45,7 @@ class NavBar extends React.Component {
   render() {
     const { theme, user } = this.props;
     return (
-      <StyledNavBar>
+      <StyledNavBar className="main-nav">
         <div className="logo">
           <Link to="/">
             {' '}
@@ -53,7 +56,6 @@ class NavBar extends React.Component {
           New Post
         </Link>
         <Link to="/feed">Feed</Link>
-        <Link to="/">Login</Link>
         <a href="/theme" onClick={this.toggleTheme}>
           <span
             className={`icon ${theme === 'light' ? 'icon-moon' : 'icon-sun'}`}

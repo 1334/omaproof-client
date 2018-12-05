@@ -8,13 +8,13 @@ import UserContext from '../contexts/userContext';
 import GroupChooser from './groupChooser';
 import { Mutation } from 'react-apollo';
 import GRAND_PARENT_LOGIN_MUTATION from '../graphql/mutations/grandParentLogin';
+import Logo from '../styledComponents/logo';
+// import './landing.css';
 
 const LandingBackground = styled.div`
-  height: 94vh;
-  background-image: url('https://res.cloudinary.com/truroer/image/upload/v1544016596/allen-taylor-709552-unsplash_copy.jpg');
-  background-size: auto 110%;
-  background-repeat: no-repeat;
-  background-position: center center;
+  background: url('https://res.cloudinary.com/truroer/image/upload/v1544016596/allen-taylor-709552-unsplash_copy.jpg')
+    no-repeat center center fixed;
+  background-size: cover;
 `;
 
 const StyledLanding = styled.div`
@@ -24,9 +24,14 @@ const StyledLanding = styled.div`
   margin: 0 auto;
   align-items: center;
 
+  h3 {
+    margin-top: 2em;
+  }
+
   & > * {
     margin: 0.5em 0;
   }
+
   .links {
     text-decoration: underline;
     color: ${props => props.theme.colors.primary};
@@ -37,12 +42,9 @@ const StyledLanding = styled.div`
     color: ${props => props.theme.colors.bg};
   }
 
-  .omaproof {
-    text-align: center;
-    font-family: 'Montez', cursive;
-    font-size: 10vh;
-    margin: 0;
-    font-weight: bold;
+  .svg-logo {
+    height: 8.2rem !important;
+    margin: 2em auto;
   }
 
   .lg1 {
@@ -63,12 +65,14 @@ class Landing extends React.Component {
           <LandingBackground>
             <StyledLanding>
               <h3 className="lg">Welcome to </h3>
-              <div className="omaproof lg">OmaProof</div>
+              <div className="omaproof lg">
+                <Logo />
+              </div>
               <div className="lg">a family friendly way to connect...</div>
 
               <div
                 style={{
-                  marginTop: '40vw',
+                  marginTop: '5vh',
                   height: '40vh',
                   display: 'flex',
                   flexDirection: 'column',
@@ -110,7 +114,7 @@ class Landing extends React.Component {
                         justifyContent: 'center',
                         padding: '4vw',
                         fontSize: '6vw',
-                        marginBottom: '10vh'
+                        marginBottom: '5vh'
                       }}
                       onClick={e => {
                         e.preventDefault();

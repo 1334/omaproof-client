@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const StyledQuestionTile = styled.div`
+const StyledImageTile = styled.div`
   .content {
     display: flex;
     justify-content: center;
@@ -11,15 +11,18 @@ const StyledQuestionTile = styled.div`
     width: 25vw;
     height: 25vw;
     border-radius: 5px;
+    overflow: hidden;
 
     &:after {
       content: '';
       display: block;
       padding-bottom: 100%;
+      background-color: ${props => props.theme.colors.primary};
     }
 
     &:hover {
       cursor: pointer;
+      opacity: 0.5;
       background-color: ${props => props.theme.colors.primary};
       color: ${props => props.theme.colors.bg};
     }
@@ -29,10 +32,11 @@ const StyledQuestionTile = styled.div`
     cursor: pointer;
     background-color: ${props => props.theme.colors.primary};
     color: ${props => props.theme.colors.bg};
+    border: 5px solid ${props => props.theme.colors.primary};
   }
 `;
 
-class QuestionTile extends React.Component {
+class ImageTile extends React.Component {
   state = {
     selected: false
   };
@@ -46,16 +50,16 @@ class QuestionTile extends React.Component {
   render() {
     const { selected } = this.state;
     return (
-      <StyledQuestionTile>
+      <StyledImageTile>
         <div
           className={`content ${selected ? 'selected' : null}`}
           onClick={this.toggleSelect}
         >
-          {this.props.text.toUpperCase()}
+          <img src={this.props.text} alt="possible grandchild" />
         </div>
-      </StyledQuestionTile>
+      </StyledImageTile>
     );
   }
 }
 
-export default QuestionTile;
+export default ImageTile;

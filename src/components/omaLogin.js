@@ -1,10 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Redirect, navigate } from '@reach/router';
 
-import Tile from '../styledComponents/questionTile';
+import QuestionTile from '../styledComponents/questionTile';
+import ImageTile from '../styledComponents/imageTile';
 import Button from '../styledComponents/button';
 import GRAND_PARENT_LOGIN_MUTATION from '../graphql/mutations/grandParentLogin';
 import { Mutation } from 'react-apollo';
+import UserContext from '../contexts/userContext';
 
 const StyledOmaLogin = styled.div`
   padding: 0 5vw;
@@ -45,12 +48,13 @@ class OmaLogin extends React.Component {
         'Please select all the names that match any of your grandchildren or press next if none match', //names
       GrandParent_ContactNumber: 'please dial in your cellphone number', //number
       GrandChildren_Authorization_Pictures:
-        'Please the pictures of your grandchildren for our final verification', //pics
+        'Please select the pictures of your grandchildren for our final verification', //pics
       Select_right_familymember: 'Who are you?',
       success: 'Welcome Oma',
       failure: 'Go away hacker!'
     },
-    selected: []
+    selected: [],
+    tileType: QuestionTile
   };
 
   componentDidMount() {
@@ -60,24 +64,28 @@ class OmaLogin extends React.Component {
   updateState = () => {
     const loginInfo = JSON.parse(localStorage.getItem('omalogin'));
 
+    if (!loginInfo) return navigate('/');
+
+    const tileType =
+      loginInfo.question.type === 'GrandChildren_Authorization_Pictures'
+        ? ImageTile
+        : QuestionTile;
+
     this.setState({
       token: loginInfo.token,
       questions: loginInfo.question.options,
       type: loginInfo.question.type,
-      selected: []
+      selected: [],
+      tileType
     });
   };
 
   selectOption = (tile, selected) => {
     if (selected) {
-      this.setState({ selected: [...this.state.selected, tile] }, () => {
-        console.log(this.state.selected, this.unselectedAnswers());
-      });
+      this.setState({ selected: [...this.state.selected, tile] });
     } else {
       const selected = this.state.selected.filter(el => el !== tile);
-      this.setState({ selected: [...selected] }, () => {
-        console.log(this.state.selected, this.unselectedAnswers());
-      });
+      this.setState({ selected: [...selected] });
     }
   };
 
@@ -86,51 +94,72 @@ class OmaLogin extends React.Component {
   }
 
   render() {
-    return (
-      <Mutation
-        mutation={GRAND_PARENT_LOGIN_MUTATION}
-        variables={{
-          sessionToken: this.state.token,
-          selected: this.state.selected,
-          unselected: this.unselectedAnswers(),
-          type: this.state.type
-        }}
-      >
-        {omaLogin => (
-          <StyledOmaLogin>
-            <h1>{this.state.questionText[this.state.type]}</h1>
-            <div className="tiles">
-              {this.state.questions.map(question => (
-                <Tile
-                  text={question}
-                  key={question + '.' + this.state.type}
-                  onSelect={this.selectOption}
-                />
-              ))}
-            </div>
-            <div className="buttons">
-              <Button
-                type="submit"
-                onClick={e => {
-                  e.preventDefault();
-                  omaLogin().then(({ data }) => {
-                    console.log('sdfsdf', data);
+    if (!localStorage.getItem('omalogin')) {
+      return <Redirect to="/" noThrow />;
+    }
+    const TileType = this.state.tileType;
 
-                    localStorage.setItem(
-                      'omalogin',
-                      JSON.stringify(data.grandParentLogin)
-                    );
-                    this.updateState();
-                    // navigate('/oma-login');
-                  });
-                }}
-              >
-                Continue
-              </Button>
-            </div>
-          </StyledOmaLogin>
+    return (
+      <UserContext.Consumer>
+        {({ updateUser }) => (
+          <Mutation
+            mutation={GRAND_PARENT_LOGIN_MUTATION}
+            variables={{
+              sessionToken: this.state.token,
+              selected: this.state.selected,
+              unselected: this.unselectedAnswers(),
+              type: this.state.type
+            }}
+          >
+            {omaLogin => (
+              <StyledOmaLogin>
+                <h1>{this.state.questionText[this.state.type]}</h1>
+                <div className="tiles">
+                  {this.state.questions.map(question => (
+                    <TileType
+                      text={question}
+                      key={question + '.' + this.state.type}
+                      onSelect={this.selectOption}
+                    />
+                  ))}
+                </div>
+                <div className="buttons">
+                  <Button
+                    type="submit"
+                    onClick={e => {
+                      e.preventDefault();
+                      omaLogin().then(({ data }) => {
+                        const questionType =
+                          data.grandParentLogin.question.type;
+
+                        if (questionType === 'success') {
+                          const user = JSON.parse(
+                            data.grandParentLogin.question.options[1]
+                          );
+                          updateUser({
+                            ...user,
+                            userToken: data.grandParentLogin.token
+                          });
+                          console.log(data.grandParentLogin);
+                          return navigate('/group-chooser');
+                        }
+
+                        localStorage.setItem(
+                          'omalogin',
+                          JSON.stringify(data.grandParentLogin)
+                        );
+                        this.updateState();
+                      });
+                    }}
+                  >
+                    Continue
+                  </Button>
+                </div>
+              </StyledOmaLogin>
+            )}
+          </Mutation>
         )}
-      </Mutation>
+      </UserContext.Consumer>
     );
   }
 }
