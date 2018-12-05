@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from 'react';
-import { Router } from '@reach/router';
+import { Router, Match } from '@reach/router';
 import { ThemeProvider } from 'styled-components';
 
 import GlobalStyle from './styledComponents/globalStyles';
@@ -56,11 +56,18 @@ class App extends Component<null, AppState> {
         <ThemeProvider theme={this.state.theme ? lightTheme : darkTheme}>
           <React.Fragment>
             <GlobalStyle />
-            <NavBar
-              user={this.state.user}
-              theme={this.state.theme ? 'light' : 'dark'}
-              toggleTheme={this.toggleTheme}
-            />
+
+            <Match path="/">
+              {props =>
+                props.match ? null : (
+                  <NavBar
+                    user={this.state.user}
+                    theme={this.state.theme ? 'light' : 'dark'}
+                    toggleTheme={this.toggleTheme}
+                  />
+                )
+              }
+            </Match>
             <Router>
               <Landing path="/" />
               <RegularLogin path="/regular-login" />

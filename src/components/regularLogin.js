@@ -9,7 +9,7 @@ import Button from '../styledComponents/button';
 const StyledLogin = styled.div`
   display: flex;
   flex-direction: column;
-  width: 50vw;
+  width: 70vw;
   margin: 0 auto;
 
   & > * {
