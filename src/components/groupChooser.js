@@ -8,19 +8,18 @@ import { navigate } from '@reach/router';
 
 class GroupChooser extends React.Component {
   render() {
-    const groups = this.props.groups;
-
     return (
       <UserContext.Consumer>
         {({ user, updateUser }) => (
           <Mutation mutation={SELECT_GROUP}>
             {(groupSelect, { loading, error }) => {
+              console.log('gr', user.groups);
               if (loading) return <div>Loading...</div>;
               if (error) return <div>{error.message} :(</div>;
               return (
                 <React.Fragment>
-                  {!user.groupToken ? (
-                    groups.map(group => (
+                  {user.groups ? (
+                    user.groups.map(group => (
                       <Button
                         key={group.id}
                         onClick={() => {

@@ -51,7 +51,7 @@ class QuestionTile extends React.Component {
           className={`content ${selected ? 'selected' : null}`}
           onClick={this.toggleSelect}
         >
-          {this.props.text}
+          {this.props.text.toUpperCase()}
         </div>
       </StyledQuestionTile>
     );

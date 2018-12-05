@@ -56,7 +56,6 @@ class NavBar extends React.Component {
           New Post
         </Link>
         <Link to="/feed">Feed</Link>
-        <Link to="/">Login</Link>
         <a href="/theme" onClick={this.toggleTheme}>
           <span
             className={`icon ${theme === 'light' ? 'icon-moon' : 'icon-sun'}`}
