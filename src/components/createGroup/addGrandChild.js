@@ -117,11 +117,12 @@ const StyledNewGrandchild = styled.div`
 
 export default class Grandchild extends React.Component {
   state = {
-    memberName: '',
-    familyStatus: 'child',
-    month: '',
-    year: '',
-    mediaUrl:
+    name: '',
+    generation: 'CHILD',
+    contactNumber: '+31',
+    monthOfBirth: '',
+    yearOfBirth: '',
+    picture:
       'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgQvLfGDGZtXgxzo4avCQJjtWT-EfhpF7EF4gFLWmL6Exm07koLA',
     expanded: false
   };
@@ -133,11 +134,13 @@ export default class Grandchild extends React.Component {
   createMember = () => {
     this.props.submitGrandChild(this.state);
     this.setState({
-      memberName: '',
-      month: '',
-      year: '',
+      name: '',
+      monthOfBirth: '',
+      yearOfBirth: '',
+      generation: 'CHILD',
+      contactNumber: '398',
       expanded: false,
-      mediaUrl:
+      picture:
         'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgQvLfGDGZtXgxzo4avCQJjtWT-EfhpF7EF4gFLWmL6Exm07koLA'
     });
   };
@@ -156,7 +159,7 @@ export default class Grandchild extends React.Component {
     })
       .then(data => data.json())
       .then(data =>
-        this.setState({ mediaUrl: data.secure_url, uploading: false })
+        this.setState({ picture: data.secure_url, uploading: false })
       );
   };
   render() {
@@ -174,7 +177,7 @@ export default class Grandchild extends React.Component {
               <div className="input">
                 <label className="media-label" htmlFor="media">
                   <img
-                    src={this.state.mediaUrl}
+                    src={this.state.picture}
                     alt="me"
                     onChange={this.handleChange}
                     className="user-profile"
@@ -191,8 +194,6 @@ export default class Grandchild extends React.Component {
                 {/* <input accept="image/*" id="media" type="file" ref={this.fileInput} /> */}
               </div>
               <p> New grandchild </p>
-
-              <span className="icon-plus-positive" />
             </div>
           </ExpansionPanelSummary>
           <ExpansionPanelDetails className="memberDetails">
@@ -200,8 +201,8 @@ export default class Grandchild extends React.Component {
               <InputLabel>Name</InputLabel>
               <Input
                 type="text"
-                name="memberName"
-                value={this.state.memberName}
+                name="name"
+                value={this.state.name}
                 onChange={this.handleChangee}
               />
             </FormControl>
@@ -209,18 +210,18 @@ export default class Grandchild extends React.Component {
               <FormControl>
                 <InputLabel>Month</InputLabel>
                 <Input
-                  type="number"
-                  name="month"
-                  value={this.state.month}
+                  type="text"
+                  name="monthOfBirth"
+                  value={this.state.monthOfBirth}
                   onChange={this.handleChangee}
                 />
               </FormControl>
               <FormControl>
                 <InputLabel>Year</InputLabel>
                 <Input
-                  type="number"
-                  name="year"
-                  value={this.state.year}
+                  type="text"
+                  name="yearOfBirth"
+                  value={this.state.yearOfBirth}
                   onChange={this.handleChangee}
                 />
               </FormControl>

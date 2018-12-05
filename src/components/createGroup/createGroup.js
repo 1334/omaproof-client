@@ -15,10 +15,10 @@ export default class CreateGroup extends React.Component {
     isVisible: false,
     component: [FirstMember, GroupInfo, AddMembers, AddGrandchildren, Group4],
     group: {
-      welcomeMsg: '',
+      welcomeText: '',
       members: [],
       grandChildren: [],
-      name: ''
+      description: ''
     }
   };
   componentDidMount() {
@@ -32,6 +32,7 @@ export default class CreateGroup extends React.Component {
       this.setState({
         step: this.state.step + 1,
         group: {
+          ...this.state.group,
           members: [data]
         }
       });
@@ -40,25 +41,46 @@ export default class CreateGroup extends React.Component {
         step: this.state.step + 1,
         group: {
           ...this.state.group,
-          welcomeMsg: data.welcomeMsg,
-          name: data.name
+          welcomeText: data.welcomeText,
+          description: data.description
         }
       });
     } else if (this.state.step === 2) {
-      console.log('data', data);
+      const correctedData = data.map(el => {
+        console.log('Generation', el.generation);
+        return {
+          name: el.name,
+          contactNumber: el.contactNumber,
+          monthOfBirth: el.monthOfBirth,
+          yearOfBirth: el.yearOfBirth,
+          picture: el.picture,
+          generation: el.generation
+        };
+      });
       this.setState({
         step: this.state.step + 1,
         group: {
           ...this.state.group,
-          members: [...data]
+          members: [...correctedData]
         }
       });
     } else if (this.state.step === 3) {
+      const correctedData = data.map(el => {
+        return {
+          name: el.name,
+          contactNumber: el.contactNumber,
+          monthOfBirth: el.monthOfBirth,
+          yearOfBirth: el.yearOfBirth,
+          picture: el.picture,
+          generation: el.generation
+        };
+      });
+      console.log('inside 3: ', correctedData);
       this.setState({
         step: this.state.step + 1,
         group: {
           ...this.state.group,
-          grandChildren: [...data]
+          grandChildren: [...correctedData]
         }
       });
       // this.setState({
@@ -76,8 +98,10 @@ export default class CreateGroup extends React.Component {
     const props = {
       handleSubmit: this.handleSubmit,
       key: this.state.step,
-      group: this.state.group
+      group: this.state.group,
+      user: this.props.user
     };
+    console.log('props: ', props);
     return (
       <div>
         <PoseGroup preEnterPose="pre-enter">
