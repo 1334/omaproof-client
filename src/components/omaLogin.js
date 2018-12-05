@@ -87,28 +87,28 @@ class OmaLogin extends React.Component {
 
   render() {
     return (
-      <StyledOmaLogin>
-        <h1>{this.state.questionText[this.state.type]}</h1>
-        <div className="tiles">
-          {this.state.questions.map(question => (
-            <Tile
-              text={question}
-              key={question + '.' + this.state.type}
-              onSelect={this.selectOption}
-            />
-          ))}
-        </div>
-        <div className="buttons">
-          <Mutation
-            mutation={GRAND_PARENT_LOGIN_MUTATION}
-            variables={{
-              sessionToken: this.state.token,
-              selected: this.state.selected,
-              unselected: this.unselectedAnswers(),
-              type: this.state.type
-            }}
-          >
-            {omaLogin => (
+      <Mutation
+        mutation={GRAND_PARENT_LOGIN_MUTATION}
+        variables={{
+          sessionToken: this.state.token,
+          selected: this.state.selected,
+          unselected: this.unselectedAnswers(),
+          type: this.state.type
+        }}
+      >
+        {omaLogin => (
+          <StyledOmaLogin>
+            <h1>{this.state.questionText[this.state.type]}</h1>
+            <div className="tiles">
+              {this.state.questions.map(question => (
+                <Tile
+                  text={question}
+                  key={question + '.' + this.state.type}
+                  onSelect={this.selectOption}
+                />
+              ))}
+            </div>
+            <div className="buttons">
               <Button
                 type="submit"
                 onClick={e => {
@@ -127,10 +127,10 @@ class OmaLogin extends React.Component {
               >
                 Continue
               </Button>
-            )}
-          </Mutation>
-        </div>
-      </StyledOmaLogin>
+            </div>
+          </StyledOmaLogin>
+        )}
+      </Mutation>
     );
   }
 }
