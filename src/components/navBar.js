@@ -43,6 +43,9 @@ class NavBar extends React.Component {
     const { theme, user } = this.props;
     return (
       <StyledNavBar>
+        <Link to="/new-post" user={user}>
+          New Post
+        </Link>
         <div className="logo">
           <Link to="/">
             {' '}

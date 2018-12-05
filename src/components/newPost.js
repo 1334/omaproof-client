@@ -6,12 +6,13 @@ import Textarea from '../styledComponents/textarea';
 import Button from '../styledComponents/button';
 import CREATE_POST_MUTATION from '../graphql/mutations/createPost';
 import GET_POSTS_QUERY from '../graphql/queries/getPosts';
+import { Link } from '@reach/router';
 
 const StyledNewPost = styled.div`
-  margin-top: 1.5em;
-  padding: 1.5em 18px;
+  padding: 1em 18px;
 
   div.input {
+    margin-top: 2em;
     position: relative;
   }
 
@@ -47,8 +48,29 @@ const StyledNewPost = styled.div`
   img.uploaded-media {
     width: 100%;
   }
-`;
 
+  .hd {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .icon-photo,
+  .icon-remove {
+    margin: 0.3em;
+    color: ${props => props.theme.colors.primary};
+  }
+
+  .links {
+    text-decoration: underline;
+    color: ${props => props.theme.colors.primary};
+  }
+
+  .writePost {
+    font-weight: bold;
+    color: ${props => props.theme.colors.primary};
+  }
+`;
 class NewPost extends React.Component {
   state = {
     description: '',
@@ -105,6 +127,13 @@ class NewPost extends React.Component {
       >
         {createPost => (
           <StyledNewPost>
+            <span className="hd">
+              <div className="writePost">WRITE YOUR POST </div>
+              <Link to="/feed">
+                <span className="links">Cancel</span>
+                <span className="icon-remove" />
+              </Link>
+            </span>
             <div className="input">
               <img
                 src="http://placehold.it/32x32"
@@ -120,7 +149,8 @@ class NewPost extends React.Component {
                 onChange={this.handleChange}
               />
             </div>
-            <label className="media-label" htmlFor="media">
+            <span className="icon-photo" />
+            <label className="media-label links" htmlFor="media">
               Add a photo
             </label>
             <input

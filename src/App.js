@@ -17,6 +17,7 @@ import type { AppState } from './flow/types';
 import CreateGroup from './components/createGroup/createGroup';
 
 import './style.css';
+import RegularLogin from './components/regularLogin';
 
 class App extends Component<null, AppState> {
   state = {
@@ -62,11 +63,12 @@ class App extends Component<null, AppState> {
             />
             <Router>
               <Landing path="/" />
+              <RegularLogin path="/regular-login" />
               <Feed path="/feed" />
               <Auth path="/login" />
               <CreateGroup path="/create-group" />
               <GroupChooser path="/group-chooser" />
-              <NewPost path="/new-post" />
+              <NewPost path="/new-post" user={this.state.user} />
               <OmaLogin path="/oma-login" />
             </Router>
           </React.Fragment>
