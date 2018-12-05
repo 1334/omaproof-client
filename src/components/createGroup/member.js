@@ -189,7 +189,11 @@ export default class Member extends React.Component {
               style={{ display: 'flex', alignItems: 'center', height: '4vh' }}
             >
               <div className="input">
-                <label className="media-label" htmlFor="media">
+                <label
+                  className="media-label"
+                  htmlFor="media"
+                  style={{ display: 'flex', alignItems: 'center' }}
+                >
                   <img
                     src={this.state.mediaUrl}
                     alt="me"
@@ -208,8 +212,6 @@ export default class Member extends React.Component {
                 {/* <input accept="image/*" id="media" type="file" ref={this.fileInput} /> */}
               </div>
               <p> New member </p>
-
-              <span className="icon-plus-positive" />
             </div>
           </ExpansionPanelSummary>
           <ExpansionPanelDetails className="memberDetails">
@@ -257,7 +259,7 @@ export default class Member extends React.Component {
                 type="radio"
                 id="switch_3_left"
                 name="switch_3"
-                value="child"
+                value="CHILD"
                 onClick={this.handleClick}
               />
               <label htmlFor="switch_3_left">Child</label>
@@ -265,7 +267,7 @@ export default class Member extends React.Component {
                 type="radio"
                 id="switch_3_center"
                 name="switch_3"
-                value="parent"
+                value="PARENT"
                 onClick={this.handleClick}
               />
               <label htmlFor="switch_3_center">Parent</label>
@@ -273,7 +275,7 @@ export default class Member extends React.Component {
                 type="radio"
                 id="switch_3_right"
                 name="switch_3"
-                value="grandparent"
+                value="GRANDPARENT"
                 onClick={this.handleClick}
               />
               <label htmlFor="switch_3_right">Grandparent</label>

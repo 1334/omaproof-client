@@ -35,7 +35,7 @@ const StyledLogin = styled.div`
 
 export default class GroupInfo extends React.Component {
   state = {
-    name: '',
+    name: 'Codeworks',
     welcomeMsg: ''
   };
   onChange = e => this.setState({ [e.target.name]: e.target.value });

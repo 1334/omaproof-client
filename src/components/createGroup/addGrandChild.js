@@ -118,7 +118,8 @@ const StyledNewGrandchild = styled.div`
 export default class Grandchild extends React.Component {
   state = {
     memberName: '',
-    familyStatus: 'child',
+    familyStatus: 'CHILD',
+    phoneNumber: '+31',
     month: '',
     year: '',
     mediaUrl:
@@ -136,6 +137,8 @@ export default class Grandchild extends React.Component {
       memberName: '',
       month: '',
       year: '',
+      familyStatus: 'CHILD',
+      phoneNumber: '+31',
       expanded: false,
       mediaUrl:
         'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgQvLfGDGZtXgxzo4avCQJjtWT-EfhpF7EF4gFLWmL6Exm07koLA'
@@ -191,8 +194,6 @@ export default class Grandchild extends React.Component {
                 {/* <input accept="image/*" id="media" type="file" ref={this.fileInput} /> */}
               </div>
               <p> New grandchild </p>
-
-              <span className="icon-plus-positive" />
             </div>
           </ExpansionPanelSummary>
           <ExpansionPanelDetails className="memberDetails">

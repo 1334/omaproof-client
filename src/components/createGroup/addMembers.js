@@ -95,14 +95,14 @@ export default class AddMembers extends React.Component {
     console.log('page2', this.props);
     return (
       <StyledMembers>
-        <p
+        <div
           style={{
             marginTop: '0',
             marginBottom: '3vh'
           }}
         >
           Members
-        </p>
+        </div>
         {this.state.members.map(member => {
           return (
             <div

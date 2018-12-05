@@ -76,7 +76,8 @@ export default class CreateGroup extends React.Component {
     const props = {
       handleSubmit: this.handleSubmit,
       key: this.state.step,
-      group: this.state.group
+      group: this.state.group,
+      user: this.props.user
     };
     return (
       <div>

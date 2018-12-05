@@ -6,6 +6,8 @@ import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import Input from '@material-ui/core/Input';
 import Button from '../../styledComponents/button';
+import { Mutation } from 'react-apollo';
+import CREATE_GROUP_MUTATION from '../../graphql/mutations/createGroup';
 
 import styled from 'styled-components';
 
@@ -74,7 +76,7 @@ export default class AddGrandchildren extends React.Component {
   };
   componentDidMount() {
     const newArr = this.props.group.members.filter(
-      member => member.familyStatus === 'child'
+      member => member.familyStatus === 'CHILD'
     );
     this.setState({
       grandChildren: [...newArr]
@@ -85,16 +87,17 @@ export default class AddGrandchildren extends React.Component {
     this.props.handleSubmit(this.state.grandChildren);
   };
   render() {
+    const { user } = this.props;
     return (
       <StyledGrandChildren>
-        <p
-          tyle={{
+        <div
+          style={{
             marginTop: '0',
             marginBottom: '3vh'
           }}
         >
           Grandchildren{' '}
-        </p>
+        </div>
         {this.state.grandChildren.map(grandChild => {
           return (
             <div
@@ -160,13 +163,33 @@ export default class AddGrandchildren extends React.Component {
             </div>
           );
         })}
-        <p className="text-p">
+        <div className="text-p">
           To provide secure authentication, please add more grandhildren{' '}
-        </p>
+        </div>
         <br />
         <Grandchild submitGrandChild={this.createGrandchild} />
         <div className="next-button">
-          <Button onClick={this.passProps}>next</Button>
+          <Mutation
+            mutation={CREATE_GROUP_MUTATION}
+            variables={{
+              welcomeText: this.props.group.welcomeMsg,
+              description: this.props.group.name,
+              members: this.props.group.members,
+              grandChildren: this.props.group.grandChildren,
+              token: user.groupToken
+            }}
+          >
+            {createPost => (
+              <Button
+                onClick={() => {
+                  this.passProps();
+                  createPost();
+                }}
+              >
+                Create Group
+              </Button>
+            )}
+          </Mutation>
         </div>
       </StyledGrandChildren>
     );
