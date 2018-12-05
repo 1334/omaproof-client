@@ -44,7 +44,10 @@ class NavBar extends React.Component {
     return (
       <StyledNavBar>
         <div className="logo">
-          <Logo />
+          <Link to="/">
+            {' '}
+            <Logo />
+          </Link>
         </div>
         <Link to="/feed">Feed</Link>
         <Link to="/">Login</Link>

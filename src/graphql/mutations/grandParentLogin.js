@@ -5,10 +5,11 @@ const GRAND_PARENT_LOGIN_MUTATION = gql`
     $sessionToken: String
     $selected: [String]
     $unselected: [String]
+    $type: String
   ) {
     grandParentLogin(
       sessionToken: $sessionToken
-      answers: { selected: $selected, unselected: $unselected }
+      answer: { type: $type, selected: $selected, unselected: $unselected }
     ) {
       token
       question {
