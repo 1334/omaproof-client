@@ -1,7 +1,7 @@
 import React from 'react';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
-import Input from '@material-ui/core/Input';
+import Input from '../../styledComponents/input';
 import Button from '../../styledComponents/button';
 
 import styled from 'styled-components';
@@ -17,10 +17,19 @@ const StyledLogin = styled.div`
   }
   .input {
     background: white;
-    margin: 0.2em 0;
+    margin: 2vh 0;
   }
   .button-next {
     align-self: flex-end;
+  }
+  .text-above {
+    margin-top: -12vh;
+    margin-bottom: 10vh;
+    padding-top: 3vh;
+    text-align: center;
+  }
+  .button-next {
+    margin-top: 10vh;
   }
 `;
 
@@ -35,19 +44,34 @@ export default class GroupInfo extends React.Component {
   };
   render() {
     return (
-      <StyledLogin>
-        <FormControl className="input">
-          <InputLabel>Group Name</InputLabel>
-          <Input type="text" name="name" onChange={this.onChange} />
-        </FormControl>
-        <FormControl className="input">
-          <InputLabel>Welcome message</InputLabel>
-          <Input type="text" name="welcomeMsg" onChange={this.onChange} />
-        </FormControl>
-        <div className="button-next">
-          <Button onClick={this.passProps}>next</Button>
-        </div>
-      </StyledLogin>
+      <div>
+        <StyledLogin>
+          <div className="text-above">
+            {' '}
+            Please fill in the group name, and personalize your welcoming
+            message
+          </div>
+          <FormControl className="input">
+            <Input
+              type="text"
+              name="name"
+              label="Group name"
+              onChange={this.onChange}
+            />
+          </FormControl>
+          <FormControl className="input">
+            <Input
+              type="text"
+              name="welcomeMsg"
+              label="Welcome message"
+              onChange={this.onChange}
+            />
+          </FormControl>
+          <div className="button-next">
+            <Button onClick={this.passProps}>next</Button>
+          </div>
+        </StyledLogin>
+      </div>
     );
   }
 }
