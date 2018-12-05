@@ -95,23 +95,23 @@ export default class AddMembers extends React.Component {
     console.log('page2', this.props);
     return (
       <StyledMembers>
-        <p
+        <div
           style={{
             marginTop: '0',
             marginBottom: '3vh'
           }}
         >
           Members
-        </p>
+        </div>
         {this.state.members.map(member => {
           return (
             <div
-              key={member.id}
+              key={member.contactNumber}
               style={{
                 margin: '0.5vh 0'
               }}
             >
-              <ExpansionPanel key={member.id}>
+              <ExpansionPanel key={member.contactNumber}>
                 <ExpansionPanelSummary>
                   <div
                     style={{
@@ -120,13 +120,13 @@ export default class AddMembers extends React.Component {
                       height: '4vh'
                     }}
                   >
-                    <img src={member.mediaUrl} className="pic" />
+                    <img src={member.picture} alt="taken" className="pic" />
                     <div
                       style={{
                         marginLeft: '5vw'
                       }}
                     >
-                      <p>{member.memberName}</p>
+                      <p>{member.name}</p>
                     </div>
                   </div>
                 </ExpansionPanelSummary>
@@ -135,8 +135,8 @@ export default class AddMembers extends React.Component {
                     <InputLabel>Name</InputLabel>
                     <Input
                       type="text"
-                      name="memberName"
-                      value={member.memberName}
+                      name="name"
+                      value={member.name}
                       onChange={this.handleChangee}
                     />
                   </FormControl>
@@ -144,18 +144,18 @@ export default class AddMembers extends React.Component {
                     <FormControl>
                       <InputLabel>Month</InputLabel>
                       <Input
-                        type="number"
-                        name="month"
-                        value={member.month}
+                        type="text"
+                        name="monthOfBirth"
+                        value={member.monthOfBirth}
                         onChange={this.handleChangee}
                       />
                     </FormControl>
                     <FormControl>
                       <InputLabel>Year</InputLabel>
                       <Input
-                        type="number"
-                        name="year"
-                        value={member.year}
+                        type="text"
+                        name="yearOfBirth"
+                        value={member.yearOfBirth}
                         onChange={this.handleChangee}
                       />
                     </FormControl>

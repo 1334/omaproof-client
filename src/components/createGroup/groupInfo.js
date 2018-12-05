@@ -35,8 +35,8 @@ const StyledLogin = styled.div`
 
 export default class GroupInfo extends React.Component {
   state = {
-    name: '',
-    welcomeMsg: ''
+    description: 'Codeworks',
+    welcomeText: ''
   };
   onChange = e => this.setState({ [e.target.name]: e.target.value });
   passProps = () => {
@@ -54,15 +54,15 @@ export default class GroupInfo extends React.Component {
           <FormControl className="input">
             <Input
               type="text"
-              name="name"
-              label="Group name"
+              name="description"
+              label="Group description"
               onChange={this.onChange}
             />
           </FormControl>
           <FormControl className="input">
             <Input
               type="text"
-              name="welcomeMsg"
+              name="welcomeText"
               label="Welcome message"
               onChange={this.onChange}
             />
