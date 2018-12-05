@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import Tile from '../styledComponents/questionTile';
 import Button from '../styledComponents/button';
 
-const StyledDemo = styled.div`
+const StyledOmaLogin = styled.div`
   padding: 0 5vw;
 
   .tiles {
@@ -30,10 +30,10 @@ const StyledDemo = styled.div`
   }
 `;
 
-class Demo extends React.Component {
+class OmaLogin extends React.Component {
   render() {
     return (
-      <StyledDemo>
+      <StyledOmaLogin>
         <h1>Select all the names of your grandchild</h1>
         <div className="tiles">
           <Tile text="Frederik" />
@@ -52,9 +52,9 @@ class Demo extends React.Component {
         <div className="buttons">
           <Button>Contiue</Button>
         </div>
-      </StyledDemo>
+      </StyledOmaLogin>
     );
   }
 }
 
-export default Demo;
+export default OmaLogin;

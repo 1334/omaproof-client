@@ -40,6 +40,8 @@ const StyledPost = styled.div`
     padding: 0.8em 0;
 
     img {
+      width: 32px;
+      height: 32px;
       border-radius: 50%;
       margin-right: 0.8em;
     }
