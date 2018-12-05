@@ -1,10 +1,22 @@
 import React from 'react';
 import { Mutation } from 'react-apollo';
+import styled from 'styled-components';
 
 import UserContext from '../contexts/userContext';
 import SELECT_GROUP from '../graphql/mutations/selectGroup';
 import Button from '../styledComponents/button';
 import { navigate } from '@reach/router';
+
+const StyledGroupChooser = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 70vw;
+  margin: 1em auto;
+
+  & > * {
+    margin: 0.5em 0;
+  }
+`;
 
 class GroupChooser extends React.Component {
   render() {
@@ -13,11 +25,12 @@ class GroupChooser extends React.Component {
         {({ user, updateUser }) => (
           <Mutation mutation={SELECT_GROUP}>
             {(groupSelect, { loading, error }) => {
-              console.log('gr', user.groups);
+              console.log('gr', user);
               if (loading) return <div>Loading...</div>;
               if (error) return <div>{error.message} :(</div>;
               return (
-                <React.Fragment>
+                <StyledGroupChooser>
+                  <h1>Please select a group</h1>
                   {user.groups ? (
                     user.groups.map(group => (
                       <Button
@@ -39,7 +52,7 @@ class GroupChooser extends React.Component {
                   ) : (
                     <div>Group with id {user.activeGroup} selected</div>
                   )}
-                </React.Fragment>
+                </StyledGroupChooser>
               );
             }}
           </Mutation>
