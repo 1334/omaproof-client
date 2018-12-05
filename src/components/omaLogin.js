@@ -1,7 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Redirect, navigate } from '@reach/router';
 
-import Tile from '../styledComponents/questionTile';
+import QuestionTile from '../styledComponents/questionTile';
+import ImageTile from '../styledComponents/imageTile';
 import Button from '../styledComponents/button';
 import GRAND_PARENT_LOGIN_MUTATION from '../graphql/mutations/grandParentLogin';
 import { Mutation } from 'react-apollo';
@@ -50,7 +52,8 @@ class OmaLogin extends React.Component {
       success: 'Welcome Oma',
       failure: 'Go away hacker!'
     },
-    selected: []
+    selected: [],
+    tileType: QuestionTile
   };
 
   componentDidMount() {
@@ -60,11 +63,19 @@ class OmaLogin extends React.Component {
   updateState = () => {
     const loginInfo = JSON.parse(localStorage.getItem('omalogin'));
 
+    if (!loginInfo) return navigate('/');
+
+    const tileType =
+      loginInfo.question.type === 'GrandChildren_Authorization_Pictures'
+        ? ImageTile
+        : QuestionTile;
+
     this.setState({
       token: loginInfo.token,
       questions: loginInfo.question.options,
       type: loginInfo.question.type,
-      selected: []
+      selected: [],
+      tileType
     });
   };
 
@@ -86,6 +97,11 @@ class OmaLogin extends React.Component {
   }
 
   render() {
+    if (!localStorage.getItem('omalogin')) {
+      return <Redirect to="/" noThrow />;
+    }
+    const TileType = this.state.tileType;
+
     return (
       <Mutation
         mutation={GRAND_PARENT_LOGIN_MUTATION}
@@ -101,7 +117,7 @@ class OmaLogin extends React.Component {
             <h1>{this.state.questionText[this.state.type]}</h1>
             <div className="tiles">
               {this.state.questions.map(question => (
-                <Tile
+                <TileType
                   text={question}
                   key={question + '.' + this.state.type}
                   onSelect={this.selectOption}
