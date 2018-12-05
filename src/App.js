@@ -30,7 +30,7 @@ class App extends Component<null, AppState> {
       user: JSON.parse(lsUser) || {
         id: '',
         name: 'Guest',
-        profilePicture: '',
+        picture: '',
         activeGroup: '',
         groups: []
       }

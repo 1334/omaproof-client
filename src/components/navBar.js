@@ -54,7 +54,7 @@ class NavBar extends React.Component {
           />
         </a>
         <img
-          src={user.profilePicture || 'http://placehold.it/32x32'}
+          src={user.picture || 'http://placehold.it/32x32'}
           alt={user.name}
         />
       </StyledNavBar>

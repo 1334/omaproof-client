@@ -16,10 +16,7 @@ function CommentUser(props) {
   const { user } = props;
   return (
     <StyledCommentUser>
-      <img
-        src={user.profilePicture || 'http://placehold.it/32x32'}
-        alt={user.name}
-      />
+      <img src={user.picture || 'http://placehold.it/32x32'} alt={user.name} />
       <span>{user.name}</span>
     </StyledCommentUser>
   );

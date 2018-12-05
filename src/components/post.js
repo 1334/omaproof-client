@@ -78,7 +78,7 @@ export default class Post extends React.Component {
       <StyledPost>
         <div className="post-info">
           <img
-            src={post.user.profilePicture || 'http://placehold.it/32x32'}
+            src={post.user.picture || 'http://placehold.it/32x32'}
             alt="post.user.name"
           />
           <span>{post.user.name}</span>
