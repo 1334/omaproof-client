@@ -1,10 +1,4 @@
 import React from 'react';
-import ExpansionPanel from '@material-ui/core/ExpansionPanel';
-import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
-import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
-import FormControl from '@material-ui/core/FormControl';
-import InputLabel from '@material-ui/core/InputLabel';
-import Input from '@material-ui/core/Input';
 import Button from '../../styledComponents/button';
 import { Mutation } from 'react-apollo';
 import CREATE_GROUP_MUTATION from '../../graphql/mutations/createGroup';
@@ -14,6 +8,19 @@ import styled from 'styled-components';
 import Grandchild from './addGrandChild';
 
 const StyledGrandChildren = styled.div`
+  .member-info {
+    background-color: ${props => props.theme.colors.bg};
+    display: flex;
+    align-items: center;
+    box-shadow: 0px 0px 5px 2px #ccc;
+
+    img {
+      margin: 0.5em 1em;
+      width: 32px;
+      height: 32px;
+    }
+  }
+
   display: flex;
   flex-direction: column;
   width: 90vw;
@@ -87,87 +94,19 @@ export default class AddGrandchildren extends React.Component {
     this.props.handleSubmit(this.state.grandChildren);
   };
   render() {
-    // console.log('hello', this.props.group);
     const { user } = this.props;
     return (
       <StyledGrandChildren>
-        <div
-          style={{
-            marginTop: '0',
-            marginBottom: '3vh'
-          }}
-        >
-          Grandchildren{' '}
-        </div>
+        <h1>Grandchildren</h1>
         {this.state.grandChildren.map(grandChild => {
           return (
-            <div
-              key={grandChild.contactNumber}
-              style={{
-                margin: '0.5vh 0'
-              }}
-            >
-              <ExpansionPanel key={grandChild.contactNumber}>
-                <ExpansionPanelSummary>
-                  <div
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      height: '4vh'
-                    }}
-                  >
-                    <img
-                      src={grandChild.picture}
-                      alt="special pic"
-                      className="pic"
-                    />
-                    <div
-                      style={{
-                        marginLeft: '5vw'
-                      }}
-                    >
-                      <p>{grandChild.name}</p>
-                    </div>
-                  </div>
-                </ExpansionPanelSummary>
-                <ExpansionPanelDetails className="memberDetails">
-                  <FormControl>
-                    <InputLabel>Name</InputLabel>
-                    <Input
-                      type="text"
-                      name="name"
-                      value={grandChild.name}
-                      onChange={this.handleChangee}
-                    />
-                  </FormControl>
-                  <div className="familyStatus">
-                    <FormControl>
-                      <InputLabel>Month</InputLabel>
-                      <Input
-                        type="text"
-                        name="monthOfBirth"
-                        value={grandChild.monthOfBirth}
-                        onChange={this.handleChangee}
-                      />
-                    </FormControl>
-                    <FormControl>
-                      <InputLabel>Year</InputLabel>
-                      <Input
-                        type="text"
-                        name="yearOfBirth"
-                        value={grandChild.yearOfBirth}
-                        onChange={this.handleChangee}
-                      />
-                    </FormControl>
-                  </div>
-                  <br />
-
-                  <Button onClick={this.createMember}>Edit grandchild</Button>
-                </ExpansionPanelDetails>
-              </ExpansionPanel>
+            <div key={grandChild.picture} className="member-info">
+              <img src={grandChild.picture} alt="taken" className="pic" />
+              <div>{grandChild.name}</div>
             </div>
           );
         })}
+
         <div className="text-p">
           To provide secure authentication, please add more grandhildren{' '}
         </div>

@@ -5,16 +5,55 @@ import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import Input from '@material-ui/core/Input';
-import Button from '../../styledComponents/button';
 import styled from 'styled-components';
+import Button from '../../styledComponents/button';
 
-const StyledNewGrandchild = styled.div`
-  margin-top: 1.5em;
+import './test.css';
+
+const StyledNewPost = styled.div`
+  .member-info {
+    background-color: ${props => props.theme.colors.bg};
+    box-shadow: 0px 0px 5px 2px #ccc;
+    margin: 0;
+    padding: 0;
+    font-weight: bold;
+
+    & > div {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      img {
+        margin: 0.5em 1em;
+        width: 32px;
+        height: 32px;
+      }
+    }
+    span {
+      margin-left: 4em;
+    }
+  }
+
+  .member-details {
+    margin-top: 1em;
+    display: flex;
+    flex-direction: column;
+    color: ${props => props.theme.colors.text};
+
+    & > * {
+      margin: 0.5em 0;
+    }
+  }
+
+  .familyStatus {
+    display: flex;
+  }
 
   .switch-field {
     font-family: 'Lucida Grande', Tahoma, Verdana, sans-serif;
     padding: 0px;
     overflow: hidden;
+    margin: 0.5em auto;
   }
 
   .switch-title {
@@ -45,14 +84,8 @@ const StyledNewGrandchild = styled.div`
     text-shadow: none;
     padding: 6px 2px;
     border: 1px solid rgba(0, 0, 0, 0.2);
-    -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3),
-      0 1px rgba(255, 255, 255, 0.1);
     box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3),
       0 1px rgba(255, 255, 255, 0.1);
-    -webkit-transition: all 0.1s ease-in-out;
-    -moz-transition: all 0.1s ease-in-out;
-    -ms-transition: all 0.1s ease-in-out;
-    -o-transition: all 0.1s ease-in-out;
     transition: all 0.1s ease-in-out;
   }
 
@@ -75,73 +108,55 @@ const StyledNewGrandchild = styled.div`
     border-radius: 0 4px 4px 0;
   }
 
-  div.input {
-    margin-right: 20px;
-  }
-
-  .user-profile {
-    border-radius: 50%;
-    bottom: 22px;
-    height: 40px;
-    width: 40px;
+  .media-label {
+    margin: 0.5em auto 0;
+    img {
+      width: 60px;
+      height: 60px;
+      &:hover {
+        cursor: pointer;
+      }
+    }
   }
 
   input[type='file'] {
     display: none;
   }
-
-  .media-label {
-    &:hover {
-      cursor: pointer;
-    }
-  }
-
-  .uploaded-media {
-    display: hidden;
-  }
-
-  textarea {
-    width: 100%;
-    margin: 1em 0;
-  }
-
-  button {
-    margin: 1em 0;
-    width: 100%;
-  }
-
-  img.uploaded-media {
-    width: 100%;
-  }
 `;
 
-export default class Grandchild extends React.Component {
+export default class Member extends React.Component {
   state = {
     name: '',
-    generation: 'CHILD',
-    contactNumber: '+31',
+    contactNumber: '',
+    generation: '',
     monthOfBirth: '',
     yearOfBirth: '',
+    status: 'member',
+    expanded: false,
     picture:
       'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgQvLfGDGZtXgxzo4avCQJjtWT-EfhpF7EF4gFLWmL6Exm07koLA',
-    expanded: false
+    uploading: false
   };
+
   handleChangee = event => {
     const target = event.target;
     this.setState({ [target.name]: target.value });
   };
-
+  handleClick = e => {
+    this.setState({ generation: e.target.value });
+  };
   createMember = () => {
     this.props.submitGrandChild(this.state);
     this.setState({
       name: '',
+      contactNumber: '',
+      generation: '',
       monthOfBirth: '',
       yearOfBirth: '',
-      generation: 'CHILD',
-      contactNumber: '398',
       expanded: false,
       picture:
-        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgQvLfGDGZtXgxzo4avCQJjtWT-EfhpF7EF4gFLWmL6Exm07koLA'
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgQvLfGDGZtXgxzo4avCQJjtWT-EfhpF7EF4gFLWmL6Exm07koLA',
+      uploading: false
     });
   };
   uploadImage = async e => {
@@ -162,43 +177,40 @@ export default class Grandchild extends React.Component {
         this.setState({ picture: data.secure_url, uploading: false })
       );
   };
+
   render() {
     return (
-      <StyledNewGrandchild>
+      <StyledNewPost>
         <ExpansionPanel expanded={this.state.expanded}>
           <ExpansionPanelSummary
             onClick={() => {
               this.setState({ expanded: !this.state.expanded });
             }}
+            classes={{ root: 'member-info' }}
           >
-            <div
-              style={{ display: 'flex', alignItems: 'center', height: '4vh' }}
-            >
-              <div className="input">
-                <label className="media-label" htmlFor="media">
-                  <img
-                    src={this.state.picture}
-                    alt="me"
-                    onChange={this.handleChange}
-                    className="user-profile"
-                  />
-                </label>
-                <input
-                  accept="image/*"
-                  id="media"
-                  type="file"
-                  ref={this.fileInput}
-                  onChange={this.uploadImage}
-                />
-                {this.state.uploading && <div>Uploading picture</div>}
-                {/* <input accept="image/*" id="media" type="file" ref={this.fileInput} /> */}
-              </div>
-              <p> New grandchild </p>
-            </div>
+            <img src={this.state.picture} alt="taken" className="pic" />
+            <div>{this.state.name || 'Add grandchild'}</div>
+            <span className="icon-plus-positive" />
           </ExpansionPanelSummary>
-          <ExpansionPanelDetails className="memberDetails">
+          <ExpansionPanelDetails classes={{ root: 'member-details' }}>
+            <label className="media-label" htmlFor="media">
+              <img
+                src={this.state.picture}
+                alt="me"
+                onChange={this.handleChange}
+                className="user-profile"
+              />
+            </label>
+            <input
+              accept="image/*"
+              id="media"
+              type="file"
+              ref={this.fileInput}
+              onChange={this.uploadImage}
+            />
+            {this.state.uploading && <div>Uploading picture</div>}
             <FormControl>
-              <InputLabel>Name</InputLabel>
+              <InputLabel>Name</InputLabel>{' '}
               <Input
                 type="text"
                 name="name"
@@ -227,11 +239,37 @@ export default class Grandchild extends React.Component {
               </FormControl>
             </div>
             <br />
-
-            <Button onClick={this.createMember}>Done</Button>
+            <div className="switch-field">
+              <input
+                type="radio"
+                id="switch_3_left"
+                name="switch_3"
+                value="CHILD"
+                onClick={this.handleClick}
+              />
+              <label htmlFor="switch_3_left">Child</label>
+              <input
+                type="radio"
+                id="switch_3_center"
+                name="switch_3"
+                value="PARENT"
+                onClick={this.handleClick}
+              />
+              <label htmlFor="switch_3_center">Parent</label>
+              <input
+                type="radio"
+                id="switch_3_right"
+                name="switch_3"
+                value="GRANDPARENT"
+                onClick={this.handleClick}
+              />
+              <label htmlFor="switch_3_right">Grandparent</label>
+            </div>
+            <br />
+            <Button onClick={this.createMember}>Add grandchild</Button>
           </ExpansionPanelDetails>
         </ExpansionPanel>
-      </StyledNewGrandchild>
+      </StyledNewPost>
     );
   }
 }
