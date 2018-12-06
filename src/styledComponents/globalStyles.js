@@ -2,6 +2,7 @@ import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
   @import url('https://fonts.googleapis.com/css?family=Titillium+Web:200,300,400,700');
+  @import url('https://fonts.googleapis.com/css?family=Pattaya');
 
   html {
     box-sizing: border-box;
@@ -20,7 +21,12 @@ const GlobalStyle = createGlobalStyle`
     color: ${props => props.theme.colors.text};
   }
 
+  h1, h2, h3, h4, h5, h6, button {
+    font-family: 'Pattaya', serif;
+  }
+
   h1 {
+    margin-top: 1.5em;
     font-size: 1.3rem;
   }
 

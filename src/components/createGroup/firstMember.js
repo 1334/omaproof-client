@@ -84,7 +84,6 @@ const StyledFirstMember = styled.div`
     }
   }
   .text-above {
-    padding-top: 3vh;
     text-align: center;
   }
   .uploaded-media {
@@ -162,6 +161,7 @@ export default class FirstMember extends React.Component {
     console.log(this.state);
     return (
       <StyledFirstMember>
+        <h1>Admin info</h1>
         <div className="text-above">
           Before creating a new group, please fill in some information about
           yourself

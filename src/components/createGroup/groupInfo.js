@@ -45,8 +45,8 @@ export default class GroupInfo extends React.Component {
   render() {
     return (
       <StyledLogin>
+        <h1>Group description</h1>
         <div className="text-above">
-          {' '}
           Please fill in the group description, and personalize your welcoming
           message
         </div>

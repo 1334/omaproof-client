@@ -26,6 +26,10 @@ const StyledMembers = styled.div`
     margin: 0.5em 0;
   }
 
+  h1 {
+    margin-top: 1.5em;
+  }
+
   p {
     color: black;
   }
