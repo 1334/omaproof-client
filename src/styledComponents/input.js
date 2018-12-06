@@ -15,7 +15,7 @@ const StyledInput = styled.div`
 
   input {
     border: none;
-    background-color: ${props => props.theme.colors.bg};
+    background-color: rgba(0, 0, 0, 0);
     color: ${props => props.theme.colors.primary};
     border-bottom: 1px solid ${props => props.theme.colors.primary};
 

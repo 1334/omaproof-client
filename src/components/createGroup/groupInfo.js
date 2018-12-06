@@ -15,7 +15,7 @@ const StyledLogin = styled.div`
     margin: 1em 0;
   }
   .input {
-    background: white;
+    background: rgba(0, 0, 0, 0);
     margin: 2vh 0;
     padding-top: 0.5em;
   }
