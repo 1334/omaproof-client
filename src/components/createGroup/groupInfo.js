@@ -33,7 +33,7 @@ const StyledLogin = styled.div`
 
 export default class GroupInfo extends React.Component {
   state = {
-    description: 'Codeworks',
+    description: '',
     welcomeText: ''
   };
 

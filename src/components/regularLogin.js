@@ -20,7 +20,7 @@ const StyledLogin = styled.div`
 
 class RegularLogin extends React.Component {
   state = {
-    login: '+36 509 590',
+    login: '',
     password: ''
   };
 

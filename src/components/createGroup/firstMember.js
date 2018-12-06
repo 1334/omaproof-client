@@ -115,11 +115,11 @@ const StyledFirstMember = styled.div`
 export default class FirstMember extends React.Component {
   state = {
     id: 1,
-    name: 'Frederik',
-    contactNumber: '4522131',
+    name: '',
+    contactNumber: '',
     generation: '',
-    monthOfBirth: '06',
-    yearOfBirth: '1994',
+    monthOfBirth: '',
+    yearOfBirth: '',
     status: 'admin',
     picture:
       'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgQvLfGDGZtXgxzo4avCQJjtWT-EfhpF7EF4gFLWmL6Exm07koLA',
