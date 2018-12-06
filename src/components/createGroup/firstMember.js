@@ -1,9 +1,12 @@
 import React from 'react';
 import FormControl from '@material-ui/core/FormControl';
 import styled from 'styled-components';
-import Button from '../../styledComponents/button';
+import UserContext from '../../contexts/userContext';
+import { Mutation } from 'react-apollo';
 
+import Button from '../../styledComponents/button';
 import Input from '../../styledComponents/input';
+import CREATE_USER_MUTATION from '../../graphql/mutations/createUser';
 
 const StyledFirstMember = styled.div`
   display: flex;
@@ -158,7 +161,6 @@ export default class FirstMember extends React.Component {
     return this.state.description.length && this.state.picture.length;
   }
   render() {
-    console.log(this.state);
     return (
       <StyledFirstMember>
         <h1>Admin info</h1>
@@ -252,9 +254,42 @@ export default class FirstMember extends React.Component {
           <label htmlFor="switch_3_right">Grandparent</label>
         </div>
         <br />
-        <Button onClick={this.passProps} className="next-button">
-          Next
-        </Button>
+        <UserContext.Consumer>
+          {({ updateUser }) => (
+            <Mutation
+              mutation={CREATE_USER_MUTATION}
+              variables={{
+                name: this.state.name,
+                picture: this.state.picture,
+                monthOfBirth: this.state.monthOfBirth,
+                yearOfBirth: this.state.yearOfBirth,
+                contactNumber: this.state.contactNumber,
+                generation: this.state.generation
+              }}
+            >
+              {createUser => (
+                <Button
+                  onClick={() => {
+                    createUser().then(({ data }) => {
+                      console.log('data', data);
+
+                      const user = {
+                        ...data.createUser.user,
+                        userToken: data.createUser.token
+                      };
+                      updateUser(user);
+
+                      this.passProps();
+                    });
+                  }}
+                  className="next-button"
+                >
+                  Next
+                </Button>
+              )}
+            </Mutation>
+          )}
+        </UserContext.Consumer>
       </StyledFirstMember>
     );
   }

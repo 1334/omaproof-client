@@ -6,8 +6,8 @@ import { ApolloProvider } from 'react-apollo';
 import App from './App';
 
 const client = new ApolloClient({
-  // uri: `http://192.168.1.126:4000`
-  uri: `http://${window.location.hostname}:4000`
+  uri: `http://192.168.1.126:4000`
+  // uri: `http://${window.location.hostname}:4000`
 });
 
 ReactDOM.render(
