@@ -45,8 +45,8 @@ class OmaLogin extends React.Component {
       GrandChildren_MonthsOfBirth:
         'Please select all months in which one of your grandchildren were born', //date
       GrandChildren_Names:
-        'Please select all the names that match any of your grandchildren or press next if none match', //names
-      GrandParent_ContactNumber: 'please dial in your cellphone number', //number
+        'Please select your grandchildren or press next if none match', //names
+      GrandParent_ContactNumber: 'Please dial in your cellphone number', //number
       GrandChildren_Authorization_Pictures:
         'Please select the pictures of your grandchildren for our final verification', //pics
       Select_right_familymember: 'Who are you?',

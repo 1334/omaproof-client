@@ -123,7 +123,7 @@ export default class AddGrandchildren extends React.Component {
                   description: this.props.group.description,
                   members: this.props.group.members,
                   grandChildren: this.props.group.grandChildren,
-                  token: user.groupToken
+                  token: user.userToken
                 }}
               >
                 {createGroup => (

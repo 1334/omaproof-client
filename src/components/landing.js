@@ -132,7 +132,13 @@ class Landing extends React.Component {
                 }}
               >
                 <span style={{ marginRight: '3vw' }}>
-                  👉 Oma, click here 👈
+                  <span role="img" aria-label="ctx">
+                    👉
+                  </span>{' '}
+                  Oma, click here{' '}
+                  <span role="img" aria-label="ctx">
+                    👈
+                  </span>
                 </span>
               </Button>
             )}
