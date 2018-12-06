@@ -74,12 +74,8 @@ export default class AddGrandchildren extends React.Component {
   };
 
   createGrandchild = child => {
-    const newGrandChild = {
-      ...child,
-      id: Math.floor(1000 + Math.random() * 9000)
-    };
     this.setState({
-      grandChildren: [...this.state.grandChildren, newGrandChild]
+      grandChildren: [...this.state.grandChildren, child]
     });
   };
   componentDidMount() {

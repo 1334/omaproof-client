@@ -56,7 +56,7 @@ class Feed extends React.Component {
             <Query
               query={GET_POSTS_QUERY}
               variables={{ id: user.activeGroup, token: user.groupToken }}
-              // pollInterval={2000}
+              // pollInterval={1000}
             >
               {({ loading, error, data }) => {
                 if (loading) return <div>Loading...</div>;

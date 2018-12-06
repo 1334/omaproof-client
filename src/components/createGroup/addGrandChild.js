@@ -87,11 +87,19 @@ export default class Member extends React.Component {
     this.setState({ generation: e.target.value });
   };
   createMember = () => {
-    this.props.submitGrandChild(this.state);
+    this.props.submitGrandChild({
+      name: this.state.name,
+      contactNumber: '',
+      generation: 'CHILD',
+      monthOfBirth: this.state.monthOfBirth,
+      yearOfBirth: this.state.yearOfBirth,
+      picture: this.state.picture
+    });
+
     this.setState({
       name: '',
       contactNumber: '',
-      generation: '',
+      generation: 'CHILD',
       monthOfBirth: '',
       yearOfBirth: '',
       expanded: false,
