@@ -44,6 +44,13 @@ const GlobalStyle = createGlobalStyle`
     color: inherit;
     text-decoration: none;
   }
+
+  .error-message {
+    background-color: rgba(99,0,0,.2);
+    padding: .5em;
+    border-radius: 5px;
+    border: 1px solid rgb(99,0,0);
+  }
 `;
 
 export default GlobalStyle;

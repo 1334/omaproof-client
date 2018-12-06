@@ -7,6 +7,7 @@ const LOGIN_MUTATION = gql`
       user {
         id
         name
+        picture
         groups {
           id
           description
