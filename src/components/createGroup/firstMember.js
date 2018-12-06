@@ -11,6 +11,7 @@ const StyledFirstMember = styled.div`
   justify-content: space-between;
   align-items: center;
   height: 80vh;
+
   .user-profile {
     border-radius: 50%;
     bottom: 22px;
@@ -56,12 +57,7 @@ const StyledFirstMember = styled.div`
   text-shadow: none;: 10vh
   padding: 6px 8px;
   border: 1px solid rgba(0, 0, 0, 0.2);
-  -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px rgba(255, 255, 255, 0.1);
   box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px rgba(255, 255, 255, 0.1);
-  -webkit-transition: all 0.1s ease-in-out;
-  -moz-transition:    all 0.1s ease-in-out;
-  -ms-transition:     all 0.1s ease-in-out;
-  -o-transition:      all 0.1s ease-in-out;
   transition:         all 0.1s ease-in-out;
 }
 
@@ -196,7 +192,8 @@ export default class FirstMember extends React.Component {
               type="text"
               label="Name"
               name="name"
-              onChange={this.handleChange}
+              value={this.state.name}
+              handleChange={this.handleChange}
             />
           </FormControl>
           <FormControl>
@@ -204,7 +201,8 @@ export default class FirstMember extends React.Component {
               type="text"
               label="Phone"
               name="contactNumber"
-              onChange={this.handleChange}
+              value={this.state.contactNumber}
+              handleChange={this.handleChange}
             />
           </FormControl>
         </div>
@@ -215,7 +213,8 @@ export default class FirstMember extends React.Component {
               label="Month"
               type="text"
               name="monthOfBirth"
-              onChange={this.handleChange}
+              value={this.state.monthOfBirth}
+              handleChange={this.handleChange}
             />
           </FormControl>
           <FormControl>
@@ -224,7 +223,8 @@ export default class FirstMember extends React.Component {
               label="Year"
               type="text"
               name="yearOfBirth"
-              onChange={this.handleChange}
+              value={this.state.yearOfBirth}
+              handleChange={this.handleChange}
             />
           </FormControl>
         </div>
