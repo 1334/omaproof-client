@@ -1,11 +1,5 @@
 import React from 'react';
 import Member from './member';
-import ExpansionPanel from '@material-ui/core/ExpansionPanel';
-import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
-import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
-import FormControl from '@material-ui/core/FormControl';
-import InputLabel from '@material-ui/core/InputLabel';
-import Input from '@material-ui/core/Input';
 import Button from '../../styledComponents/button';
 import styled from 'styled-components';
 
@@ -31,6 +25,7 @@ const StyledMembers = styled.div`
   & > * {
     margin: 0.5em 0;
   }
+
   p {
     color: black;
   }
@@ -109,7 +104,6 @@ export default class AddMembers extends React.Component {
     this.props.handleSubmit(this.state.members);
   };
   render() {
-    // console.log('page2', this.props);
     return (
       <StyledMembers>
         <h1>Members</h1>

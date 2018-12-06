@@ -11,12 +11,49 @@ import Button from '../../styledComponents/button';
 import './test.css';
 
 const StyledNewPost = styled.div`
-  margin-top: 1.5em;
+  .member-info {
+    background-color: ${props => props.theme.colors.bg};
+    box-shadow: 0px 0px 5px 2px #ccc;
+    margin: 0;
+    padding: 0;
+    font-weight: bold;
+
+    & > div {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      img {
+        margin: 0.5em 1em;
+        width: 32px;
+        height: 32px;
+      }
+    }
+    span {
+      margin-left: 4em;
+    }
+  }
+
+  .member-details {
+    margin-top: 1em;
+    display: flex;
+    flex-direction: column;
+    color: ${props => props.theme.colors.text};
+
+    & > * {
+      margin: 0.5em 0;
+    }
+  }
+
+  .familyStatus {
+    display: flex;
+  }
 
   .switch-field {
     font-family: 'Lucida Grande', Tahoma, Verdana, sans-serif;
     padding: 0px;
     overflow: hidden;
+    margin: 0.5em auto;
   }
 
   .switch-title {
@@ -47,14 +84,8 @@ const StyledNewPost = styled.div`
     text-shadow: none;
     padding: 6px 2px;
     border: 1px solid rgba(0, 0, 0, 0.2);
-    -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3),
-      0 1px rgba(255, 255, 255, 0.1);
     box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3),
       0 1px rgba(255, 255, 255, 0.1);
-    -webkit-transition: all 0.1s ease-in-out;
-    -moz-transition: all 0.1s ease-in-out;
-    -ms-transition: all 0.1s ease-in-out;
-    -o-transition: all 0.1s ease-in-out;
     transition: all 0.1s ease-in-out;
   }
 
@@ -77,43 +108,19 @@ const StyledNewPost = styled.div`
     border-radius: 0 4px 4px 0;
   }
 
-  div.input {
-    margin-right: 20px;
-  }
-
-  .user-profile {
-    border-radius: 50%;
-    bottom: 22px;
-    height: 40px;
-    width: 40px;
+  .media-label {
+    margin: 0.5em auto 0;
+    img {
+      width: 60px;
+      height: 60px;
+      &:hover {
+        cursor: pointer;
+      }
+    }
   }
 
   input[type='file'] {
     display: none;
-  }
-
-  .media-label {
-    &:hover {
-      cursor: pointer;
-    }
-  }
-
-  .uploaded-media {
-    display: hidden;
-  }
-
-  textarea {
-    width: 100%;
-    margin: 1em 0;
-  }
-
-  button {
-    margin: 1em 0;
-    width: 100%;
-  }
-
-  img.uploaded-media {
-    width: 100%;
   }
 `;
 
@@ -171,52 +178,39 @@ export default class Member extends React.Component {
       );
   };
 
-  isPostValid() {
-    return this.state.description.length && this.state.picture.length;
-  }
-
   render() {
     return (
       <StyledNewPost>
         <ExpansionPanel expanded={this.state.expanded}>
           <ExpansionPanelSummary
-            style={{ marginTop: '2vh' }}
             onClick={() => {
               this.setState({ expanded: !this.state.expanded });
             }}
+            classes={{ root: 'member-info' }}
           >
-            <div
-              style={{ display: 'flex', alignItems: 'center', height: '4vh' }}
-            >
-              <div className="input">
-                <label
-                  className="media-label"
-                  htmlFor="media"
-                  style={{ display: 'flex', alignItems: 'center' }}
-                >
-                  <img
-                    src={this.state.picture}
-                    alt="me"
-                    onChange={this.handleChange}
-                    className="user-profile"
-                  />
-                </label>
-                <input
-                  accept="image/*"
-                  id="media"
-                  type="file"
-                  ref={this.fileInput}
-                  onChange={this.uploadImage}
-                />
-                {this.state.uploading && <div>Uploading picture</div>}
-                {/* <input accept="image/*" id="media" type="file" ref={this.fileInput} /> */}
-              </div>
-              <p> New member </p>
-            </div>
+            <img src={this.state.picture} alt="taken" className="pic" />
+            <div>{this.state.name || 'Add new member'}</div>
+            <span className="icon-plus-positive" />
           </ExpansionPanelSummary>
-          <ExpansionPanelDetails className="memberDetails">
+          <ExpansionPanelDetails classes={{ root: 'member-details' }}>
+            <label className="media-label" htmlFor="media">
+              <img
+                src={this.state.picture}
+                alt="me"
+                onChange={this.handleChange}
+                className="user-profile"
+              />
+            </label>
+            <input
+              accept="image/*"
+              id="media"
+              type="file"
+              ref={this.fileInput}
+              onChange={this.uploadImage}
+            />
+            {this.state.uploading && <div>Uploading picture</div>}
             <FormControl>
-              <InputLabel>Name</InputLabel>
+              <InputLabel>Name</InputLabel>{' '}
               <Input
                 type="text"
                 name="name"
@@ -281,7 +275,6 @@ export default class Member extends React.Component {
               <label htmlFor="switch_3_right">Grandparent</label>
             </div>
             <br />
-
             <Button onClick={this.createMember}>Add member</Button>
           </ExpansionPanelDetails>
         </ExpansionPanel>
