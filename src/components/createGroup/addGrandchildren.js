@@ -1,6 +1,7 @@
 import React from 'react';
 import Button from '../../styledComponents/button';
 import { Mutation } from 'react-apollo';
+import UserContext from '../../contexts/userContext';
 import CREATE_GROUP_MUTATION from '../../graphql/mutations/createGroup';
 
 import styled from 'styled-components';
@@ -113,27 +114,40 @@ export default class AddGrandchildren extends React.Component {
         <br />
         <Grandchild submitGrandChild={this.createGrandchild} />
         <div className="next-button">
-          <Mutation
-            mutation={CREATE_GROUP_MUTATION}
-            variables={{
-              welcomeText: this.props.group.welcomeText,
-              description: this.props.group.description,
-              members: this.props.group.members,
-              grandChildren: this.props.group.grandChildren,
-              token: user.groupToken
-            }}
-          >
-            {createPost => (
-              <Button
-                onClick={() => {
-                  this.passProps();
-                  createPost();
+          <UserContext.Consumer>
+            {({ updateUser }) => (
+              <Mutation
+                mutation={CREATE_GROUP_MUTATION}
+                variables={{
+                  welcomeText: this.props.group.welcomeText,
+                  description: this.props.group.description,
+                  members: this.props.group.members,
+                  grandChildren: this.props.group.grandChildren,
+                  token: user.groupToken
                 }}
               >
-                Create Group
-              </Button>
+                {createGroup => (
+                  <Button
+                    onClick={() => {
+                      createGroup().then(({ data }) => {
+                        console.log('data', data);
+
+                        const user = {
+                          activeGroup: data.createGroup.group.id,
+                          groupToken: data.createGroup.token
+                        };
+                        updateUser(user);
+
+                        this.passProps();
+                      });
+                    }}
+                  >
+                    Create Group
+                  </Button>
+                )}
+              </Mutation>
             )}
-          </Mutation>
+          </UserContext.Consumer>
         </div>
       </StyledGrandChildren>
     );
