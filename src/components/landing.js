@@ -6,10 +6,10 @@ import { navigate } from '@reach/router';
 
 import { Mutation } from 'react-apollo';
 import GRAND_PARENT_LOGIN_MUTATION from '../graphql/mutations/grandParentLogin';
-import Logo from '../styledComponents/logo';
+import logo from '../assets/logo-w.png';
 
 const StyledLanding = styled.div`
-  background: url('https://res.cloudinary.com/truroer/image/upload/v1544016596/allen-taylor-709552-unsplash_copy.jpg')
+  background: url('https://res.cloudinary.com/truroer/image/upload/v1544096260/BeFunky-collage12.jpg')
     no-repeat center center fixed;
   background-size: cover;
 
@@ -28,13 +28,24 @@ const StyledLanding = styled.div`
     margin: 0.5em 0;
   }
 
+  .logo {
+    img {
+      width: 250px;
+    }
+  }
+
+  .tagline {
+    margin-bottom: 3em;
+  }
+
   .links {
     text-decoration: underline;
     color: ${props => props.theme.colors.primary};
   }
 
   .lg {
-    font-family: 'Lily Script One', cursive;
+    font-family: 'Pattaya', cursive;
+    font-size: 1.3rem;
     color: ${props => props.theme.colors.bg};
   }
 
@@ -58,10 +69,10 @@ class Landing extends React.Component {
     return (
       <StyledLanding>
         <h3 className="lg">Welcome to </h3>
-        <div className="omaproof lg">
-          <Logo />
+        <div className="logo">
+          <img src={logo} alt="logo" />
         </div>
-        <div className="lg">a family friendly way to connect...</div>
+        <div className="tagline lg">a family friendly way to connect...</div>
 
         <div
           style={{
@@ -120,8 +131,9 @@ class Landing extends React.Component {
                   });
                 }}
               >
-                <span style={{ marginRight: '3vw' }}>Oma, click to start </span>
-                <span className="icon-arrow-right" />
+                <span style={{ marginRight: '3vw' }}>
+                  👉 Oma, click here 👈
+                </span>
               </Button>
             )}
           </Mutation>

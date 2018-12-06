@@ -25,7 +25,6 @@ class GroupChooser extends React.Component {
         {({ user, updateUser }) => (
           <Mutation mutation={SELECT_GROUP}>
             {(groupSelect, { loading, error }) => {
-              console.log('gr', user);
               if (loading) return <div>Loading...</div>;
               if (error) return <div>{error.message} :(</div>;
               return (

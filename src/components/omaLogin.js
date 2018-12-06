@@ -140,7 +140,6 @@ class OmaLogin extends React.Component {
                             ...user,
                             userToken: data.grandParentLogin.token
                           });
-                          console.log(data.grandParentLogin);
                           return navigate('/group-chooser');
                         }
 
