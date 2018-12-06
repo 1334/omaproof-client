@@ -87,7 +87,7 @@ export default class AddGrandchildren extends React.Component {
       member => member.generation === 'CHILD'
     );
     this.setState({
-      grandChildren: [...newArr]
+      grandChildren: newArr
     });
   }
 
@@ -122,7 +122,7 @@ export default class AddGrandchildren extends React.Component {
                   welcomeText: this.props.group.welcomeText,
                   description: this.props.group.description,
                   members: this.props.group.members,
-                  grandChildren: this.props.group.grandChildren,
+                  grandChildren: this.state.grandChildren,
                   token: user.userToken
                 }}
               >

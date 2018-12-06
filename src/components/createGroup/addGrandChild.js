@@ -49,65 +49,6 @@ const StyledNewPost = styled.div`
     display: flex;
   }
 
-  .switch-field {
-    font-family: 'Lucida Grande', Tahoma, Verdana, sans-serif;
-    padding: 0px;
-    overflow: hidden;
-    margin: 0.5em auto;
-  }
-
-  .switch-title {
-    margin-bottom: 6px;
-  }
-
-  .switch-field input {
-    position: absolute !important;
-    clip: rect(0, 0, 0, 0);
-    height: 1px;
-    width: 1px;
-    border: 0;
-    overflow: hidden;
-  }
-
-  .switch-field label {
-    float: left;
-  }
-
-  .switch-field label {
-    display: inline-block;
-    width: 91px;
-    background-color: #e4e4e4;
-    color: rgba(0, 0, 0, 0.6);
-    font-size: 12px;
-    font-weight: normal;
-    text-align: center;
-    text-shadow: none;
-    padding: 6px 2px;
-    border: 1px solid rgba(0, 0, 0, 0.2);
-    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3),
-      0 1px rgba(255, 255, 255, 0.1);
-    transition: all 0.1s ease-in-out;
-  }
-
-  .switch-field label:hover {
-    cursor: pointer;
-  }
-
-  .switch-field input:checked + label {
-    background-color: ${props => props.theme.colors.primary};
-    color: ${props => props.theme.colors.bg};
-    -webkit-box-shadow: none;
-    box-shadow: none;
-  }
-
-  .switch-field label:first-of-type {
-    border-radius: 4px 0 0 4px;
-  }
-
-  .switch-field label:last-of-type {
-    border-radius: 0 4px 4px 0;
-  }
-
   .media-label {
     margin: 0.5em auto 0;
     img {
@@ -128,7 +69,7 @@ export default class Member extends React.Component {
   state = {
     name: '',
     contactNumber: '',
-    generation: '',
+    generation: 'CHILD',
     monthOfBirth: '',
     yearOfBirth: '',
     status: 'member',
@@ -237,33 +178,6 @@ export default class Member extends React.Component {
                   onChange={this.handleChangee}
                 />
               </FormControl>
-            </div>
-            <br />
-            <div className="switch-field">
-              <input
-                type="radio"
-                id="switch_3_left"
-                name="switch_3"
-                value="CHILD"
-                onClick={this.handleClick}
-              />
-              <label htmlFor="switch_3_left">Child</label>
-              <input
-                type="radio"
-                id="switch_3_center"
-                name="switch_3"
-                value="PARENT"
-                onClick={this.handleClick}
-              />
-              <label htmlFor="switch_3_center">Parent</label>
-              <input
-                type="radio"
-                id="switch_3_right"
-                name="switch_3"
-                value="GRANDPARENT"
-                onClick={this.handleClick}
-              />
-              <label htmlFor="switch_3_right">Grandparent</label>
             </div>
             <br />
             <Button onClick={this.createMember}>Add grandchild</Button>

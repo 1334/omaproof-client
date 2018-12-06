@@ -57,9 +57,6 @@ class NavBar extends React.Component {
         </div>
         {user.id ? (
           <React.Fragment>
-            <Link to="/new-post" user={user}>
-              New Post
-            </Link>
             <Link to="/feed">Feed</Link>
             <a href="/theme" onClick={this.toggleTheme}>
               <span

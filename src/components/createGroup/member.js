@@ -255,6 +255,7 @@ export default class Member extends React.Component {
                 name="switch_3"
                 value="CHILD"
                 onClick={this.handleClick}
+                checked={this.state.generation === 'CHILD'}
               />
               <label htmlFor="switch_3_left">Child</label>
               <input
@@ -263,6 +264,7 @@ export default class Member extends React.Component {
                 name="switch_3"
                 value="PARENT"
                 onClick={this.handleClick}
+                checked={this.state.generation === 'PARENT'}
               />
               <label htmlFor="switch_3_center">Parent</label>
               <input
@@ -271,6 +273,7 @@ export default class Member extends React.Component {
                 name="switch_3"
                 value="GRANDPARENT"
                 onClick={this.handleClick}
+                checked={this.state.generation === 'GRANDPARENT'}
               />
               <label htmlFor="switch_3_right">Grandparent</label>
             </div>
