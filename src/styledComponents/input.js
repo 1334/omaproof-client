@@ -55,6 +55,7 @@ class Input extends React.Component {
         <input
           type="text"
           id={props.name}
+          name={props.name}
           required
           value={props.value}
           onChange={props.handleChange}

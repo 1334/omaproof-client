@@ -8,8 +8,8 @@ import styled from 'styled-components';
 const StyledLogin = styled.div`
   display: flex;
   flex-direction: column;
-  width: 90vw;
-  margin: 80px auto;
+  width: 80vw;
+  margin: 0 auto;
 
   & > * {
     margin: 1em 0;
@@ -23,10 +23,8 @@ const StyledLogin = styled.div`
     align-self: flex-end;
   }
   .text-above {
-    margin-top: -12vh;
-    margin-bottom: 10vh;
-    padding-top: 3vh;
     text-align: center;
+    margin-bottom: 2em;
   }
   .button-next {
     margin-top: 10vh;
@@ -38,40 +36,42 @@ export default class GroupInfo extends React.Component {
     description: 'Codeworks',
     welcomeText: ''
   };
-  onChange = e => this.setState({ [e.target.name]: e.target.value });
+
+  handleChange = e => this.setState({ [e.target.name]: e.target.value });
+
   passProps = () => {
     this.props.handleSubmit(this.state);
   };
   render() {
     return (
-      <div>
-        <StyledLogin>
-          <div className="text-above">
-            {' '}
-            Please fill in the group name, and personalize your welcoming
-            message
-          </div>
-          <FormControl className="input">
-            <Input
-              type="text"
-              name="description"
-              label="Group description"
-              onChange={this.onChange}
-            />
-          </FormControl>
-          <FormControl className="input">
-            <Input
-              type="text"
-              name="welcomeText"
-              label="Welcome message"
-              onChange={this.onChange}
-            />
-          </FormControl>
-          <div className="button-next">
-            <Button onClick={this.passProps}>next</Button>
-          </div>
-        </StyledLogin>
-      </div>
+      <StyledLogin>
+        <div className="text-above">
+          {' '}
+          Please fill in the group description, and personalize your welcoming
+          message
+        </div>
+        <FormControl className="input">
+          <Input
+            type="text"
+            name="description"
+            label="Group description"
+            value={this.state.description}
+            handleChange={this.handleChange}
+          />
+        </FormControl>
+        <FormControl className="input">
+          <Input
+            type="text"
+            name="welcomeText"
+            label="Welcome message"
+            value={this.state.welcomeText}
+            handleChange={this.handleChange}
+          />
+        </FormControl>
+        <div className="button-next">
+          <Button onClick={this.passProps}>next</Button>
+        </div>
+      </StyledLogin>
     );
   }
 }
