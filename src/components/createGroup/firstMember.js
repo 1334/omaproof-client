@@ -18,9 +18,7 @@ const StyledFirstMember = styled.div`
     height: 80px;
     width: 80px;
   }
-  .next-button {
 
-  }
   input[type='file'] {
     display: none;
   }
@@ -168,7 +166,6 @@ export default class FirstMember extends React.Component {
           Before creating a new group, please fill in some information about
           yourself
         </div>
-        <div className="input" />
         <label className="media-label" htmlFor="media">
           <img
             src={this.state.picture}
@@ -185,7 +182,6 @@ export default class FirstMember extends React.Component {
           onChange={this.uploadImage}
         />
         {this.state.uploading && <div>Uploading picture</div>}
-        {/* <input accept="image/*" id="media" type="file" ref={this.fileInput} /> */}
         <div className="nameAndPhone">
           <FormControl>
             <Input

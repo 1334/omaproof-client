@@ -47,7 +47,7 @@ export default class CreateGroup extends React.Component {
       });
     } else if (this.state.step === 2) {
       const correctedData = data.map(el => {
-        console.log('Generation', el.generation);
+        // console.log('Generation', el.generation);
         return {
           name: el.name,
           contactNumber: el.contactNumber,
@@ -75,7 +75,7 @@ export default class CreateGroup extends React.Component {
           generation: el.generation
         };
       });
-      console.log('inside 3: ', correctedData);
+      // console.log('inside 3: ', correctedData);
       this.setState({
         step: this.state.step + 1,
         group: {
@@ -88,12 +88,11 @@ export default class CreateGroup extends React.Component {
       // });
     } else if (this.state.step === 4) {
       // this.props.history.push('/');
-      console.log('ada');
     }
   };
 
   render() {
-    console.log(this.state);
+    // console.log(this.state);
     const ComponentType = this.state.component[this.state.step];
     const props = {
       handleSubmit: this.handleSubmit,

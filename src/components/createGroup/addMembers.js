@@ -13,7 +13,20 @@ const StyledMembers = styled.div`
   display: flex;
   flex-direction: column;
   width: 90vw;
-  margin: 20px auto;
+  margin: 0 auto;
+
+  .member-info {
+    background-color: ${props => props.theme.colors.bg};
+    display: flex;
+    align-items: center;
+    box-shadow: 0px 0px 5px 2px #ccc;
+
+    img {
+      margin: 0.5em 1em;
+      width: 32px;
+      height: 32px;
+    }
+  }
 
   & > * {
     margin: 0.5em 0;
@@ -23,8 +36,8 @@ const StyledMembers = styled.div`
   }
   img {
     border-radius: 50%;
-    width: 40px;
-    height: 40px;
+    width: 32px;
+    height: 32px;
   }
   .memberCard {
     display: flex;
@@ -36,8 +49,8 @@ const StyledMembers = styled.div`
   }
   .memberCard img {
     border-radius: 50%;
-    width: 40px;
-    height: 40px;
+    width: 32px;
+    height: 32px;
   }
   .test2 {
     display: flex;
@@ -49,14 +62,18 @@ const StyledMembers = styled.div`
     justify-content: flex-end;
   }
   .pic {
-    width: 40px;
+    width: 32px;
   }
 `;
 export default class AddMembers extends React.Component {
   state = {
     displayComponent: false,
-    members: [...this.props.group.members]
+    members: []
   };
+
+  componentDidMount() {
+    this.setState({ members: this.props.group.members });
+  }
 
   createMember = member1 => {
     const newMemeber = {
@@ -92,80 +109,15 @@ export default class AddMembers extends React.Component {
     this.props.handleSubmit(this.state.members);
   };
   render() {
-    console.log('page2', this.props);
+    // console.log('page2', this.props);
     return (
       <StyledMembers>
-        <div
-          style={{
-            marginTop: '0',
-            marginBottom: '3vh'
-          }}
-        >
-          Members
-        </div>
+        <h1>Members</h1>
         {this.state.members.map(member => {
           return (
-            <div
-              key={member.contactNumber}
-              style={{
-                margin: '0.5vh 0'
-              }}
-            >
-              <ExpansionPanel key={member.contactNumber}>
-                <ExpansionPanelSummary>
-                  <div
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      height: '4vh'
-                    }}
-                  >
-                    <img src={member.picture} alt="taken" className="pic" />
-                    <div
-                      style={{
-                        marginLeft: '5vw'
-                      }}
-                    >
-                      <p>{member.name}</p>
-                    </div>
-                  </div>
-                </ExpansionPanelSummary>
-                <ExpansionPanelDetails className="memberDetails">
-                  <FormControl>
-                    <InputLabel>Name</InputLabel>
-                    <Input
-                      type="text"
-                      name="name"
-                      value={member.name}
-                      onChange={this.handleChangee}
-                    />
-                  </FormControl>
-                  <div className="familyStatus">
-                    <FormControl>
-                      <InputLabel>Month</InputLabel>
-                      <Input
-                        type="text"
-                        name="monthOfBirth"
-                        value={member.monthOfBirth}
-                        onChange={this.handleChangee}
-                      />
-                    </FormControl>
-                    <FormControl>
-                      <InputLabel>Year</InputLabel>
-                      <Input
-                        type="text"
-                        name="yearOfBirth"
-                        value={member.yearOfBirth}
-                        onChange={this.handleChangee}
-                      />
-                    </FormControl>
-                  </div>
-
-                  <br />
-
-                  <Button>Edit member</Button>
-                </ExpansionPanelDetails>
-              </ExpansionPanel>
+            <div key={member.contactNumber} className="member-info">
+              <img src={member.picture} alt="taken" className="pic" />
+              <div>{member.name}</div>
             </div>
           );
         })}

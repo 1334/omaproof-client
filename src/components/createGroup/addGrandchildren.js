@@ -87,7 +87,7 @@ export default class AddGrandchildren extends React.Component {
     this.props.handleSubmit(this.state.grandChildren);
   };
   render() {
-    console.log('hello', this.props.group);
+    // console.log('hello', this.props.group);
     const { user } = this.props;
     return (
       <StyledGrandChildren>
