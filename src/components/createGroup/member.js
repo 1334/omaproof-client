@@ -29,8 +29,9 @@ const StyledNewPost = styled.div`
         height: 32px;
       }
     }
-    span {
-      margin-left: 4em;
+    .icon-plus-positive {
+      flex-grow: 3;
+      text-align: right;
     }
   }
 
