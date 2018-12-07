@@ -61,7 +61,6 @@ class Feed extends React.Component {
               {({ loading, error, data }) => {
                 if (loading) return <div>Loading...</div>;
                 if (error) return <p>{error.message} :(</p>;
-                console.log(data);
 
                 return data.getPosts.length ? (
                   <div className="feed">

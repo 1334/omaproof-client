@@ -126,8 +126,6 @@ export default class AddGrandchildren extends React.Component {
                   <Button
                     onClick={() => {
                       createGroup().then(({ data }) => {
-                        console.log('data', data);
-
                         const user = {
                           activeGroup: data.createGroup.group.id,
                           groupToken: data.createGroup.token

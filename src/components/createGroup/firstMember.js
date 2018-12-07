@@ -271,9 +271,6 @@ export default class FirstMember extends React.Component {
                 <Button
                   onClick={() => {
                     createUser().then(({ data }) => {
-                      console.log('data', data.createUser.user);
-                      console.log('token', data.createUser.token);
-
                       const user = {
                         ...data.createUser.user,
                         userToken: data.createUser.token

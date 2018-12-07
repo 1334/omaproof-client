@@ -47,7 +47,6 @@ export default class CreateGroup extends React.Component {
       });
     } else if (this.state.step === 2) {
       const correctedData = data.map(el => {
-        // console.log('Generation', el.generation);
         return {
           name: el.name,
           contactNumber: el.contactNumber,
@@ -75,7 +74,6 @@ export default class CreateGroup extends React.Component {
           generation: el.generation
         };
       });
-      // console.log('inside 3: ', correctedData);
       this.setState({
         step: this.state.step + 1,
         group: {
@@ -83,16 +81,12 @@ export default class CreateGroup extends React.Component {
           grandChildren: [...correctedData]
         }
       });
-      // this.setState({
-      //   step: this.state.step + 1
-      // });
     } else if (this.state.step === 4) {
       // this.props.history.push('/');
     }
   };
 
   render() {
-    // console.log(this.state);
     const ComponentType = this.state.component[this.state.step];
     const props = {
       handleSubmit: this.handleSubmit,
@@ -100,7 +94,6 @@ export default class CreateGroup extends React.Component {
       group: this.state.group,
       user: this.props.user
     };
-    console.log('props: ', props);
     return (
       <div>
         <PoseGroup preEnterPose="pre-enter">
