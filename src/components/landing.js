@@ -4,23 +4,19 @@ import styled from 'styled-components';
 import Button from '../styledComponents/button';
 import { navigate } from '@reach/router';
 
-import UserContext from '../contexts/userContext';
-import GroupChooser from './groupChooser';
 import { Mutation } from 'react-apollo';
 import GRAND_PARENT_LOGIN_MUTATION from '../graphql/mutations/grandParentLogin';
-import Logo from '../styledComponents/logo';
-// import './landing.css';
-
-const LandingBackground = styled.div`
-  background: url('https://res.cloudinary.com/truroer/image/upload/v1544016596/allen-taylor-709552-unsplash_copy.jpg')
-    no-repeat center center fixed;
-  background-size: cover;
-`;
+import logo from '../assets/logo-w.png';
 
 const StyledLanding = styled.div`
+  background: url('https://res.cloudinary.com/truroer/image/upload/v1544096260/BeFunky-collage12.jpg')
+    no-repeat center center fixed;
+  background-size: cover;
+
   display: flex;
   flex-direction: column;
   width: 100vw;
+  height: 100vh;
   margin: 0 auto;
   align-items: center;
 
@@ -32,13 +28,24 @@ const StyledLanding = styled.div`
     margin: 0.5em 0;
   }
 
+  .logo {
+    img {
+      width: 250px;
+    }
+  }
+
+  .tagline {
+    margin-bottom: 3em;
+  }
+
   .links {
     text-decoration: underline;
     color: ${props => props.theme.colors.primary};
   }
 
   .lg {
-    font-family: 'Lily Script One', cursive;
+    font-family: 'Pattaya', cursive;
+    font-size: 1.3rem;
     color: ${props => props.theme.colors.bg};
   }
 
@@ -60,95 +67,91 @@ const StyledLanding = styled.div`
 class Landing extends React.Component {
   render() {
     return (
-      <UserContext.Consumer>
-        {({ user }) => (
-          <LandingBackground>
-            <StyledLanding>
-              <h3 className="lg">Welcome to </h3>
-              <div className="omaproof lg">
-                <Logo />
-              </div>
-              <div className="lg">a family friendly way to connect...</div>
+      <StyledLanding>
+        <h3 className="lg">Welcome to </h3>
+        <div className="logo">
+          <img src={logo} alt="logo" />
+        </div>
+        <div className="tagline lg">a family friendly way to connect...</div>
 
-              <div
+        <div
+          style={{
+            marginTop: '5vh',
+            height: '40vh',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'space-between'
+          }}
+        >
+          <Link to="/create-group">
+            <Button
+              className="buttonLanding"
+              style={{
+                width: '50vw',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}
+            >
+              <div>Create new group</div>
+            </Button>
+          </Link>
+
+          <div className="lg">OR</div>
+          <Mutation
+            mutation={GRAND_PARENT_LOGIN_MUTATION}
+            variables={{
+              sessionToken: null,
+              selected: [],
+              unselected: []
+            }}
+          >
+            {omaLogin => (
+              <Button
+                type="submit"
+                className="buttonLanding"
                 style={{
-                  marginTop: '5vh',
-                  height: '40vh',
+                  width: '80vw',
                   display: 'flex',
-                  flexDirection: 'column',
                   alignItems: 'center',
-                  justifyContent: 'space-between'
+                  justifyContent: 'center',
+                  padding: '4vw',
+                  fontSize: '6vw',
+                  marginBottom: '5vh'
+                }}
+                onClick={e => {
+                  e.preventDefault();
+                  omaLogin().then(({ data }) => {
+                    localStorage.setItem(
+                      'omalogin',
+                      JSON.stringify(data.grandParentLogin)
+                    );
+                    navigate('/oma-login');
+                  });
                 }}
               >
-                <Link to="/create-group">
-                  <Button
-                    className="buttonLanding"
-                    style={{
-                      width: '50vw',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center'
-                    }}
-                  >
-                    <div>Create new group</div>
-                  </Button>
-                </Link>
-
-                <div className="lg">OR</div>
-                <Mutation
-                  mutation={GRAND_PARENT_LOGIN_MUTATION}
-                  variables={{
-                    sessionToken: null,
-                    selected: [],
-                    unselected: []
-                  }}
-                >
-                  {omaLogin => (
-                    <Button
-                      type="submit"
-                      className="buttonLanding"
-                      style={{
-                        width: '80vw',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        padding: '4vw',
-                        fontSize: '6vw',
-                        marginBottom: '5vh'
-                      }}
-                      onClick={e => {
-                        e.preventDefault();
-                        omaLogin().then(({ data }) => {
-                          localStorage.setItem(
-                            'omalogin',
-                            JSON.stringify(data.grandParentLogin)
-                          );
-                          navigate('/oma-login');
-                        });
-                      }}
-                    >
-                      <span style={{ marginRight: '3vw' }}>
-                        Oma, click to start{' '}
-                      </span>
-                      <span className="icon-arrow-right" />
-                    </Button>
-                  )}
-                </Mutation>
-                {!user.userToken ? (
-                  <span>
-                    <span className="lg1">You can also </span>
-                    <Link to="/regular-login" className="links lg">
-                      Log in with password
-                    </Link>
+                <span style={{ marginRight: '3vw' }}>
+                  <span role="img" aria-label="ctx">
+                    👉
+                  </span>{' '}
+                  Oma, click here{' '}
+                  <span role="img" aria-label="ctx">
+                    👈
                   </span>
-                ) : (
-                  <GroupChooser groups={user.groups} />
-                )}
-              </div>
-            </StyledLanding>
-          </LandingBackground>
-        )}
-      </UserContext.Consumer>
+                </span>
+              </Button>
+            )}
+          </Mutation>
+
+          <span>
+            <span className="lg1">You can also </span>
+            <Link to="/regular-login" className="links lg">
+              Log in with password
+            </Link>
+          </span>
+        </div>
+      </StyledLanding>
     );
   }
 }

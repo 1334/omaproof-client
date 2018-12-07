@@ -5,11 +5,12 @@ import styled from 'styled-components';
 import UserContext from '../contexts/userContext';
 import LOGIN_MUTATION from '../graphql/mutations/login';
 import Button from '../styledComponents/button';
+import { navigate } from '@reach/router';
 
 const StyledLogin = styled.div`
   display: flex;
   flex-direction: column;
-  width: 50vw;
+  width: 70vw;
   margin: 0 auto;
 
   & > * {
@@ -19,7 +20,7 @@ const StyledLogin = styled.div`
 
 class RegularLogin extends React.Component {
   state = {
-    login: '+36 509 590',
+    login: '',
     password: ''
   };
 
@@ -44,9 +45,11 @@ class RegularLogin extends React.Component {
               const { loading, error } = other;
 
               if (loading) return <div>Loading...</div>;
-              if (error) return <div>{error.message} :(</div>;
               return (
                 <StyledLogin>
+                  {error && (
+                    <div className="error-message">{error.message} :(</div>
+                  )}
                   <label htmlFor="login">login</label>
                   <input
                     type="text"
@@ -72,6 +75,7 @@ class RegularLogin extends React.Component {
                           userToken: data.login.token
                         };
                         updateUser(user);
+                        return navigate('/group-chooser');
                       });
                     }}
                   >

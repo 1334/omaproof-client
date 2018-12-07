@@ -20,6 +20,12 @@ const StyledFeed = styled.div`
     padding: 0 18px;
   }
 
+  h1 {
+    width: 80vw;
+    margin: 2em auto;
+    text-align: center;
+  }
+
   .new-post {
     position: sticky;
     top: 0;
@@ -50,15 +56,22 @@ class Feed extends React.Component {
             <Query
               query={GET_POSTS_QUERY}
               variables={{ id: user.activeGroup, token: user.groupToken }}
-              // pollInterval={2000}
+              // pollInterval={1000}
             >
               {({ loading, error, data }) => {
                 if (loading) return <div>Loading...</div>;
                 if (error) return <p>{error.message} :(</p>;
-                return (
+
+                return data.getPosts.length ? (
                   <div className="feed">
                     <Posts posts={data.getPosts} user={user} />
                   </div>
+                ) : (
+                  <h1>
+                    <span>👆</span>
+                    <br />
+                    Start the feed by cliking above
+                  </h1>
                 );
               }}
             </Query>

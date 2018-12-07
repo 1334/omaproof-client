@@ -19,6 +19,8 @@ const StyledComment = styled.div`
     position: absolute;
     left: -3em;
     border-radius: 50%;
+    width: 32px;
+    height: 32px;
   }
 
   .timestamp {

@@ -1,9 +1,12 @@
 import React from 'react';
 import FormControl from '@material-ui/core/FormControl';
 import styled from 'styled-components';
-import Button from '../../styledComponents/button';
+import UserContext from '../../contexts/userContext';
+import { Mutation } from 'react-apollo';
 
+import Button from '../../styledComponents/button';
 import Input from '../../styledComponents/input';
+import CREATE_USER_MUTATION from '../../graphql/mutations/createUser';
 
 const StyledFirstMember = styled.div`
   display: flex;
@@ -11,15 +14,14 @@ const StyledFirstMember = styled.div`
   justify-content: space-between;
   align-items: center;
   height: 80vh;
+
   .user-profile {
     border-radius: 50%;
     bottom: 22px;
     height: 80px;
     width: 80px;
   }
-  .next-button {
 
-  }
   input[type='file'] {
     display: none;
   }
@@ -56,12 +58,7 @@ const StyledFirstMember = styled.div`
   text-shadow: none;: 10vh
   padding: 6px 8px;
   border: 1px solid rgba(0, 0, 0, 0.2);
-  -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px rgba(255, 255, 255, 0.1);
   box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px rgba(255, 255, 255, 0.1);
-  -webkit-transition: all 0.1s ease-in-out;
-  -moz-transition:    all 0.1s ease-in-out;
-  -ms-transition:     all 0.1s ease-in-out;
-  -o-transition:      all 0.1s ease-in-out;
   transition:         all 0.1s ease-in-out;
 }
 
@@ -90,7 +87,6 @@ const StyledFirstMember = styled.div`
     }
   }
   .text-above {
-    padding-top: 3vh;
     text-align: center;
   }
   .uploaded-media {
@@ -119,11 +115,11 @@ const StyledFirstMember = styled.div`
 export default class FirstMember extends React.Component {
   state = {
     id: 1,
-    name: 'Frederik',
-    contactNumber: '4522131',
+    name: '',
+    contactNumber: '',
     generation: '',
-    monthOfBirth: '06',
-    yearOfBirth: '1994',
+    monthOfBirth: '',
+    yearOfBirth: '',
     status: 'admin',
     picture:
       'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgQvLfGDGZtXgxzo4avCQJjtWT-EfhpF7EF4gFLWmL6Exm07koLA',
@@ -165,14 +161,13 @@ export default class FirstMember extends React.Component {
     return this.state.description.length && this.state.picture.length;
   }
   render() {
-    console.log(this.state);
     return (
       <StyledFirstMember>
+        <h1>Admin info</h1>
         <div className="text-above">
           Before creating a new group, please fill in some information about
           yourself
         </div>
-        <div className="input" />
         <label className="media-label" htmlFor="media">
           <img
             src={this.state.picture}
@@ -189,14 +184,14 @@ export default class FirstMember extends React.Component {
           onChange={this.uploadImage}
         />
         {this.state.uploading && <div>Uploading picture</div>}
-        {/* <input accept="image/*" id="media" type="file" ref={this.fileInput} /> */}
         <div className="nameAndPhone">
           <FormControl>
             <Input
               type="text"
               label="Name"
               name="name"
-              onChange={this.handleChange}
+              value={this.state.name}
+              handleChange={this.handleChange}
             />
           </FormControl>
           <FormControl>
@@ -204,7 +199,8 @@ export default class FirstMember extends React.Component {
               type="text"
               label="Phone"
               name="contactNumber"
-              onChange={this.handleChange}
+              value={this.state.contactNumber}
+              handleChange={this.handleChange}
             />
           </FormControl>
         </div>
@@ -215,7 +211,8 @@ export default class FirstMember extends React.Component {
               label="Month"
               type="text"
               name="monthOfBirth"
-              onChange={this.handleChange}
+              value={this.state.monthOfBirth}
+              handleChange={this.handleChange}
             />
           </FormControl>
           <FormControl>
@@ -224,7 +221,8 @@ export default class FirstMember extends React.Component {
               label="Year"
               type="text"
               name="yearOfBirth"
-              onChange={this.handleChange}
+              value={this.state.yearOfBirth}
+              handleChange={this.handleChange}
             />
           </FormControl>
         </div>
@@ -256,9 +254,40 @@ export default class FirstMember extends React.Component {
           <label htmlFor="switch_3_right">Grandparent</label>
         </div>
         <br />
-        <Button onClick={this.passProps} className="next-button">
-          Next
-        </Button>
+        <UserContext.Consumer>
+          {({ updateUser }) => (
+            <Mutation
+              mutation={CREATE_USER_MUTATION}
+              variables={{
+                name: this.state.name,
+                picture: this.state.picture,
+                monthOfBirth: this.state.monthOfBirth,
+                yearOfBirth: this.state.yearOfBirth,
+                contactNumber: this.state.contactNumber,
+                generation: this.state.generation
+              }}
+            >
+              {createUser => (
+                <Button
+                  onClick={() => {
+                    createUser().then(({ data }) => {
+                      const user = {
+                        ...data.createUser.user,
+                        userToken: data.createUser.token
+                      };
+                      updateUser(user);
+
+                      this.passProps();
+                    });
+                  }}
+                  className="next-button"
+                >
+                  Next
+                </Button>
+              )}
+            </Mutation>
+          )}
+        </UserContext.Consumer>
       </StyledFirstMember>
     );
   }

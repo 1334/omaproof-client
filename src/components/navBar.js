@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from '@reach/router';
 import styled from 'styled-components';
-import Logo from '../styledComponents/logo';
+import logo from '../assets/logo-w-small.png';
 
 const StyledNavBar = styled.nav`
   display: flex;
@@ -19,8 +19,10 @@ const StyledNavBar = styled.nav`
     color: ${props => props.theme.colors.bg};
   }
 
-  img {
+  .profile-picture {
     border-radius: 50%;
+    width: 32px;
+    height: 32px;
   }
 
   .icon {
@@ -29,10 +31,12 @@ const StyledNavBar = styled.nav`
 
   .logo {
     flex-grow: 3;
-    height: 2rem;
-    fill: white;
     position: relative;
-    top: -1px;
+
+    img {
+      margin-top: 0.3em;
+      height: 2.2rem;
+    }
   }
 `;
 
@@ -48,23 +52,28 @@ class NavBar extends React.Component {
       <StyledNavBar className="main-nav">
         <div className="logo">
           <Link to="/">
-            {' '}
-            <Logo />
+            <img src={logo} alt="omaproof logo" />
           </Link>
         </div>
-        <Link to="/new-post" user={user}>
-          New Post
-        </Link>
-        <Link to="/feed">Feed</Link>
-        <a href="/theme" onClick={this.toggleTheme}>
-          <span
-            className={`icon ${theme === 'light' ? 'icon-moon' : 'icon-sun'}`}
-          />
-        </a>
-        <img
-          src={user.picture || 'http://placehold.it/32x32'}
-          alt={user.name}
-        />
+        {user.id ? (
+          <React.Fragment>
+            <Link to="/feed">Feed</Link>
+            <a href="/theme" onClick={this.toggleTheme}>
+              <span
+                className={`icon ${
+                  theme === 'light' ? 'icon-moon' : 'icon-sun'
+                }`}
+              />
+            </a>
+            <img
+              className="profile-picture"
+              src={user.picture || 'http://placehold.it/32x32'}
+              alt={user.name}
+            />
+          </React.Fragment>
+        ) : (
+          <Link to="/regular-login">Login</Link>
+        )}
       </StyledNavBar>
     );
   }
