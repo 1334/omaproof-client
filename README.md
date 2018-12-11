@@ -1,44 +1,76 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<p align="center">
+<img src="./src/assets/logo-b-large.png" width="300px">
+</p>
+_A family friendly way to connect._
 
-## Available Scripts
+Do you have a family group on WhatsApp? Do you feel like you should share more with your family, but find the major social networks too public?
+Omaproof aims to provide a secure, easy to use, structured social network dedicated to your family.
 
-In the project directory, you can run:
+## Screenshots
 
-### `npm start`
+<p align="center">
+<img src="https://res.cloudinary.com/errstate/image/upload/v1544519942/screenshots/omaproof/home.png" width="300px"> &nbsp;&nbsp;
+<img src="https://res.cloudinary.com/errstate/image/upload/v1544519938/screenshots/omaproof/register.png" width="300px"> &nbsp;&nbsp;
+<img src="https://res.cloudinary.com/errstate/image/upload/v1544519941/screenshots/omaproof/feed.png" width="300px"> &nbsp;&nbsp;
+<img src="https://res.cloudinary.com/errstate/image/upload/v1544519937/screenshots/omaproof/month.png" width="300px"> &nbsp;&nbsp;
+<img src="https://res.cloudinary.com/errstate/image/upload/v1544519937/screenshots/omaproof/names.png" width="300px"> &nbsp;&nbsp;
+<img src="https://res.cloudinary.com/errstate/image/upload/v1544519938/screenshots/omaproof/pics.png" width="300px"> &nbsp;&nbsp;
+</p>
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Installation
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+To run the app you need to clone the [omaproof-client](https://github.com/1334/omaproof-client), [omaproof-server](https://github.com/1334/omaproof-server) and [omaproof-auth](https://github.com/1334/omaproof-auth) repositories.
 
-### `npm test`
+### Client
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```
+git clone https://github.com/1334/omaproof-client
+cd  omaproof-client
+npm install
 
-### `npm run build`
+# to run it
+npm start
+```
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Server
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+```
+git clone https://github.com/1334/omaproof-server
+cd  omaproof-server
+npm install
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+# to run it
+nodemon src/index.js
+```
 
-### `npm run eject`
+### Auth
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+```
+# install rabbitMQ, on MacOs
+brew install rabbitmq
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+git clone https://github.com/1334/omaproof-auth
+cd  omaproof-auth
+npm install
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+# to run it
+rabbitmq-server # start the rabitMQ service
+nodemon src/index.js
+```
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Tech Stack
 
-## Learn More
+- React
+- Apollo Client
+- GraphQL-Yoga
+- Prisma
+- RabbitMQ
+- Sequelize.js
+- PostgreSQL
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Developers
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- Frederik Hermans (@h3dgy)
+- Iñigo Solano (@1334)
+- Maxim Sinelnikov (@Truroer)
+- Jovan Ratković (@ishootblanks)
