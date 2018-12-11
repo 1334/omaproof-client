@@ -1,7 +1,8 @@
 <p align="center">
 <img src="./src/assets/logo-b-large.png" width="300px">
 </p>
-_A family friendly way to connect._
+
+_A family friendly way to connect_
 
 Do you have a family group on WhatsApp? Do you feel like you should share more with your family, but find the major social networks too public?
 Omaproof aims to provide a secure, easy to use, structured social network dedicated to your family.
@@ -9,12 +10,12 @@ Omaproof aims to provide a secure, easy to use, structured social network dedica
 ## Screenshots
 
 <p align="center">
-<img src="https://res.cloudinary.com/errstate/image/upload/v1544519942/screenshots/omaproof/home.png" width="300px"> &nbsp;&nbsp;
-<img src="https://res.cloudinary.com/errstate/image/upload/v1544519938/screenshots/omaproof/register.png" width="300px"> &nbsp;&nbsp;
-<img src="https://res.cloudinary.com/errstate/image/upload/v1544519941/screenshots/omaproof/feed.png" width="300px"> &nbsp;&nbsp;
-<img src="https://res.cloudinary.com/errstate/image/upload/v1544519937/screenshots/omaproof/month.png" width="300px"> &nbsp;&nbsp;
-<img src="https://res.cloudinary.com/errstate/image/upload/v1544519937/screenshots/omaproof/names.png" width="300px"> &nbsp;&nbsp;
-<img src="https://res.cloudinary.com/errstate/image/upload/v1544519938/screenshots/omaproof/pics.png" width="300px"> &nbsp;&nbsp;
+<img src="https://res.cloudinary.com/errstate/image/upload/v1544519942/screenshots/omaproof/home.png" width="250px"> &nbsp;&nbsp;
+<img src="https://res.cloudinary.com/errstate/image/upload/v1544519938/screenshots/omaproof/register.png" width="250px"> &nbsp;&nbsp;
+<img src="https://res.cloudinary.com/errstate/image/upload/v1544519941/screenshots/omaproof/feed.png" width="250px"> &nbsp;&nbsp;
+<img src="https://res.cloudinary.com/errstate/image/upload/v1544519937/screenshots/omaproof/month.png" width="250px"> &nbsp;&nbsp;
+<img src="https://res.cloudinary.com/errstate/image/upload/v1544519937/screenshots/omaproof/names.png" width="250px"> &nbsp;&nbsp;
+<img src="https://res.cloudinary.com/errstate/image/upload/v1544519938/screenshots/omaproof/pics.png" width="250px"> &nbsp;&nbsp;
 </p>
 
 ## Installation
